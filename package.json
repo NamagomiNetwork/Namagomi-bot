@@ -1,0 +1,24 @@
+{
+  "name": "kuronekobot",
+  "version": "1.0.0",
+  "description": "黒猫ちゃんbotは気まぐれで書いたbotです。<br>\r オープンソースなのでご自由にお使いください。ライセンスなどはありません。<br>\r discord.js@13です。<br><br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuronekoServer/kuronekobot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KuronekoServer/kuronekobot/issues"
+  },
+  "homepage": "https://github.com/KuronekoServer/kuronekobot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.1",
+    "tesseract.js": "^2.1.5"
+  }
+}
