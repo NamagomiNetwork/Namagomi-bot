@@ -34,7 +34,9 @@ exports.run = (client, message, args) => {
           text = require("util").inspect(text, { depth: 1 });
         
           // TOKENを表示できないように
+          const token_base64 = Buffer.from(config.token).toString('base64');
           text = text.replaceAll(config.token, "[検閲済み]");
+          text = text.replaceAll(token_base64, "[検閲済み]");
 
         // Replace symbols with character code alternatives
         text = text
