@@ -19,6 +19,14 @@ for (const file of events) {
   client.on(eventName, event.bind(null, client));
   logger.debug("Loading event...")
 }
+
+const seichi_achievement_events = fs.readdirSync("./sub-systems/seichi-achievement/events/").filter(file => file.endsWith(".js"));
+for (const file of seichi_achievement_events) {
+  const seichi_achievement_eventName = file.split(".")[0];
+  const seichi_achievement_event = require(`./sub-systems/seichi-achievement/events/${file}`);
+  client.on(seichi_achievement_eventName, seichi_achievement_event.bind(null, client));
+  logger.debug("Loading event...")
+}
 logger.debug("Loading event... Done!")
 
 const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
