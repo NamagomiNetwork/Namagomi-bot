@@ -13,6 +13,10 @@ exports.run = (client, message, args) => {
         ]
     })
 
+    if(!config.command_settings.eval.includes("true")){
+        return;
+    }
+
     if (!config.owner.includes(message.author.id)){
         message.channel.send({embeds: [notadmin.embed]})
         // ログとして送信
