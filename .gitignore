@@ -1,1 +1,6 @@
 node_modules
+config.json
+logs/
+
+# 開発のメモ用
+tmp/

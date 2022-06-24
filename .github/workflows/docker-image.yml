@@ -1,0 +1,41 @@
+name: main imageBuild and push
+on:
+  push:
+    branches:
+      - main
+    paths:
+    - 'docker/image/**'
+    - '.github/workflows/docker-image.yml'
+
+jobs:
+  namagomi-velocity-build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: namagomi-bot-docker
+      TEAM: namagominetwork
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          submodules: recursive
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # gitのcommit shaをtagにする
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./docker/image
+          push: true
+          tags: |
+            ghcr.io/${{ env.TEAM }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
