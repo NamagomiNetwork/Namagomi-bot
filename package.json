@@ -1,6 +1,6 @@
 {
   "name": "namagomi-bot",
-  "version": "2.0.0-debug-1",
+  "version": "2.0.0-debug-2",
   "description": "なまごみぼっと",
   "main": "index.js",
   "scripts": {
