@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  namagomi-velocity-build-and-push:
+  imagebuild:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: namagomi-bot-full-docker
