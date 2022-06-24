@@ -61,6 +61,27 @@ async function run(){
     try {
       // Evaluate (execute) our input
       const evaled = eval(args.join(" "));
+    
+      var err_argument = new MessageEmbed({
+        title: "コードの評価",
+        description: "ERROR: 評価するコードが入力されていません",
+        color: 16601703,
+        fields: [
+            {
+                name: "入力",
+                value: "```\n"+ "N/A" + "\n```"
+            },
+            {
+                name: "出力",
+                value: "```\n"+ "N/A" + "\n```"
+            }
+        ]
+    })
+
+    if(!evaled){
+        message.reply({ embeds: [err_argument]})
+        return;
+    }
 
       // Put our eval result through the function
       // we defined above
@@ -74,7 +95,7 @@ async function run(){
         color: 3853014,
         fields: [
             {
-                name: "入力値",
+                name: "入力",
                 value: "```\n"+ args + "\n```"
             },
             {
