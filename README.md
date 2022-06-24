@@ -11,12 +11,12 @@
 
 ## このbotの動かし方
 
-- 1. このリポジトリをcloneします ( `git clone https://github.com/NamagomiNetwork/Namagomi-bot.git` )
-- 2. configファイルを作成します(詳しくは [config settings](./config.md)を御覧ください)
-- 3. `node index.js` を実行します
-- 4. コンソールに `Starting System... Done!` と表示されたら起動成功です
+- このリポジトリをcloneします ( `git clone https://github.com/NamagomiNetwork/Namagomi-bot.git` )
+- configファイルを作成します(詳しくは [config settings](./config.md)を御覧ください)
+- `node index.js` を実行します
+- コンソールに `Starting System... Done!` と表示されたら起動成功です
 
 ### docker環境で動作させる場合
 
-- 1. configファイルを作成します(詳しくは [config settings](./config.md)を御覧ください)
-- 2. [Starting docker](./docker.md) を参照してbotを起動します
+- configファイルを作成します(詳しくは [config settings](./config.md)を御覧ください)
+- [Starting docker](./docker.md) を参照してbotを起動します

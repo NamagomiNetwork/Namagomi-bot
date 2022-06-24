@@ -7,8 +7,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update && apt upgrade -y && apt install -y
 
 # install nodejs
-RUN apt install nodejs npm -y  && npm install -g n\
-        && n 16.6.0 && apt purge nodejs npm
+RUN apt install nodejs npm -y
+RUN npm install -g n && n 16.6.0
+RUN apt purge nodejs npm
 
 # install nodejs
 RUN apt-get install -y software-properties-common \
