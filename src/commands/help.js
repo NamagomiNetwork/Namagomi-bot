@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
-const config = require('../get-config')
+const config = require('../../get-config')
 
 exports.run = (client, message, args) => {
     try{

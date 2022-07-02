@@ -1,5 +1,5 @@
 const logger = require('../modules/logger')
-const config = require('../get-config.js');
+const config = require('../../get-config');
 const notadmin = require('../utils/not-admin');
 const { MessageEmbed } = require('discord.js');
 const util = require('util');
@@ -16,7 +16,11 @@ exports.run = (client, message, args) => {
                 },
             ]
         })
-    
+        
+        if(!config.command_settings.shell.includes("true")){
+            return;
+        }
+
         if (!config.owner.includes(message.author.id)){
             message.channel.send({embeds: [notadmin.embed]})
             // ログとして送信
