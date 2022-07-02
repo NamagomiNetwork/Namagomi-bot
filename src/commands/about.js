@@ -1,31 +1,28 @@
 const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
-const config = require('../get-config')
+const package = require('../../package.json');
+const config = require('../../get-config')
+const prefix = config.prefix
 
 exports.run = (client, message, args) => {
     try{
-        const prefix = config.prefix
         var embed = new MessageEmbed({
-            title: "help-admin",
-            description: "このコマンドはconfig.jsonで指定したユーザーのみ実行可能です",
+            title: "about",
+            description: "botの詳細を表示します",
             color: 0xffff12,
             fields: [
                 {
-                    name: prefix + "shell [実行するshellコマンド]",
-                    value: "shellコマンドを実行します"
+                    name: "Repository",
+                    value: "https://github.com/NamagomiNetwork/Namagomi-bot"
                 },
                 {
-                    name: prefix + "eval [評価するコード]",
-                    value: "JavaScriptコードを評価,実行します"
+                    name: "License",
+                    value: "`"+ prefix + "license` で確認をお願いします"
                 },
                 {
-                    name: prefix + "shutdown",
-                    value: "botをシャットダウンします"
-                },
-                {
-                    name: prefix + "reload [コマンド名]",
-                    value: "コマンドをリロードします(開発用コマンド)"
-                },
+                    name: "Botバージョン",
+                    value: package.version
+                }
             ]
         })
         message.channel.send({embeds: [embed]})
@@ -53,4 +50,4 @@ exports.run = (client, message, args) => {
     }
 }
 
-exports.name = "help-admin";
+exports.name = "about";
