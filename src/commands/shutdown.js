@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
-const package = require('../package.json');
+const package = require('../../package.json');
 const logger = require('../modules/logger')
-const config = require('../configs/config.json')
+const config = require('../../get-config');
 const sleep = require('../modules/sleep')
 const notadmin = require('../utils/not-admin');
 

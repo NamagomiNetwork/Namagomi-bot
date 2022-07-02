@@ -1,5 +1,5 @@
 const logger = require('../modules/logger')
-const config = require('../get-config.js');
+const config = require('../../get-config');
 const notadmin = require('../utils/not-admin');
 const { MessageEmbed } = require('discord.js');
 exports.run = (client, message, args) => {

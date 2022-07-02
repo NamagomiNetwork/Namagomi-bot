@@ -1,7 +1,7 @@
 const cron = require('node-cron')
 const seichivote = require("../sub-systems/send-seichi-vote")
 const logger = require("../modules/logger")
-const config = require("../get-config");
+const config = require("../../get-config");
 
 module.exports = (client) => {
     // 投票しろ通知
