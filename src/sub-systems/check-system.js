@@ -1,5 +1,5 @@
 const logger = require("../modules/logger")
-const config = require("../../get-config");
+const config = require("../utils/get-config");
 
 // このファイルでは無効化されている機能を検挙します
 

@@ -1,5 +1,5 @@
 const logger = require('../modules/logger')
-const config = require('../../get-config');
+const config = require('../utils/get-config');
 const notadmin = require('../utils/not-admin');
 const { MessageEmbed } = require('discord.js');
 const util = require('util');
