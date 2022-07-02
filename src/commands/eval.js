@@ -1,5 +1,5 @@
 const logger = require('../modules/logger')
-const config = require('../get-config.js');
+const config = require('../../get-config');
 const notadmin = require('../utils/not-admin');
 const { MessageEmbed } = require('discord.js');
 exports.run = (client, message, args) => {
@@ -12,6 +12,10 @@ exports.run = (client, message, args) => {
             },
         ]
     })
+
+    if(!config.command_settings.eval.includes("true")){
+        return;
+    }
 
     if (!config.owner.includes(message.author.id)){
         message.channel.send({embeds: [notadmin.embed]})
@@ -34,7 +38,9 @@ exports.run = (client, message, args) => {
           text = require("util").inspect(text, { depth: 1 });
         
           // TOKENを表示できないように
+          const token_base64 = Buffer.from(config.token).toString('base64');
           text = text.replaceAll(config.token, "[検閲済み]");
+          text = text.replaceAll(token_base64, "[検閲済み]");
 
         // Replace symbols with character code alternatives
         text = text
@@ -55,6 +61,27 @@ async function run(){
     try {
       // Evaluate (execute) our input
       const evaled = eval(args.join(" "));
+    
+      var err_argument = new MessageEmbed({
+        title: "コードの評価",
+        description: "ERROR: 評価するコードが入力されていません",
+        color: 16601703,
+        fields: [
+            {
+                name: "入力",
+                value: "```\n"+ "N/A" + "\n```"
+            },
+            {
+                name: "出力",
+                value: "```\n"+ "N/A" + "\n```"
+            }
+        ]
+    })
+
+    if(!evaled){
+        message.reply({ embeds: [err_argument]})
+        return;
+    }
 
       // Put our eval result through the function
       // we defined above
@@ -68,7 +95,7 @@ async function run(){
         color: 3853014,
         fields: [
             {
-                name: "入力値",
+                name: "入力",
                 value: "```\n"+ args + "\n```"
             },
             {

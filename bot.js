@@ -1,4 +1,4 @@
-const logger = require('./modules/logger')
+const logger = require('./src/modules/logger')
 logger.debug("Starting Logger.... Done!")
 logger.debug('Starting System...')
 const { Client, Intents, Collection, MessageEmbed} = require('discord.js');
@@ -12,19 +12,27 @@ logger.debug("config Load ... Done!")
 
 client.commands = new Collection();
 
-const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+const events = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
 for (const file of events) {
   const eventName = file.split(".")[0];
-  const event = require(`./events/${file}`);
+  const event = require(`./src/events/${file}`);
   client.on(eventName, event.bind(null, client));
+  logger.debug("Loading event...")
+}
+
+const seichi_achievement_events = fs.readdirSync("./src/sub-systems/seichi-achievement/events/").filter(file => file.endsWith(".js"));
+for (const file of seichi_achievement_events) {
+  const seichi_achievement_eventName = file.split(".")[0];
+  const seichi_achievement_event = require(`./src/sub-systems/seichi-achievement/events/${file}`);
+  client.on(seichi_achievement_eventName, seichi_achievement_event.bind(null, client));
   logger.debug("Loading event...")
 }
 logger.debug("Loading event... Done!")
 
-const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+const commands = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 for (const file of commands) {
   const commandName = file.split(".")[0];
-  const command = require(`./commands/${file}`);
+  const command = require(`./src/commands/${file}`);
 
   client.commands.set(commandName, command);
   logger.debug("Loading command...")
@@ -43,4 +51,4 @@ logger.info("Botバージョン: " + package.version)
 logger.info("Repository: https://github.com/NamagomiNetwork/Namagomi-bot")
 
 // 無効化機能を表示する
-const checksys = require('./sub-systems/check-system');
+const checksys = require('./src/sub-systems/check-system');
