@@ -7,7 +7,7 @@ const fs = require("fs");
 const package = require('./package.json');
 logger.debug("module loading... Done!");
 
-const config = require('./get-config.js');
+const config = require('./src/utils/get-config.js');
 logger.debug("config Load ... Done!")
 
 client.commands = new Collection();
