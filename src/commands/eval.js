@@ -1,30 +1,16 @@
 const logger = require('../modules/logger')
 const config = require('../utils/get-config');
-const notadmin = require('../utils/not-admin');
+const check_admin = require('../utils/check-admin')
 const { MessageEmbed } = require('discord.js');
+const err_embed = require('../utils/error-embed')
+
 exports.run = (client, message, args) => {
-    var syslog = new MessageEmbed({
-        title: "権限がない人がコマンドを実行しようとしました",
-        description: "このメッセージはBotownerでない人が実行しようとしたため送信します",
-        fields: [{
-                name: "ユーザーID",
-                value: message.author.id
-            },
-        ]
-    })
+    var permission_check = check_admin(message, client)
 
-    if(!config.command_settings.eval.includes("true")){
+    if (permission_check == ('error: true')){
         return;
     }
-
-    if (!config.owner.includes(message.author.id)){
-        message.channel.send({embeds: [notadmin.embed]})
-        // ログとして送信
-        client.channels.cache.get(config.syslog).send({embeds: [syslog]})
-        logger.warn("権限のない人が管理コマンドを実行しました")
-        return;
-    }
-
+    
     const clean = async (text) => {
         // If our input is a promise, await it before continuing
         if (text && text.constructor.name == "Promise")
@@ -37,11 +23,6 @@ exports.run = (client, message, args) => {
         if (typeof text !== "string")
           text = require("util").inspect(text, { depth: 1 });
         
-          // TOKENを表示できないように
-          const token_base64 = Buffer.from(config.token).toString('base64');
-          text = text.replaceAll(config.token, "[検閲済み]");
-          text = text.replaceAll(token_base64, "[検閲済み]");
-
         // Replace symbols with character code alternatives
         text = text
           .replace(/`/g, "`" + String.fromCharCode(8203))
@@ -87,59 +68,16 @@ async function run(){
       // we defined above
       const cleaned = await clean(evaled);
 
-      
-    // 埋め込み: 成功時
-    var code = new MessageEmbed({
-        title: "コードの評価",
-        description: "コードを評価しました",
-        color: 3853014,
-        fields: [
-            {
-                name: "入力",
-                value: "```\n"+ args + "\n```"
-            },
-            {
-                name: "出力",
-                value: "```\n"+ cleaned + "\n```"
-            }
-        ]
-    })
-
-    // 出力値が500文字,入力値が350文字を超えた場合処理を中断する
-    const output = cleaned.length
-    const input = args.length
-
-    if(output >=500){
-        var err_output_long = new MessageEmbed({
-            title: "コードの評価",
-            description: "ERROR: 実行結果が500文字を超えたため表示しません...",
-            color: 16601703,
-            fields: [
-                {
-                    name: "入力",
-                    // この時点ではinputが350文字を超える可能性があるため
-                    value: "```\n"+ "N/A(非表示)" + "\n```"
-                },
-                {
-                    name: "出力",
-                    value: "```sh\n"+ "実行結果が500文字以上でした..." + "\n```"
-                }
-            ]
-        })
-        message.reply({ embeds: [err_output_long]})
-        logger.warn("コードの評価の出力値が500字を超えたため処理を中断しました")
-    }
-
-    if(input >=350){
+      // 入力値規制
+    if(args.length >=1000){
         var err_input_long = new MessageEmbed({
             title: "コードの評価",
-            description: "ERROR: 入力値が350文字を超えたため表示しません...",
+            description: "ERROR: 入力値が1000文字を超えたため表示しません...",
             color: 16601703,
             fields: [
                 {
                     name: "入力",
-                    // この時点ではinputが400文字を超える可能性があるため
-                    value: "```\n"+ "入力値が350文字以上でした..." + "\n```"
+                    value: "```\n"+ "入力値が1000文字以上でした..." + "\n```"
                 },
                 {
                     name: "出力",
@@ -148,43 +86,104 @@ async function run(){
             ]
         })
         message.reply({ embeds: [err_input_long]})
-        logger.warn("コードの評価の入力値が350字を超えたため処理を中断しました")
+        logger.warn("入力値が1000字を超えたため処理を中断しました")
+        return;
     }
 
-      // Reply in the channel with our result
-      //message.channel.send(`\`\`\`js\n${cleaned}\n\`\`\``);
-      message.channel.send(({embeds: [code]}))
-    } catch (err) {
-      // エラーが起きた場合エラー文を送信する
-    
-    try{
-    var error_msg = new MessageEmbed({
+    // ページを作成したり分割したり
+    const output_1 = cleaned.slice(0, 1000)
+    const output_2 = cleaned.slice(1000, 2000)
+    const output_3 = cleaned.slice(3000, 4000)
+    const output_4 = cleaned.slice(4000, 5000)
+    const output_5 = cleaned.slice(5000, 6000)
+    var page1 = new MessageEmbed({
         title: "コードの評価",
-        color: 16601703,
-        description: "コードを評価しました",
+        description: "コードを評価しました (1ページ目)",
+        color: 3853014,
         fields: [
             {
-                name: "入力値",
+                name: "入力",
                 value: "```\n"+ args + "\n```"
             },
             {
                 name: "出力",
-                value: "```\n"+ err + "\n```"
+                value: "```sh\n"+ output_1 + "\n```"
+            }
+        ]
+    })
+    var page2 = new MessageEmbed({
+        title: "コードの評価",
+        description: "コードを評価しました (2ページ目)",
+        color: 3853014,
+        fields: [
+            {
+                name: "2ページ目",
+                value: "```sh\n"+ output_2 + "\n```"
+            }
+        ]
+    })
+    var page3 = new MessageEmbed({
+        title: "コードの評価",
+        description: "コードを評価しました (3ページ目)",
+        color: 3853014,
+        fields: [
+            {
+                name: "3ページ目",
+                value: "```sh\n"+ output_3 + "\n```"
+            }
+        ]
+    })
+    var page4 = new MessageEmbed({
+        title: "コードの評価",
+        description: "コードを評価しました (4ページ目)",
+        color: 3853014,
+        fields: [
+            {
+                name: "4ページ目",
+                value: "```sh\n"+ output_4 + "\n```"
+            }
+        ]
+    })
+    var page5 = new MessageEmbed({
+        title: "コードの評価",
+        description: "コードを評価しました (最終ページ)",
+        color: 3853014,
+        fields: [
+            {
+                name: "5ページ目",
+                value: "```sh\n"+ output_5 + "\n```"
             }
         ]
     })
 
-    logger.error("eval実行エラーが発生しました")
-    logger.error(err)
-    message.channel.send(({embeds: [error_msg]}))
-    } catch(send_error){
-        logger.error("Discordへのメッセージ送信に失敗しました...")
-        logger.error(send_error)
+    // メッセージ送信
+    message.channel.send({ embeds: [page1]})
+        if(output_2.length >=1){
+            message.channel.send({ embeds: [page2]})
+        }
+        if(output_3.length >=1){
+            message.channel.send({ embeds: [page3]})
+        }
+        if(output_4.length >=1){
+            message.channel.send({ embeds: [page4]})
+        }
+        if(output_5.length >=1){
+            message.channel.send({ embeds: [page5]})
+        }
+    } catch (err) {
+            logger.error("コマンド評価エラーが発生しました")
+            logger.error(err)
+            message.channel.send(({embeds: [err_embed.main]}))
+            if(config.debug.enable.includes("true")){
+                message.channel.send(({embeds: [err_embed.debug]}))
+                message.channel.send("エラー内容: ")
+                message.channel.send("```\n"+ err + "\n```")
+            }
     }
 }
-}
 
+// じっこう
 run()
-  };
+};
 
 exports.name = "eval";

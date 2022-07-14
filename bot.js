@@ -1,31 +1,39 @@
 const logger = require('./src/modules/logger')
 logger.debug("Starting Logger.... Done!")
 logger.debug('Starting System...')
+
+// モジュールの読み込み
 const { Client, Intents, Collection, MessageEmbed} = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_VOICE_STATES] });
 const fs = require("fs");
-const package = require('./package.json');
+client.commands = new Collection();
 logger.debug("module loading... Done!");
+
+// configあるかたしかめる
+if( fs.existsSync("./configs/config.json") ){
+  logger.debug( "configが設定されています...");
+}else{
+      logger.error("configファイルがありません (config not found) \n ./configs/sample_config.jsonをもとに ./configs/config.json を作成してください")
+      logger.error("Error: ENOENT: no such file or directory, open configs/config.json")
+      return;
+}
 
 const config = require('./src/utils/get-config.js');
 logger.debug("config Load ... Done!")
 
-client.commands = new Collection();
+// mongodbに接続
+logger.debug("Connected to mongodb")
+require('./src/utils/database')
 
+// ファイルの読み込み
 const events = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
 for (const file of events) {
   const eventName = file.split(".")[0];
   const event = require(`./src/events/${file}`);
   client.on(eventName, event.bind(null, client));
-  logger.debug("Loading event...")
-}
-
-const seichi_achievement_events = fs.readdirSync("./src/sub-systems/seichi-achievement/events/").filter(file => file.endsWith(".js"));
-for (const file of seichi_achievement_events) {
-  const seichi_achievement_eventName = file.split(".")[0];
-  const seichi_achievement_event = require(`./src/sub-systems/seichi-achievement/events/${file}`);
-  client.on(seichi_achievement_eventName, seichi_achievement_event.bind(null, client));
-  logger.debug("Loading event...")
+  if(config.debug.enable.includes("true")){
+    logger.debug(`Loading Event: ${eventName}`);
+  }
 }
 logger.debug("Loading event... Done!")
 
@@ -35,20 +43,15 @@ for (const file of commands) {
   const command = require(`./src/commands/${file}`);
 
   client.commands.set(commandName, command);
-  logger.debug("Loading command...")
+  if(config.debug.enable.includes("true")){
+    logger.debug(`Loading command: ${commandName}`);
+  }
 }
 logger.debug("Loading command... Done!")
 
+// Discord login
+client.login( config.bot.token).catch(err => logger.error(err));
 
-client.login(config.token).catch(err => logger.error(err));
 logger.debug('Starting System... Done!')
-
-// バージョン情報等を表示
-logger.info("=====Bot Status=====")
-logger.info("現在下記のユーザーが登録されています")
-logger.info(config.owner)
-logger.info("Botバージョン: " + package.version)
-logger.info("Repository: https://github.com/NamagomiNetwork/Namagomi-bot")
-
-// 無効化機能を表示する
-const checksys = require('./src/sub-systems/check-system');
+// ログを表示
+require("./src/modules/info-logger")
