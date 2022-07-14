@@ -9,14 +9,6 @@
 [wiki](https://github.com/NamagomiNetwork/Namagomi-bot/wiki) を御覧ください。<br>
 コマンドの一覧,使用方法をまとめています
 
-## このbotの動かし方
+## 前提要件
 
-- このリポジトリをcloneします ( `git clone https://github.com/NamagomiNetwork/Namagomi-bot.git` )
-- configファイルを作成します(詳しくは [config settings](./config.md)を御覧ください)
-- `node index.js` を実行します
-- コンソールに `Starting System... Done!` と表示されたら起動成功です
-
-### docker環境で動作させる場合
-
-- configファイルを作成します(詳しくは [config settings](./config.md)を御覧ください)
-- [Starting docker](./docker.md) を参照してbotを起動します
+- mongodbを使用できる環境

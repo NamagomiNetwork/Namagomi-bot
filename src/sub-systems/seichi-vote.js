@@ -1,4 +1,7 @@
 const { MessageEmbed} = require('discord.js');
+const config = require('../utils/get-config')
+
+module.exports = function(client) {
 
 var embed =  new MessageEmbed({
     title: "投票の時間です",
@@ -15,4 +18,7 @@ var embed =  new MessageEmbed({
         },
     ]
 })
-exports.embed = embed
+const mention = "<@&" + config.seichi_vote_notification.role + ">"
+client.channels.cache.get(config.seichi_vote_notification.channel).send(mention)
+client.channels.cache.get(config.seichi_vote_notification.channel).send({ embeds: [ embed ] })
+}

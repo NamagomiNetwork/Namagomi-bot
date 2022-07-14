@@ -1,46 +1,23 @@
 {
-    "token": "hoge",
-    "prefix": "g!",
-    "_comment": "ownerに指定したユーザーは、各種管理botコマンドが実行可能となります(例: eval,reload)",
-    "owner": [
-        "927919368665456710", 
-        "538308521985572867"
-    ],
+    "bot": {
+        "token": "TOKEN",
+        "prefix": "k!",
+        "_comment": "ownerに指定したユーザーは、各種管理botコマンドが実行可能となります(例: eval,reload)",
+        "owner": [
+            "927919368665456710", 
+            "608788412367110149",
+            "731503872098697226",
+            "586157827400400907"
+        ]
+    },
+    "mongodb":  {
+        "url": "mongodb_URL"
+    },
+    "debug": {
+        "_comment": "debugモードを有効にするとコマンド実行失敗時にエラーメッセージを一部表示(ログにはつねに表示)するなど、開発中に便利機能を有効化します",
+        "enable": "true"
+    },
     "syslog": "986566525244825602",
-    "seichivote": {
-        "enable": "false",
-        "role": "987095020639223879",
-        "channel": "987094992285749318"
-    },
-    "seichi_achievement": {
-        "enable": "false",
-        "role": "987095020639223879",
-        "channel": "987094992285749318"
-    },
-    "log": {
-        "_comment": "logシステムの設定です。よくわからない場合無視してください",
-        "appenders": {
-            "system": { 
-                "type": "datefile",
-                "filename": "logs/system.log" 
-            }, 
-            "console": {
-                "type": "console"
-            }
-        },
-        "categories": {
-            "default": { 
-                "appenders": ["system", "console"], 
-                "level": "all" 
-            } 
-        }
-    },
-    "botlog_system": {
-        "_comment": "この部分は特に明記することが無い限りチャンネルIDを指定してください",
-        "enable": "true",
-        "Message_change": "988006102564221008",
-        "nickname_change": ""
-    },
     "command_settings": {
         "_comment": "この設定項目では一部コマンドの有効化,無効化を設定することができます。",
         "_comment_2": "trueで有効,falseで無効化します(既定値: true)",

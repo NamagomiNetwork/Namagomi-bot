@@ -1,12 +1,12 @@
+const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
+const config = require('../utils/get-config')
+const embed = require('./utils/help-embed')
 const err_embed = require('../utils/error-embed')
 
 exports.run = (client, message, args) => {
     try{
-        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶"];
-        var random = Math.floor(Math.random() * arr.length);
-        var result = arr[random];
-        message.reply({content: result});
+        message.channel.send({embeds: [embed.page2]})
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
@@ -19,4 +19,4 @@ exports.run = (client, message, args) => {
     }
 }
 
-exports.name = "omikuji";
+exports.name = "help-2";
