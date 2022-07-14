@@ -36,7 +36,7 @@ exports.run = (client, message, args) => {
             })
 
             if(!input){
-                message.reply({ embeds: [err_argument]})
+                message.channel.send({ embeds: [err_argument]})
                 return;
             }
 

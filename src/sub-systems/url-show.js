@@ -34,7 +34,7 @@ exports.discord_com = (client, message) => {
             ;
         }
   
-        message.reply({ embeds: [msgpanel] })
+        message.channel.send({ embeds: [msgpanel] })
   
         if (msg.embeds[0]) {
             message.channel.send({ embeds: [msg.embeds[0]] });
@@ -78,7 +78,7 @@ exports.discord_ptb_com = (client, message) => {
             ;
         }
   
-        message.reply({ embeds: [msgpanel] })
+        message.channel.send({ embeds: [msgpanel] })
   
         if (msg.embeds[0]) {
             message.channel.send({ embeds: [msg.embeds[0]] });

@@ -60,7 +60,7 @@ async function run(){
     })
 
     if(!evaled){
-        message.reply({ embeds: [err_argument]})
+        message.channel.send({ embeds: [err_argument]})
         return;
     }
 
@@ -85,7 +85,7 @@ async function run(){
                 }
             ]
         })
-        message.reply({ embeds: [err_input_long]})
+        message.channel.send({ embeds: [err_input_long]})
         logger.warn("入力値が1000字を超えたため処理を中断しました")
         return;
     }
