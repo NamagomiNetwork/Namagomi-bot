@@ -10,31 +10,46 @@
 
 ## configファイルの編集
 
-バージョン `2.0.0-debug-1` 現在、下記の項目が設定可能です
+### カテゴリー: bot
 
 - `token`
-    - Discord botのTOKENを指定してください
+    - botのTOKENを指定します
 - `prefix`
-    - Botコマンドの接頭辞を設定します
-    - (例: `!g` を指定した場合helpは `!g help` で参照可能になります)
+    - 初期のprefixを設定します
+    - これらはユーザーごとに変更可能です
 - `owner`
-    - Bot管理者のユーザーIDを入力します(複数指定可能)
-    - **WARNING:** この項目に入力したユーザーは、evalコマンドなどの管理コマンドが使えるようになります。付与の際は最大限の注意をしてください
+    - botのownerを指定します
+    - eval(コード実行) などの管理コマンドが実行可能になります
+
+### カテゴリー: mongodb
+
+- `url`
+    - mongodbの接続URLを指定します
+    - 例: `mongodb+srv://user:pass@hogehoge_namagmoi_bot_sample.dhpsa.mongodb.net/namagomibot?retryWrites=true&w=majority`
+
+### カテゴリー: debug
+
+- `enable`
+    - `true`もしくは、`false` を指定してください
+    - `true`に設定すると、詳細なログ出力,コマンド実行エラー時に詳細を表示します
+
+### カテゴリー: command_settings
+
+この項目では一部コマンドの無効化を行えます。
+
+- trueで有効,falseで無効化します
+
+### カテゴリー: seichi_vote_notification
+
+この項目では、整地鯖投票通知を行えます
+
+- `channel`
+    - 投票通知を送信するチャンネルIDを設定します
+- `role`
+    - メンションを行うユーザーIDもしくは、ロールを設定します
+
+### カテゴリー: その他
+
 - `syslog`
-    - この項目にはチャンネルIDを指定してください
-    - 指定したチャンネルに、Botの一部動作ログを送信します
-- `seichivote`
-    - この機能は、整地鯖への投票通知を行う機能です
-    - 無効化する場合 `enable` の項目を falseに、有効化する場合は true に設定してください
-    - 設定項目2 `role` : この項目にはメンションするロールIDを指定してください
-    - 設定項目3 `channel` : この項目には送信するチャンネルIDを指定してください
-- `seichi_achievement`
-    - **未実装** 2.0.0-debug-2を目処に実装する予定です
-- `log`
-    - **WARNING**: この項目ではログ出力機能 `log4js` のconfigを定義しています。よく分からない場合、決して編集しないでください
-- `botlog_system`
-    - **未実装** 2.0.0-debug-2を目処に実装する予定です
-    - **WARNING**: この項目は複数サーバーにbotを導入する場合、無効化してください
-- `command_settings`
-    - この項目では、一部コマンドの有効化,無効化を切り替えることができます。
-    - trueで有効,falseで無効に設定することができます
+    - botの一部ログをDiscordに送信します
+    - チャンネルIDを指定してください
