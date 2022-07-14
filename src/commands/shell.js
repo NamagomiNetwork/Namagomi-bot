@@ -34,7 +34,7 @@ exports.run = (client, message, args) => {
         })
     
         if(!command){
-            message.reply({ embeds: [err_argument]})
+            message.channel.send({ embeds: [err_argument]})
             return;
         }
     
@@ -59,7 +59,7 @@ exports.run = (client, message, args) => {
                         }
                     ]
                 })
-            message.reply({ embeds: [err_input_long]})
+            message.channel.send({ embeds: [err_input_long]})
             logger.warn("シェルコマンド入力値が1000文字を超えたため処理を中断しました... (文字数: " + input_count + "文字)")
             return;
         }
@@ -85,7 +85,7 @@ exports.run = (client, message, args) => {
                         }
                     ]
                 })
-                message.reply({ embeds: [err_shell]})
+                message.channel.send({ embeds: [err_shell]})
                 logger.error("シェルコマンド実行中にエラーが発生しました...")
                 logger.error(err)
                 return;

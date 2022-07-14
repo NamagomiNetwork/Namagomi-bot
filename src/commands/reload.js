@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
             ]
         })
     
-        if (!args || args.length < 1) return message.reply({embeds: [not_args]});
+        if (!args || args.length < 1) return message.channel.send({embeds: [not_args]});
         const commandName = args[0];
         var reload_success = new MessageEmbed({
             title: "リロード成功",
@@ -46,7 +46,7 @@ exports.run = (client, message, args) => {
         // Check if the command exists and is valid
         if (!client.commands.has(commandName)) {
             logger.error("コマンドのreloadに失敗しました... unknown_command 実行者ID: " + message.author.id)
-          return message.reply({embeds: [reload_unknown]});
+          return message.channel.send({embeds: [reload_unknown]});
         }
     
         delete require.cache[require.resolve(`./${commandName}.js`)];
@@ -54,7 +54,7 @@ exports.run = (client, message, args) => {
         client.commands.delete(commandName);
         const props = require(`./${commandName}.js`);
         client.commands.set(commandName, props);
-        message.reply({embeds: [reload_success]});
+        message.channel.send({embeds: [reload_success]});
         logger.info("コマンドのreloadに成功しました! 実行者ID: " + message.author.id + " リロードされたコマンド: " + commandName)
     
     } catch (err) {    

@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
         let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
-        message.reply({content: result});
+        message.channel.send({content: result});
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
