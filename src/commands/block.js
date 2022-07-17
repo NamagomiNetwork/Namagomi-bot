@@ -44,7 +44,6 @@ exports.run = (client, message, args) => {
             const profileData = await profileModel.findOne({ _id: input });
 
             if (!profileData) {
-                message.channel.send(({embeds: [err_embed.main]}))
                 message.channel.send("エラー: ユーザープロファイルが見つかりませんでした")
                 logger.error("ユーザーID: " + input + " のプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
                 return;
@@ -53,7 +52,6 @@ exports.run = (client, message, args) => {
             // block profileの確認
             const BlockData = await BlockUserModel.findOne({ _id: input });
             if (!BlockData) {
-                message.channel.send(({embeds: [err_embed.main]}))
                 message.channel.send("エラー: ユーザーブロックプロファイルが見つかりませんでした")
                 logger.error("ユーザーID: " + input + " のブロックプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
                 return;
@@ -63,7 +61,7 @@ exports.run = (client, message, args) => {
                 message.channel.send("さすがにbotのownerをブロックすることはできません")
                 return;
             }
-            
+
             await BlockData.updateOne({
                 enable: true,
             })
