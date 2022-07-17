@@ -3,6 +3,7 @@ const config = require('../utils/get-config');
 const check_admin = require('../utils/check-admin')
 const { MessageEmbed } = require('discord.js');
 const err_embed = require('../utils/error-embed')
+var seichi_vote = require('../sub-systems/seichi-vote')
 
 exports.run = (client, message, args) => {
     var permission_check = check_admin(message, client)
