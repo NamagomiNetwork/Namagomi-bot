@@ -3,7 +3,7 @@ const err_embed = require('../utils/error-embed')
 
 exports.run = (client, message, args) => {
     try{
-        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶"];
+        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
