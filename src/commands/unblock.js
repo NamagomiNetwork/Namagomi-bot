@@ -57,6 +57,11 @@ exports.run = (client, message, args) => {
                 logger.error("ユーザーID: " + input + " のブロックプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
                 return;
             }
+            
+            if (config.bot.owner.includes(input)){
+                message.channel.send("さすがにbotのownerをブロックすることはできません")
+                return;
+            }
 
             await BlockData.updateOne({
                 enable: false,
