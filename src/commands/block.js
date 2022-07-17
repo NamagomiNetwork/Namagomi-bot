@@ -59,6 +59,11 @@ exports.run = (client, message, args) => {
                 return;
             }
 
+            if (config.bot.owner.includes(input)){
+                message.channel.send("さすがにbotのownerをブロックすることはできません")
+                return;
+            }
+            
             await BlockData.updateOne({
                 enable: true,
             })

@@ -63,6 +63,11 @@ exports.run = (client, message, args) => {
                 message.channel.send("エラー: ハードブロックの前に `block` コマンドを実行してください")
                 return
             } 
+            
+            if (config.bot.owner.includes(input)){
+                message.channel.send("さすがにbotのownerをブロックすることはできません")
+                return;
+            }
 
             await BlockData.updateOne({
                 hardblock: true,
