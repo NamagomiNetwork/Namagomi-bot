@@ -11,6 +11,27 @@ exports.run = (client, message, args) => {
     if (permission_check == ('error: true')){
         return;
     }
+
+    var err_not_args = new MessageEmbed({
+        title: "コードの評価",
+        description: "ERROR: 評価するコードが入力されていません",
+        color: 16601703,
+        fields: [
+            {
+                name: "入力",
+                value: "```\n"+ "N/A" + "\n```"
+            },
+            {
+                name: "出力",
+                value: "```\n"+ "N/A" + "\n```"
+            }
+        ]
+    })
+
+    if(args.length == 0){
+        message.channel.send({ embeds: [err_not_args]})
+        return;
+    }
     
     const clean = async (text) => {
         // If our input is a promise, await it before continuing
@@ -37,39 +58,13 @@ async function run(){
   // Get our input arguments
     const args = message.content.split(" ").slice(1);
 
-
     // In case something fails, we to catch errors
     // in a try/catch block
     try {
       // Evaluate (execute) our input
-      const evaled = eval(args.join(" "));
-    
-      var err_argument = new MessageEmbed({
-        title: "コードの評価",
-        description: "ERROR: 評価するコードが入力されていません",
-        color: 16601703,
-        fields: [
-            {
-                name: "入力",
-                value: "```\n"+ "N/A" + "\n```"
-            },
-            {
-                name: "出力",
-                value: "```\n"+ "N/A" + "\n```"
-            }
-        ]
-    })
+    const evaled = eval(args.join(" "));
 
-    if(!evaled){
-        message.channel.send({ embeds: [err_argument]})
-        return;
-    }
-
-      // Put our eval result through the function
-      // we defined above
-      const cleaned = await clean(evaled);
-
-      // 入力値規制
+    // 入力値規制
     if(args.length >=1000){
         var err_input_long = new MessageEmbed({
             title: "コードの評価",
@@ -88,6 +83,29 @@ async function run(){
         })
         message.channel.send({ embeds: [err_input_long]})
         logger.warn("入力値が1000字を超えたため処理を中断しました")
+        return;
+    }
+
+      var err_not_output = new MessageEmbed({
+        title: "コードの評価",
+        description: "出力がありませんでしたが、コードの実行には成功しました",
+        color: 3853014,
+        fields: [
+            {
+                name: "入力",
+                value: "```\n"+ args + "\n```"
+            },
+            {
+                name: "出力",
+                value: "```\n"+ "N/A" + "\n```"
+            }
+        ]
+    })
+
+    const cleaned = await clean(evaled);
+
+    if(!evaled){
+        message.channel.send({ embeds: [err_not_output]})
         return;
     }
 
