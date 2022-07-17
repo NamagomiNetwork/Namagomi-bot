@@ -1,0 +1,7 @@
+version: "3"
+services:
+  voicevox-engine:
+    container_name: voicevox-engine
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    ports:
+      - "8080:50021"

@@ -3,7 +3,7 @@
         "_comment": "logシステムの設定です。よくわからない場合無視してください",
         "appenders": {
             "system": { 
-                "type": "datefile",
+                "type": "dateFile",
                 "filename": "logs/system.log" 
             }, 
             "console": {
