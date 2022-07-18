@@ -2,7 +2,7 @@ const cron = require('node-cron')
 const logger = require("../modules/logger")
 const config = require("../utils/get-config");
 const seichi_vote = require('../sub-systems/seichi-vote')
-const seichi_achievement = require('../sub-systems/seichi-achievement')
+// const seichi_achievement = require('../sub-systems/seichi-achievement')
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 
 module.exports = (client) => {
