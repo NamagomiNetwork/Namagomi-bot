@@ -13,8 +13,6 @@ module.exports = (client, message) => {
 
       // ぶたさんのときだけリアクションをつける
       if(message.author.id.includes("281902125909409792")){
-        message.react('🐖')
-        message.react('💨')
       }
 
       // URL展開
