@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
     try{
         var permission_check = check_admin(message, client)
         
-        if (permission_check == ('error: true')){
+        if (permission_check == ('owner: no')){
             return;
         }
 
