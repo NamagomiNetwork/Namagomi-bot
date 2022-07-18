@@ -11,6 +11,11 @@ module.exports = (client, message) => {
       // Ignore bots
       if (message.author.bot || message.channel.type === 'dm') return;
 
+      // ぶたさんのときだけリアクションをつける
+      if(message.author.id.includes("281902125909409792")){
+        message.react('🐖')
+      }
+
       // URL展開
       url.discord_com(client, message)
       url.discord_ptb_com(client, message)
