@@ -29,10 +29,10 @@ module.exports = (message, client) =>  {
         // ログとして送信
         client.channels.cache.get(config.syslog).send({embeds: [syslog]})
         logger.warn("権限のない人が管理コマンドを実行しました")
-        return "error: true"
+        return "owner: no"
     } else {
         if (config.bot.owner.includes(message.author.id)){
-            return "error: false"
+            return "owner: yes"
         }
     }
 }

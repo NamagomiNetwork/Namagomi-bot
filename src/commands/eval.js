@@ -8,7 +8,7 @@ var seichi_vote = require('../sub-systems/seichi-vote')
 exports.run = (client, message, args) => {
     var permission_check = check_admin(message, client)
 
-    if (permission_check == ('error: true')){
+    if (permission_check == ('owner: no')){
         return;
     }
 
@@ -32,7 +32,7 @@ exports.run = (client, message, args) => {
         message.channel.send({ embeds: [err_not_args]})
         return;
     }
-    
+
     const clean = async (text) => {
         // If our input is a promise, await it before continuing
         if (text && text.constructor.name == "Promise")
