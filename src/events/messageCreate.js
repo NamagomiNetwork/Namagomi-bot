@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
 const profileModel = require('../utils/Schema/ProfileSchema');
 const BlockUserModel = require('../utils/Schema/BlockUserSchema');
+const TawasiModel = require('../utils/Schema/TawasiSchema');
 const url = require('../sub-systems/url-show')
 
 module.exports = (client, message) => {
@@ -16,7 +17,26 @@ module.exports = (client, message) => {
 
 
       const profileData = await profileModel.findOne({ _id: message.author.id });
-      
+      const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
+
+      if (!tawasiData) {
+        if (message.content.includes('たわしさん')) {
+          message.channel.send("1日1たわしさんのデータが存在しません \n コマンドを実行してください")
+        }
+      } else {
+        if (message.content.includes('たわしさん')) {
+          if(tawasiData.tawasi.includes("true")){
+          // そうしん
+          message.channel.send("1日1たわしさんの本日分は終了しています \n ||うるさかったですか？すみません|| ")
+          return;
+          }
+          message.channel.send({ files: [__dirname + '/../assets/tawasi.jpg'] });
+          await tawasiData.updateOne({
+            tawasi: true,
+          })
+        }
+      }
+
       if (!profileData) {
         var prefix =  config.bot.prefix
       } else {
@@ -47,6 +67,20 @@ module.exports = (client, message) => {
 
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成に成功しました")
     }
+
+    // たわしさんprofileがない場合作成
+    if (!tawasiData) {
+      const tawasi = await TawasiModel.create({
+          _id: message.author.id,
+          tawasi: false,
+      });
+      tawasi.save().catch((error) => {
+        logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
+        logger.error(error);
+    });;
+
+    logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
+  }
 
     // ユーザーブロックprofileを作成
     const BlockData = await BlockUserModel.findOne({ _id: message.author.id });
