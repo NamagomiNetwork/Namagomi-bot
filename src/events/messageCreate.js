@@ -13,6 +13,10 @@ module.exports = (client, message) => {
       // URL展開
       url.discord_com(client, message)
       url.discord_ptb_com(client, message)
+      if (message.content.includes('たわし')) {
+        message.channel.send({ files: [__dirname + '/../assets/tawasi.jpg'] });
+      }
+
       const profileData = await profileModel.findOne({ _id: message.author.id });
       
       if (!profileData) {
