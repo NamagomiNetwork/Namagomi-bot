@@ -33,15 +33,12 @@ module.exports = (client) => {
     */
 
     async function one_day_tawasi_reset(){
-      const tawasiData = await TawasiModel.findOne({ tawasi: true });
+      const tawasiData = await TawasiModel.find({ tawasi: true });
       if (!tawasiData) {
-        if (message.content.includes('たわしさん')) {
           logger.warn("たわしさんデータが見つかりませんでした...")
-        }
+          return;
       }else {
-        await tawasiData.update({
-          tawasi: false,
-        })
+        await TawasiModel.updateMany({ tawasi: true }, {$set: { tawasi: false }})
       }
     }
 
