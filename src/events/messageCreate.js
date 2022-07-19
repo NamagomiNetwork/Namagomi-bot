@@ -39,6 +39,10 @@ module.exports = (client, message) => {
         }
       }
 
+      if (message.content.includes('とってもおいしい豚さん')) {
+        message.channel.send("https://i.gyazo.com/2408edaa5c00321c1d726cbae8429bdd.jpg");
+      }
+      
       if (!profileData) {
         var prefix =  config.bot.prefix
       } else {
