@@ -2,7 +2,7 @@ const cron = require('node-cron')
 const logger = require("../modules/logger")
 const config = require("../utils/get-config");
 const seichi_vote = require('../sub-systems/seichi-vote')
-// const seichi_achievement = require('../sub-systems/seichi-achievement')
+const seichi_achievement = require('../sub-systems/seichi-achievement')
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 
 module.exports = (client) => {
@@ -26,11 +26,12 @@ module.exports = (client) => {
     cron.schedule('0 0 9 * * *', () => {
       seichi_vote(client)
     })
-    /*
-    cron.schedule('0 * * * * *', () => {
+    
+    // 実績通知
+    cron.schedule('0 0 0 * * *', () => {
       seichi_achievement(client)
     })
-    */
+    
 
     async function one_day_tawasi_reset(){
       const tawasiData = await TawasiModel.find({ tawasi: true });
