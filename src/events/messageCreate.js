@@ -30,8 +30,6 @@ module.exports = (client, message) => {
       } else {
         if (message.content.includes('たわしさん')) {
           if(tawasiData.tawasi.includes("true")){
-          // そうしん
-          message.channel.send("1日1たわしさんの本日分は終了しています \n ||うるさかったですか？すみません|| ")
           return;
           }
           message.channel.send("https://i.gyazo.com/90c929eccbec4f36d4b15be295660dce.jpg");
