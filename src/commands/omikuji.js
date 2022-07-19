@@ -3,6 +3,21 @@ const err_embed = require('../utils/error-embed')
 
 exports.run = (client, message, args) => {
     try{
+        
+        //ごみ
+        function namagomi(){
+        let arr = ["生ゴミ", "黙れゴミ"];
+        var random = Math.floor(Math.random() * arr.length);
+        var result = arr[random];
+        message.channel.send({content: result});
+        }
+
+        if(message.author.id.includes("538308521985572867")){
+            namagomi()
+            return;
+        }
+        
+        
         let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
