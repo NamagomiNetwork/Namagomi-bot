@@ -3,18 +3,32 @@ const err_embed = require('../utils/error-embed')
 
 exports.run = (client, message, args) => {
     try{
+
+        
         function bukkubukku(){
         let arr = ["ﾌﾞｯｸﾌﾞｯｸ", "本が溺れた。ﾌﾞｯｸﾌﾞｯｸｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
         }
-
-        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ(大吉)", "超大吉", "超大凶"];
+        //ごみ
+        function namagomi(){
+        let arr = ["生ゴミ", "黙れゴミ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
-    } catch (err) {
+        }
+        
+        if(message.author.id.includes("538308521985572867")){
+            namagomi()
+            return;
+        }
+        
+        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ"];
+        var random = Math.floor(Math.random() * arr.length);
+        var result = arr[random];
+        message.channel.send({content: result});
+        } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
             message.channel.send(({embeds: [err_embed.main]}))
