@@ -3,6 +3,22 @@ const err_embed = require('../utils/error-embed')
 
 exports.run = (client, message, args) => {
     try{
+        function bukkubukku(){
+        let arr = ["ﾌﾞｯｸﾌﾞｯｸ", "本が溺れた。ﾌﾞｯｸﾌﾞｯｸｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗ"];
+        var random = Math.floor(Math.random() * arr.length);
+        var result = arr[random];
+        message.channel.send({content: result});
+        }
+
+        if(message.author.id.includes("281902125909409792")){
+            bukkubukku()
+            return;
+        }
+        if(message.author.id.includes("755242003163250730")){
+            bukkubukku()
+            return;
+        }
+
         let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
