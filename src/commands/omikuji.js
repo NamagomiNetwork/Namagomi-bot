@@ -24,6 +24,7 @@ exports.run = (client, message, args) => {
             return;
         }
         
+        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
