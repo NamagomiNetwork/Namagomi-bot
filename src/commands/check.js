@@ -4,6 +4,7 @@ const check_admin = require('../utils/check-admin')
 const profileModel = require('../utils/Schema/ProfileSchema');
 const { MessageEmbed } = require('discord.js');
 const BlockUserModel = require('../utils/Schema/BlockUserSchema');
+const TawasiModel = require('../utils/Schema/TawasiSchema');
 const err_embed = require('../utils/error-embed')
 
 exports.run = (client, message, args) => {
@@ -58,6 +59,13 @@ exports.run = (client, message, args) => {
                 logger.error("ユーザーID: " + input + " のブロックプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
                 return;
             }
+            const tawasiData = await TawasiModel.findOne({ _id: input });
+            if (!tawasiData) {
+                message.channel.send(({embeds: [err_embed.main]}))
+                message.channel.send("エラー: ユーザーたわしプロファイルが見つかりませんでした")
+                logger.error("ユーザーID: " + input + " のたわしプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
+                return;
+            }
 
             var data = new MessageEmbed({
                 title: "ユーザー情報確認",
@@ -83,12 +91,17 @@ exports.run = (client, message, args) => {
                         inline: true
                     },
                     {
-                        name: "ユーザー設定情報",
+                        name: "ユーザーその他情報",
                         value: "DBに保存されている設定情報を表示します",
                     },
                     {
                         name: "prefix: ",
                         value: "`"+ profileData.prefix + "`",
+                        inline: true
+                    },
+                    {
+                        name: "1日1たわしさん: ",
+                        value: "`"+ tawasiData.tawasi + "`",
                         inline: true
                     },
                     {
