@@ -9,8 +9,8 @@ exports.run = (client, message, args) => {
         var result = arr[random];
         message.channel.send({content: result});
         }
-        
-        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ(大吉)"];
+
+        let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ(大吉)", "超大吉", "超大凶"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
