@@ -10,44 +10,40 @@ exports.run = (client, message, args) => {
 
     try{
     // commit情報を取得
-        async function get_commit_short(){
-            await child.exec("git rev-parse --short HEAD", (err, res) =>{
+            child.exec("git rev-parse --short HEAD", (err, res) =>{
                 if(err){
-                return "Error"
+                var commit_short_hash = "取得エラーが発生しました..."
+                return;
                 } else {
-                    logger.info(res)
-                    return res;
+                    var commit_short_hash = res
                 }
+            
+                var embed = new MessageEmbed({
+                    title: "Version",
+                    color: 5301186,
+                    "footer": {
+                        "text": "Version"
+                    },
+                    fields: [
+                        {
+                            name: "commit short hash",
+                            value: commit_short_hash
+                        },
+                        {
+                            "name": "bot-version",
+                            "value": package.version,
+                            "inline": true
+                          },
+                          {
+                            "name": "Discord.js Version",
+                            "value": require('discord.js').version,
+                            "inline": true
+                          }
+                    ]
+                })
+                message.channel.send({embeds: [embed]})
             })
-        }
-        commit_short_hash = get_commit_short() + "."
-        logger.info(commit_short_hash)
-
-        var embed = new MessageEmbed({
-            title: "Version",
-            color: 5301186,
-            "footer": {
-                "text": "Version"
-            },
-            fields: [
-                {
-                    name: "commit short hash",
-                    value: commit_short_hash
-                },
-                {
-                    "name": "bot-version",
-                    "value": package.version,
-                    "inline": true
-                  },
-                  {
-                    "name": "Discord.js Version",
-                    "value": require('discord.js').version,
-                    "inline": true
-                  }
-            ]
-        })
-        message.channel.send({embeds: [embed]})
-    } catch (err) {
+        } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
             message.channel.send(({embeds: [err_embed.main]}))
