@@ -5,17 +5,23 @@ const logger = require('../modules/logger')
 const err_embed = require('../utils/error-embed')
 const child = require('child_process')
 const config = require('../utils/get-config')
+const sleep = require('../modules/sleep')
 exports.run = (client, message, args) => {
 
     try{
     // commit情報を取得
-    child.exec("git rev-parse --short HEAD", (err, res) =>{
-        if(err){
-            var commit_short_hash = "取得エラーが発生しました..."
-        } else {
-            var commit_short_hash = res
+        async function get_commit_short(){
+            await child.exec("git rev-parse --short HEAD", (err, res) =>{
+                if(err){
+                return "Error"
+                } else {
+                    logger.info(res)
+                    return res;
+                }
+            })
         }
-        
+        commit_short_hash = get_commit_short() + "."
+        logger.info(commit_short_hash)
 
         var embed = new MessageEmbed({
             title: "Version",
@@ -41,7 +47,6 @@ exports.run = (client, message, args) => {
             ]
         })
         message.channel.send({embeds: [embed]})
-    })
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)

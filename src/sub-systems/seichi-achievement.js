@@ -6,7 +6,7 @@ const logger = require('../modules/logger')
 module.exports = (client) => {
 
 var day = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' })
-const mention = "<@&" + config.seichi_vote_notification.role + ">"
+const mention = "<@&" + config.seichi_achievement.role + ">"
 // 9001
 if(day.includes("1/1")){
     client.channels.cache.get(config.seichi_achievement.channel).send(mention)
