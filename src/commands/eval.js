@@ -4,7 +4,7 @@ const check_admin = require('../utils/check-admin')
 const { MessageEmbed } = require('discord.js');
 const err_embed = require('../utils/error-embed')
 var seichi_vote = require('../sub-systems/seichi-vote')
-
+const seichi_achievement_embeds = require('../sub-systems/seichi-achievement/embed')
 exports.run = (client, message, args) => {
     var permission_check = check_admin(message, client)
 
