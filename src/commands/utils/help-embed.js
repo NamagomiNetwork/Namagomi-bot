@@ -33,6 +33,10 @@ var top= new MessageEmbed({
             value: "おみくじをします"
         },
         {
+            name:  "`one-day-kuji`",
+            value: "おみくじを1日限定にするかを設定します"
+        },
+        {
             name:  "`status`",
             value: "botのステータスを表示します"
         },
