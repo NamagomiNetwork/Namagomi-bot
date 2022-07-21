@@ -9,7 +9,6 @@ module.exports = async (message) => {
     } else {
       if (message.content.includes('たわしさん')) {
         if(tawasiData.tawasi.includes("true")){
-            message.channel.send("a")
         return;
         }
         message.channel.send("https://i.gyazo.com/90c929eccbec4f36d4b15be295660dce.jpg");
