@@ -1,11 +1,14 @@
 const config = require('../utils/get-config');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
+const msg_replay = require('../sub-systems/message-reply')
+const url = require('../sub-systems/url-show')
+
+// DBSchema
 const profileModel = require('../utils/Schema/ProfileSchema');
 const BlockUserModel = require('../utils/Schema/BlockUserSchema');
 const TawasiModel = require('../utils/Schema/TawasiSchema');
-const msg_replay = require('../sub-systems/message-reply')
-const url = require('../sub-systems/url-show')
+const OmikujiModel = require('../utils/Schema/OmikujiSchema');
 
 module.exports = (client, message) => {
     async function run(){
@@ -49,7 +52,7 @@ module.exports = (client, message) => {
 
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成に成功しました")
     }
-
+    const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
     // たわしさんprofileがない場合作成
     if (!tawasiData) {
       const tawasi = await TawasiModel.create({
@@ -81,6 +84,23 @@ module.exports = (client, message) => {
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のブロックプロファイル作成に成功しました")
     }
 
+    // おみくじprofileをつくる
+    const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
+        // ユーザーブロックprofileを作成
+    if (!OmikujiData) {
+      const omikuji = await OmikujiModel.create({
+          _id: message.author.id,
+          one_day_omikuji_feature: false,
+          one_day_omikuji: false,
+          mae_no_omikuji_kekka: "none",
+      });
+      omikuji.save().catch((error) => {
+        logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成中にエラーが発生しました...")
+        logger.error(error);
+        return;
+      });;
+      logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成に成功しました")
+    }
 
     // 新規作成のときバグる可能性しかないので再取得
     const BlockData_check = await BlockUserModel.findOne({ _id: message.author.id });
