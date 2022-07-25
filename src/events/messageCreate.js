@@ -1,58 +1,38 @@
 const config = require('../utils/get-config');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
+const msg_replay = require('../sub-systems/message-reply')
+const url = require('../sub-systems/url-show')
+
+// DBSchema
 const profileModel = require('../utils/Schema/ProfileSchema');
 const BlockUserModel = require('../utils/Schema/BlockUserSchema');
 const TawasiModel = require('../utils/Schema/TawasiSchema');
-const url = require('../sub-systems/url-show')
+const OmikujiModel = require('../utils/Schema/OmikujiSchema');
 
 module.exports = (client, message) => {
     async function run(){
-      // Ignore bots
+      // botとDMを無視する
       if (message.author.bot || message.channel.type === 'dm') return;
-
-      // ぶたさんのときだけリアクションをつける
-      if(message.author.id.includes("281902125909409792")){
-      }
 
       // URL展開
       url.discord_com(client, message)
       url.discord_ptb_com(client, message)
 
+      // とあるメッセージに対して画像を送ったりする
+      msg_replay(message)
 
+      // profileデータがある場合はDBから ない場合はconfigからprefixを取得する
       const profileData = await profileModel.findOne({ _id: message.author.id });
-      const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
-
-      if (!tawasiData) {
-        if (message.content.includes('たわしさん')) {
-          message.channel.send("1日1たわしさんのデータが存在しません \n コマンドを実行してください")
-        }
-      } else {
-        if (message.content.includes('たわしさん')) {
-          if(tawasiData.tawasi.includes("true")){
-          // そうしん
-          message.channel.send("1日1たわしさんの本日分は終了しています \n ||うるさかったですか？すみません|| ")
-          return;
-          }
-          message.channel.send({ files: [__dirname + '/../assets/tawasi.jpg'] });
-          await tawasiData.updateOne({
-            tawasi: true,
-          })
-        }
-      }
-
       if (!profileData) {
         var prefix =  config.bot.prefix
       } else {
         var prefix = profileData.prefix
       }
 
-    //const prefix =  config.bot.prefix
-    // Ignore messages not starting with the prefix
+    // ここから先prefixを持ってない人以外無視する
     if (message.content.indexOf(prefix) !== 0) return;
   
-    
-    // Our standard argument/command name definition.
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
@@ -67,11 +47,12 @@ module.exports = (client, message) => {
           profile.save().catch((error) => {
             logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成中にエラーが発生しました...")
             logger.error(error);
+            return;
       });;
 
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成に成功しました")
     }
-
+    const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
     // たわしさんprofileがない場合作成
     if (!tawasiData) {
       const tawasi = await TawasiModel.create({
@@ -81,6 +62,7 @@ module.exports = (client, message) => {
       tawasi.save().catch((error) => {
         logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
         logger.error(error);
+        return;
     });;
 
     logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
@@ -97,10 +79,28 @@ module.exports = (client, message) => {
       profile.save().catch((error) => {
         logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のブロックプロファイル作成中にエラーが発生しました...")
         logger.error(error);
+        return;
       });;
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のブロックプロファイル作成に成功しました")
     }
 
+    // おみくじprofileをつくる
+    const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
+        // ユーザーブロックprofileを作成
+    if (!OmikujiData) {
+      const omikuji = await OmikujiModel.create({
+          _id: message.author.id,
+          one_day_omikuji_feature: false,
+          one_day_omikuji: false,
+          mae_no_omikuji_kekka: "none",
+      });
+      omikuji.save().catch((error) => {
+        logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成中にエラーが発生しました...")
+        logger.error(error);
+        return;
+      });;
+      logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成に成功しました")
+    }
 
     // 新規作成のときバグる可能性しかないので再取得
     const BlockData_check = await BlockUserModel.findOne({ _id: message.author.id });
@@ -119,7 +119,7 @@ module.exports = (client, message) => {
             },
             fields: [
               {
-                  name: "ブロック理由",
+                  name: "おしらせ:",
                   value: "あなたはブロックされています"
               },
               {
@@ -133,12 +133,10 @@ module.exports = (client, message) => {
       return;
     }
 
-      // Grab the command data from the client.commands Enmap
       const cmd = client.commands.get(command);
-  
-      // If that command doesn't exist, silently exit and do nothing
       if (!cmd) return;
-      // Run the command
+      
+      // こまんどじっこう
       cmd.run(client, message, args);  
 }
 run()

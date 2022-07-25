@@ -4,3 +4,6 @@ logs/
 
 # 開発のメモ用
 tmp/
+
+# 開発中
+src/tts

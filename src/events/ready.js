@@ -4,6 +4,7 @@ const config = require("../utils/get-config");
 const seichi_vote = require('../sub-systems/seichi-vote')
 const seichi_achievement = require('../sub-systems/seichi-achievement')
 const TawasiModel = require('../utils/Schema/TawasiSchema');
+const OmikujiModel = require('../utils/Schema/OmikujiSchema')
 
 module.exports = (client) => {
       client.user.setActivity( config.bot.prefix + 'help' + ' | ぶおおお', {type: 'PLAYING'});
@@ -42,8 +43,17 @@ module.exports = (client) => {
         await TawasiModel.updateMany({ tawasi: true }, {$set: { tawasi: false }})
       }
     }
-
+    async function one_day_kuji_reset(){
+      const OmikujiData = await OmikujiModel.find({ one_day_omikuji: true });
+      if (!OmikujiData) {
+          logger.warn("おみくじデータが見つかりませんでした...")
+          return;
+      }else {
+        await OmikujiModel.updateMany({ one_day_omikuji: true }, {$set: { one_day_omikuji: false }})
+      }
+    }
     cron.schedule('0 0 0 * * *', () => {
       one_day_tawasi_reset()
+      one_day_kuji_reset()
     })
 }
