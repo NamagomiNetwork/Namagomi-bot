@@ -1,5 +1,3 @@
-> **WARNING:** 現在このbotは開発版です。このbotを使用して得た不利益について NamagomiNetworkは一切保証致しません
-
 # configファイルの作成
 
 このセクションでは、configの作成を行います
