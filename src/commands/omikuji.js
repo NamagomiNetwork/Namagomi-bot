@@ -4,23 +4,35 @@ const OmikujiModel = require('../utils/Schema/OmikujiSchema')
 const { MessageEmbed } = require('discord.js');
 exports.run = (client, message, args) => {
     try{       
-        function bukkubukku(){
-        let arr = ["ﾌﾞｯｸﾌﾞｯｸ", "本が溺れた。ﾌﾞｯｸﾌﾞｯｸｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗ"];
+
+        function ko(){
+        let arr = ["や！","こばわ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
         }
-        //ごみ
+
         function namagomi(){
         let arr = ["生ゴミ", "黙れゴミ"];
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
         }
-        
+        //ごみ
         if(message.author.id.includes("538308521985572867")){
-            namagomi()
-            return;
+            var random = Math.floor(Math.random() * 2);
+            if(random == 1){
+                namagomi()
+                return;
+            }
+        }
+        //ko
+        if(message.author.id.includes("666277504260112429")){
+            var random = Math.floor(Math.random() * 2);
+            if(random == 1){
+                ko()
+                return;
+            }    
         }
         
         async function run() {
