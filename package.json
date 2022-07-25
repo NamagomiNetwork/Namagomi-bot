@@ -24,7 +24,7 @@
     "child_process": "^1.0.2",
     "cron": "^2.0.0",
     "discord-job-panel": "^1.0.8",
-    "discord.js": "^13.9.0",
+    "discord.js": "^14.0.0",
     "dotenv": "^16.0.1",
     "ffmpeg-static": "^5.0.2",
     "fs": "^0.0.1-security",
