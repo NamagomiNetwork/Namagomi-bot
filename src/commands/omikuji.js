@@ -26,7 +26,7 @@ exports.run = (client, message, args) => {
         async function run() {
             const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
             if (!OmikujiData) {
-                logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイルが見つかりませんでした発生しました...")
+                logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイルが見つかりませんでした...")
                 message.channel.send(({embeds: [err_embed.main]}))
                 return;
             }
