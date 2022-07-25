@@ -18,10 +18,13 @@ exports.run = (client, message, args) => {
         var result = arr[random];
         message.channel.send({content: result});
         }
-        
+        //確立分岐
         if(message.author.id.includes("538308521985572867")){
-            namagomi()
-            return;
+            var random = Math.floor(Math.random() * 2);
+            if(random == 1){
+                namagomi()
+                return;
+            }
         }
         
         let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ"];
