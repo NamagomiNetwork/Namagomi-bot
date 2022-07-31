@@ -79,6 +79,10 @@ var page3 = new MessageEmbed({
             value: "接頭辞を設定します(設定は設定を行ったユーザーのみに)"
         },
         {
+            name: "`update-profile`",
+            value: "profileを最新のものに更新します"
+        },
+        {
             name: "次のページを表示する",
             value:   "`help-4`"
         },
