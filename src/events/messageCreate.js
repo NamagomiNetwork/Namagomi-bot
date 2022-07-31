@@ -104,32 +104,32 @@ module.exports = (client, message) => {
 
     // 新規作成のときバグる可能性しかないので再取得
     const BlockData_check = await BlockUserModel.findOne({ _id: message.author.id });
+
+    if(BlockData_check.hardblock.includes("true")){
+      logger.info("ユーザーID: " + message.author.id + " はハードブロックされています")
+      return;
+    }
     // ブロックされているか確認
     if(BlockData_check.enable.includes("true")){
       logger.info("ユーザーID: " + message.author.id + " はブロックされています")
-      if(BlockData_check.hardblock.includes("true")){
-        logger.info("ユーザーID: " + message.author.id + " はハードブロックされています")
-      }
-      if(!BlockData_check.hardblock.includes("true")){
-        var your_block = new MessageEmbed({
-            title: "警告: あなたはブロックされています",
-            color: 16601703,
-            "footer": {
-              "text": "なまごみ"
+      var your_block = new MessageEmbed({
+          title: "警告: あなたはブロックされています",
+          color: 16601703,
+          "footer": {
+            "text": "なまごみ"
+          },
+          fields: [
+            {
+                name: "おしらせ:",
+                value: "あなたはブロックされています"
             },
-            fields: [
-              {
-                  name: "おしらせ:",
-                  value: "あなたはブロックされています"
-              },
-              {
-                  name: "お問い合わせ",
-                  value: "なまごみへ"
-              },
-            ]
-          })
+            {
+                name: "お問い合わせ",
+                value: "なまごみへ"
+            },
+          ]
+        })
       message.channel.send({embeds: [your_block]})
-      }
       return;
     }
 
