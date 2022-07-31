@@ -50,8 +50,8 @@ exports.run = async (client, message, args) => {
             if(OmikujiData.one_day_omikuji_feature.includes("true")){
                 if(OmikujiData.one_day_omikuji.includes("true")){
                     var sudeni_1day_true = new MessageEmbed({
-                        title: "1日1おみくじ",
-                        description: "すでに1日1おみくじを実行しています",
+                        title: "おみくじ",
+                        description: "すでに今日はおみくじを実行しています",
                         color: 5301186,
                         "footer": {
                             "text": "ぶひ"
@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
                         fields: [
                             {
                                 name: "この機能を無効化するには",
-                                value: profileData.prefix + "one-day-kuji コマンドを実行してください"
+                                value: "`" + profileData.prefix + "one-day-kuji` コマンドを実行してください"
                             },
                         ]
                     })
