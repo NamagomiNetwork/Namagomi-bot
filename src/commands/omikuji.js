@@ -1,10 +1,10 @@
 const logger = require('../modules/logger')
 const err_embed = require('../utils/error-embed');
 const OmikujiModel = require('../utils/Schema/OmikujiSchema')
+const profileModel = require('../utils/Schema/ProfileSchema');
 const { MessageEmbed } = require('discord.js');
-exports.run = (client, message, args) => {
-    try{       
-
+exports.run = async (client, message, args) => {
+    try{
         function ko(){
         let arr = ["や！","こばわ"];
         var random = Math.floor(Math.random() * arr.length);
@@ -35,10 +35,15 @@ exports.run = (client, message, args) => {
             }    
         }
         
-        async function run() {
             const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
+            const profileData = await profileModel.findOne({ _id: message.author.id });
             if (!OmikujiData) {
                 logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイルが見つかりませんでした...")
+                message.channel.send(({embeds: [err_embed.main]}))
+                return;
+            }
+            if (!profileData) {
+                logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイルが見つかりませんでした...")
                 message.channel.send(({embeds: [err_embed.main]}))
                 return;
             }
@@ -54,7 +59,7 @@ exports.run = (client, message, args) => {
                         fields: [
                             {
                                 name: "この機能を無効化するには",
-                                value: "g!one-day-kuji コマンドを実行してください"
+                                value: profileData.prefix + "one-day-kuji コマンドを実行してください"
                             },
                         ]
                     })
@@ -94,8 +99,6 @@ exports.run = (client, message, args) => {
             await OmikujiData.updateOne({
                 mae_no_omikuji_kekka: result,
             })
-        }
-        run()
         } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
