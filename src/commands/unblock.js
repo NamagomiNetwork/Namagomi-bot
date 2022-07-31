@@ -55,6 +55,12 @@ exports.run = (client, message, args) => {
                 logger.error("ユーザーID: " + input + " のブロックプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
                 return;
             }
+            
+            // 通常のブロック解除の前にハードブロックが解除されているか確認
+            if(!BlockData.hardblock.includes("false")){
+                message.channel.send("エラー: ブロック解除の前に `unhardblock` コマンドを実行してください")
+                return
+            } 
 
             if (config.bot.owner.includes(input)){
                 message.channel.send("さすがにbotのownerをブロックすることはできません")
