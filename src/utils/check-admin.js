@@ -5,7 +5,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = (message, client) =>  {
 
     var syslog = new MessageEmbed({
-        title: "権限がない人が管理コマンドを実行しました`",
+        title: "権限がない人が管理コマンドを実行しました",
         description: "このメッセージはBot管理者でない人が評価しようとしたため送信します",
         fields: [{
                 name: "ユーザーID",
