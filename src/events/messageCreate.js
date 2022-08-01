@@ -131,9 +131,19 @@ module.exports = async (client, message) => {
       message.channel.send({embeds: [your_block]})
       return;
     }
-
+    var unknown_command = new MessageEmbed({
+      title: "コマンドが不明です😉",
+      color: 16601703,
+      "footer": {
+        "text": "??? 「そんなコマンドないで」"
+      },
+      description: "コマンドが存在しません。helpを確認してください"
+    })
       const cmd = client.commands.get(command);
-      if (!cmd) return;
+      if (!cmd){
+        message.channel.send({embeds: [unknown_command]})
+        return; 
+      }
       
       // こまんどじっこう
       cmd.run(client, message, args);  
