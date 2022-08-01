@@ -6,9 +6,8 @@ const { MessageEmbed } = require('discord.js');
 const BlockUserModel = require('../utils/Schema/BlockUserSchema');
 const err_embed = require('../utils/error-embed')
 
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
     try {
-        async function run(){
             var permission_check = check_admin(message, client)
             
             if (permission_check == ('owner: no')){
@@ -97,9 +96,6 @@ exports.run = (client, message, args) => {
                 ]
             })
             message.channel.send(({embeds: [data]}))
-        }
-
-        run()
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)

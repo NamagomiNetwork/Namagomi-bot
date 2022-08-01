@@ -5,9 +5,8 @@ const profileModel = require('../utils/Schema/ProfileSchema');
 const { MessageEmbed } = require('discord.js');
 const err_embed = require('../utils/error-embed')
 
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
     try {
-        async function run(){
             // Get our input arguments
             const profileData = await profileModel.findOne({ _id: message.author.id });
             const args = message.content.split(" ").slice(1);
@@ -61,9 +60,6 @@ exports.run = (client, message, args) => {
                 ]
             })
             message.channel.send(({embeds: [success]}))
-        }
-
-        run()
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)

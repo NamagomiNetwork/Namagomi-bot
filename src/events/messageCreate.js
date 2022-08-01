@@ -10,8 +10,7 @@ const BlockUserModel = require('../utils/Schema/BlockUserSchema');
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 const OmikujiModel = require('../utils/Schema/OmikujiSchema');
 
-module.exports = (client, message) => {
-    async function run(){
+module.exports = async (client, message) => {
       // botとDMを無視する
       if (message.author.bot || message.channel.type === 'dm') return;
 
@@ -138,6 +137,4 @@ module.exports = (client, message) => {
       
       // こまんどじっこう
       cmd.run(client, message, args);  
-}
-run()
 };

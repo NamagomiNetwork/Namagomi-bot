@@ -7,9 +7,8 @@ const BlockUserModel = require('../utils/Schema/BlockUserSchema');
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 const err_embed = require('../utils/error-embed')
 
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
     try {
-        async function run(){
             // 権限の確認
             var permission_check = check_admin(message, client)
             
@@ -121,9 +120,6 @@ exports.run = (client, message, args) => {
                 ]
             })
             message.channel.send(({embeds: [data]}))
-        }
-
-        run()
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
