@@ -3,9 +3,8 @@ const err_embed = require('../utils/error-embed')
 const OmikujiModel = require('../utils/Schema/OmikujiSchema')
 const { MessageEmbed } = require('discord.js');
 
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
     try{
-        async function run() {
             const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
             
             if (!OmikujiData) {
@@ -55,8 +54,6 @@ exports.run = (client, message, args) => {
                     one_day_omikuji_feature: true,
                 })
             }
-        }
-        run()
         } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
