@@ -14,6 +14,28 @@ exports.run = (client, message, args) => {
         if (permission_check == ('owner: no')){
             return;
         }
+        // configのやばい情報を置き換える
+        const clean = async (text) => {
+            // If our input is a promise, await it before continuing
+            if (text && text.constructor.name == "Promise")
+              text = await text;
+            
+            // If the response isn't a string, `util.inspect()`
+            // is used to 'stringify' the code in a safe way that
+            // won't error out on objects with circular references
+            // (like Collections, for example)
+            if (typeof text !== "string")
+              text = require("util").inspect(text, { depth: 1 });
+            
+            // Replace symbols with character code alternatives
+            text = text.replaceAll(config.mongodb.url, "****");
+            text = text
+              .replace(/`/g, "`" + String.fromCharCode(8203))
+              .replace(/@/g, "@" + String.fromCharCode(8203));
+            text = text.replaceAll(config.bot.token, "****");
+            // Send off the cleaned up result
+            return text;
+        }
 
         const command = args.join(" ");
         
@@ -37,10 +59,9 @@ exports.run = (client, message, args) => {
             message.channel.send({ embeds: [err_argument]})
             return;
         }
-    
-        child.exec(command, (err, res) => {
-                    // 1024字文字以上メッセージを送信するとエラーがおきるので文字数制御を行う
+        async function run (err, res_old) {
 
+            const res = await clean(res_old);
             const input = command
             const input_count = input.length
             if(input_count >=1000){
@@ -63,7 +84,7 @@ exports.run = (client, message, args) => {
             logger.warn("シェルコマンド入力値が1000文字を超えたため処理を中断しました... (文字数: " + input_count + "文字)")
             return;
         }
-
+        
             const output_1 = res.slice(0, 1000)
             const output_2 = res.slice(1000, 2000)
             const output_3 = res.slice(3000, 4000)
@@ -165,7 +186,11 @@ exports.run = (client, message, args) => {
                 if(output_5.length >=1){
                     message.channel.send({ embeds: [page5]})
                 }
+        }
+        child.exec(command, (err, res_not_replace) => {
+            run(err, res_not_replace)
         })
+        
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
             logger.error(err)
