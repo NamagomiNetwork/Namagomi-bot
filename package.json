@@ -41,6 +41,6 @@
     "ytdl-core": "^4.11.0"
   },
   "devDependencies": {
-    "ts-migrate": "^0.1.30"
+    "ts-migrate": "0.1.30"
   }
 }
