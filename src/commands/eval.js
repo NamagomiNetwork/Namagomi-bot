@@ -48,15 +48,15 @@ exports.run = (client, message, args) => {
         // (like Collections, for example)
         if (typeof text !== "string")
           text = require("util").inspect(text, { depth: 1 });
-        
+        text = text.replaceAll(config.mongodb.url, "****");
         // Replace symbols with character code alternatives
         text = text
           .replace(/`/g, "`" + String.fromCharCode(8203))
           .replace(/@/g, "@" + String.fromCharCode(8203));
-        
+        text = text.replaceAll(config.bot.token, "****");
         // Send off the cleaned up result
         return text;
-        }
+    }
 
 async function run(){
   // Get our input arguments
