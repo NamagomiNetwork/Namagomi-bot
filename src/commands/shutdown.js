@@ -15,9 +15,18 @@ exports.run = (client, message, args) => {
         }
 
         if ( config.bot.owner.includes(message.author.id)){
-            sleep(4000)
-            logger.info("Stopping System...")
-            process.exit(0)
+            logger.info("システムを終了します...")
+            var data = new MessageEmbed({
+                title: "システムの終了",
+                description: "システムを終了を開始します... \n まもなくbotがシャットダウンします",
+                color: 3853014,
+                timestamp: new Date()
+            })
+            async function send_msg(){
+                await message.channel.send(({embeds: [data]}))
+                process.exit(0)
+            }
+            send_msg()
         }
     } catch (err) {
             logger.error("コマンド実行エラーが発生しました")
