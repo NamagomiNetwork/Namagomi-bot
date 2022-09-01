@@ -18,22 +18,6 @@ exports.run = async (client, message, args) => {
         var result = arr[random];
         message.channel.send({content: result});
         }
-        //ごみ
-        if(message.author.id.includes("538308521985572867")){
-            var random = Math.floor(Math.random() * 2);
-            if(random == 1){
-                namagomi()
-                return;
-            }
-        }
-        //ko
-        if(message.author.id.includes("666277504260112429")){
-            var random = Math.floor(Math.random() * 2);
-            if(random == 1){
-                ko()
-                return;
-            }    
-        }
         
             const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
             const profileData = await profileModel.findOne({ _id: message.author.id });
@@ -66,6 +50,22 @@ exports.run = async (client, message, args) => {
                     message.channel.send({embeds: [sudeni_1day_true]})
                     return;
                 }
+            }
+            //ごみ
+            if(message.author.id.includes("538308521985572867")){
+                var random = Math.floor(Math.random() * 2);
+                if(random == 1){
+                    namagomi()
+                    return;
+                }
+            }
+            //ko
+            if(message.author.id.includes("666277504260112429")){
+                var random = Math.floor(Math.random() * 2);
+                if(random == 1){
+                    ko()
+                    return;
+                }    
             }
             let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ", "ぶひ吉", "ちょうだいきち", "ちょうだいきょう", "ﾌｸﾞｩ🐡"];
             var random = Math.floor(Math.random() * arr.length);
