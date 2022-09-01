@@ -32,6 +32,9 @@ module.exports = (client) => {
     cron.schedule('0 0 0 * * *', () => {
       seichi_achievement(client)
     })
+    cron.schedule('0 30 22 * * *', () => {
+      seichi_achievement(client)
+    })
     
 
     async function one_day_tawasi_reset(){
