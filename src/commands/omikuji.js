@@ -67,7 +67,7 @@ exports.run = async (client, message, args) => {
                     return;
                 }    
             }
-            let arr = ["大吉", "中吉", "小吉", "吉", "凶", "大凶", "ﾌﾞｯｸﾌﾞｯｸ", "ぶひ吉", "ちょうだいきち", "ちょうだいきょう", "ﾌｸﾞｩ🐡"];
+            let arr = ["ちょうだいきち", "大吉", "吉", "中吉", "小吉", "半吉", "ぶひ吉", "凶", "大凶", "ちょうだいきょう", "ﾌﾞｯｸﾌﾞｯｸ", "ﾌｸﾞｩ🐡"];
             var random = Math.floor(Math.random() * arr.length);
             var result = arr[random];
 
