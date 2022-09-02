@@ -36,4 +36,4 @@ exports.run = async (client, message, args) => {
     await message.channel.send(({embeds: [data]}))
 }
 
-exports.name = "p";
+exports.name = "profile-update";
