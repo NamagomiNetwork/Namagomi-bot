@@ -1,6 +1,6 @@
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 module.exports = async (message) => {
-    if (message.author.id.includes("538308521985572867")) {
+    if (tawasiData.one_day_tawasi_feature.includes("faise")) {
         return;
     } else {
         // たわしさん
@@ -20,12 +20,9 @@ module.exports = async (message) => {
                 })
             }
         }
-
+    }
         // 豚
         if (message.content.includes('とってもおいしい豚さん')) {
             message.channel.send("https://i.gyazo.com/2408edaa5c00321c1d726cbae8429bdd.jpg");
         }
-
-
-    }//なまごみのやつ
 }
