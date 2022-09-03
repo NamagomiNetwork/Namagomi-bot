@@ -37,6 +37,10 @@ var top= new MessageEmbed({
             value: "おみくじを1日限定にするかを設定します"
         },
         {
+            name:  "`one-day-tawasi`",
+            value: "1日1たわしさんを有効にするかを設定します"
+        },
+        {
             name:  "`status`",
             value: "botのステータスを表示します"
         },

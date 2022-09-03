@@ -1,6 +1,6 @@
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 module.exports = async (message) => {
-    if (tawasiData.one_day_tawasi_feature.includes("faise")) {
+    if (tawasiData.one_day_tawasi_feature.includes("false")) {
         return;
     } else {
         // たわしさん
