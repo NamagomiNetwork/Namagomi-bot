@@ -116,6 +116,10 @@ var page4 = new MessageEmbed({
             value:   "DBに保存されているデータを表示します"
         },
         {
+            name: "`reset-tawasi 【1日1たわしをリセットするユーザーのID】`",
+            value:   "ユーザーの1日1たわしをリセットします"
+        },
+        {
             name: "`prefix-reset 【リセットするユーザーのID】`",
             value:   "prefixのリセットを行いconfigで設定されているものに強制的に置き換えます"
         },
