@@ -37,6 +37,10 @@ var top= new MessageEmbed({
             value: "おみくじを1日限定にするかを設定します"
         },
         {
+            name:  "`one-day-tawasi`",
+            value: "1日1たわしさんを有効にするかを設定します"
+        },
+        {
             name:  "`status`",
             value: "botのステータスを表示します"
         },
@@ -110,6 +114,10 @@ var page4 = new MessageEmbed({
         {
             name: "`check 【調べるユーザーのID】`",
             value:   "DBに保存されているデータを表示します"
+        },
+        {
+            name: "`reset-tawasi 【1日1たわしをリセットするユーザーのID】`",
+            value:   "ユーザーの1日1たわしをリセットします"
         },
         {
             name: "`prefix-reset 【リセットするユーザーのID】`",
