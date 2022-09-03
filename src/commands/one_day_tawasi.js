@@ -1,5 +1,6 @@
 const logger = require('../modules/logger')
 const err_embed = require('../utils/error-embed')
+const config = require('../utils/get-config');
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 const { MessageEmbed } = require('discord.js');
 
@@ -66,4 +67,4 @@ exports.run = async (client, message, args) => {
     }
 }
 
-exports.name = "tawasi";
+exports.name = "one_day_tawasi";
