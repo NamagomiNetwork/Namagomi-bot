@@ -3,7 +3,8 @@ const config = require('../utils/get-config')
 
 module.exports = (client, message) => {
 
-const dayOfweek = date.getDay();
+const today = new Date();
+const dayOfweek = today.getDay()
 
 if ( dayOfweek == 0 || dayOfweek == 6 ) {
     var embed =  new MessageEmbed({
@@ -14,8 +15,8 @@ if ( dayOfweek == 0 || dayOfweek == 6 ) {
             {
                 name: "本日の香川開始時間",
                 value: "19:30"
-            }
-        ],
+            },
+        ]
     })
 } else {
     var embed =  new MessageEmbed({
@@ -26,8 +27,8 @@ if ( dayOfweek == 0 || dayOfweek == 6 ) {
             {
                 name: "本日の香川開始時間",
                 value: "20:00"
-            }
-        ],
+            },
+        ]
     })    
 }
 
