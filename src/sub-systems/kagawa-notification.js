@@ -5,7 +5,7 @@ module.exports = (client, message) => {
 
 const dayOfweek = date.getDay();
 
-if ( dayOfweek == 0 || 6 ) {
+if ( dayOfweek == 0 || dayOfweek == 6 ) {
     var embed =  new MessageEmbed({
         title: "香川チャレンジの時間です",
         color: 5301186,
