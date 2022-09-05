@@ -3,6 +3,7 @@ const logger = require("../modules/logger")
 const config = require("../utils/get-config");
 const seichi_vote = require('../sub-systems/seichi-vote')
 const seichi_achievement = require('../sub-systems/seichi-achievement')
+const kagawa_notice = require('../sub-systems/kagawa-notification')
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 const OmikujiModel = require('../utils/Schema/OmikujiSchema')
 
@@ -36,6 +37,13 @@ module.exports = (client) => {
       seichi_achievement(client)
     })
     
+    // 香川通知
+    cron.schedule('0 50 19 * * 1-5', () => {
+      kagawa_notice(client)
+    })
+    cron.schedule('0 20 19 * * 0,6', () => {
+      kagawa_notice(client)
+    })
 
     async function one_day_tawasi_reset(){
       const tawasiData = await TawasiModel.find({ tawasi: true });
