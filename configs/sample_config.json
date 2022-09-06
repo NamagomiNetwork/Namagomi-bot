@@ -30,5 +30,9 @@
     "seichi_achievement": {
         "channel": "987094992285749318",
         "role": "987095020639223879"
+    },
+    "kagawa_notification": {
+        "channel": "987094992285749318",
+        "role": "987095020639223879"
     }
 }

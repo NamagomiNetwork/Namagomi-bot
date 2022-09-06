@@ -57,6 +57,7 @@ module.exports = async (client, message) => {
       const tawasi = await TawasiModel.create({
           _id: message.author.id,
           tawasi: false,
+          one_day_tawasi_feature: true,
       });
       tawasi.save().catch((error) => {
         logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
