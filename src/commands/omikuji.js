@@ -10,6 +10,7 @@ exports.run = async (client, message, args) => {
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
+        return result;
         }
 
         function namagomi(){
@@ -17,6 +18,7 @@ exports.run = async (client, message, args) => {
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
+        return result;
         }
         
             const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
@@ -55,42 +57,44 @@ exports.run = async (client, message, args) => {
             if(message.author.id.includes("538308521985572867")){
                 var random = Math.floor(Math.random() * 2);
                 if(random == 1){
-                    namagomi()
-                    return;
+                    var unique = "true"
+                    var result = namagomi()
                 }
             }
             //ko
             if(message.author.id.includes("666277504260112429")){
                 var random = Math.floor(Math.random() * 2);
                 if(random == 1){
-                    ko()
-                    return;
+                    var unique = "true"
+                    var result = ko()
                 }    
             }
-            let arr = ["ちょうだいきち", "大吉", "吉", "中吉", "小吉", "半吉", "ぶひ吉", "凶", "大凶", "ちょうだいきょう", "ﾌﾞｯｸﾌﾞｯｸ", "ﾌｸﾞｩ🐡"];
-            var random = Math.floor(Math.random() * arr.length);
-            var result = arr[random];
-
-            var maeno_data = OmikujiData.mae_no_omikuji_kekka
-            var success = new MessageEmbed({
-                title: "おみくじ",
-                description: "おみくじをしたよ～",
-                color: 5301186,
-                "footer": {
-                    "text": "ぶひ"
-                },
-                fields: [
-                    {
-                        name: "結果: ",
-                        value: result
+            if (unique != "true"){
+                let arr = ["ちょうだいきち", "大吉", "吉", "中吉", "小吉", "半吉", "ぶひ吉", "凶", "大凶", "ちょうだいきょう", "ﾌﾞｯｸﾌﾞｯｸ", "ﾌｸﾞｩ🐡"];
+                var random = Math.floor(Math.random() * arr.length);
+                var result = arr[random];
+            
+                var maeno_data = OmikujiData.mae_no_omikuji_kekka
+                var success = new MessageEmbed({
+                    title: "おみくじ",
+                    description: "おみくじをしたよ～",
+                    color: 5301186,
+                    "footer": {
+                        "text": "ぶひ"
                     },
-                    {
-                        name: "前回の結果: ",
-                        value: maeno_data
-                    },
-                ]
-            })
+                    fields: [
+                        {
+                            name: "結果: ",
+                            value: result
+                        },
+                        {
+                            name: "前回の結果: ",
+                            value: maeno_data
+                        },
+                    ]
+                })
             message.channel.send({embeds: [success]})
+            }
             if(OmikujiData.one_day_omikuji_feature.includes("true")){
                 await OmikujiData.updateOne({
                     one_day_omikuji: true,
