@@ -10,6 +10,7 @@ exports.run = async (client, message, args) => {
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
+        return result;
         }
 
         function namagomi(){
@@ -17,6 +18,7 @@ exports.run = async (client, message, args) => {
         var random = Math.floor(Math.random() * arr.length);
         var result = arr[random];
         message.channel.send({content: result});
+        return result;
         }
         
             const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
@@ -56,6 +58,7 @@ exports.run = async (client, message, args) => {
                 var random = Math.floor(Math.random() * 2);
                 if(random == 1){
                     namagomi()
+                    var result = result;
                     return;
                 }
             }
@@ -64,6 +67,7 @@ exports.run = async (client, message, args) => {
                 var random = Math.floor(Math.random() * 2);
                 if(random == 1){
                     ko()
+                    var result = result;
                     return;
                 }    
             }
