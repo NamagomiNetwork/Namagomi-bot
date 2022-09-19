@@ -11,17 +11,15 @@ exports.run = (client, message, args) => {
                 return message.channel.send({content: `選択肢は最低2つ以上,試行回数の選択肢以下で指定してください`})
             var arr = choices.join()
 
-            //一回目
-            var random = Math.floor(Math.random() * choices.length)
-            var result = choices[random]
-            choices.splice(random,1)
+            const results = [];
             
-            //二回目以降
-            for (let i=1; i < count; i++){
-                var random = Math.floor(Math.random() * choices.length)
-                result = result + "," + choices[random]
+            for (let i=0; i < count; i++){
+                const random = Math.floor(Math.random() * choices.length)
+                results[i] = choices[random]
                 choices.splice(random,1)
             }
+            
+            const result = results.join(',')
 
             var success = new MessageEmbed({
                 title: "抽選結果",
