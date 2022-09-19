@@ -8,20 +8,19 @@ exports.run = (client, message, args) => {
             if (!count) 
                 return message.channel.send({content: '試行回数を指定してください'})
             if (choices.length < 2 || count > choices.length)
-                return message.channel.send({content: `選択肢は最低2つ以上,試行回数の選択肢以下で指定してください`})
+                return message.channel.send({content: `選択肢は最低2つ以上,もしくは試行回数の選択肢以下で指定してください`})
             var arr = choices.join()
+            var num =choices.length
 
-            //一回目
-            var random = Math.floor(Math.random() * choices.length)
-            var result = choices[random]
-            choices.splice(random,1)
+            const results = [];
             
-            //二回目以降
-            for (let i=1; i < count; i++){
-                var random = Math.floor(Math.random() * choices.length)
-                result = result + "," + choices[random]
+            for (let i=0; i < count; i++){
+                const random = Math.floor(Math.random() * choices.length)
+                results[i] = choices[random]
                 choices.splice(random,1)
             }
+            
+            const result = results.join(',')
 
             var success = new MessageEmbed({
                 title: "抽選結果",
@@ -29,7 +28,7 @@ exports.run = (client, message, args) => {
                 color: 5301186,
                 fields: [
                     {
-                        name:  "試行回数 >> " + count,
+                        name:  "試行回数 >> " + count + "/" + num,
                         value:  "選択肢 >> " + arr
                     },
                 ]
