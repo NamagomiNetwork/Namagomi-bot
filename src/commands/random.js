@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
             if (choices.length < 2 || count > choices.length)
                 return message.channel.send({content: `選択肢は最低2つ以上,試行回数の選択肢以下で指定してください`})
             var arr = choices.join()
-
+            var arrlist = choices
             const results = [];
             
             for (let i=0; i < count; i++){
@@ -28,7 +28,7 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name:  "試行回数 >> " + count + "/" + arr.length,
-                        value:  "選択肢 >> " + arr
+                        value:  "選択肢 >> " + arrlist
                     },
                 ]
             })
