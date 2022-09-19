@@ -30,7 +30,7 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name:  "選択数 :" + count,
-                        value:  "選択数 :" + arr
+                        value:  "試行回数 :" + arr
                     },
                 ]
             })
