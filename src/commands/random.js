@@ -27,7 +27,7 @@ exports.run = (client, message, args) => {
                 color: 5301186,
                 fields: [
                     {
-                        name:  "試行回数 >> " + count,
+                        name:  "試行回数 >> " + count + "/" + choices.length,
                         value:  "選択肢 >> " + arr
                     },
                 ]
