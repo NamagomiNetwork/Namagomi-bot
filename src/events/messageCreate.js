@@ -51,23 +51,7 @@ module.exports = async (client, message) => {
 
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成に成功しました")
     }
-    const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
-    // たわしさんprofileがない場合作成
-    if (!tawasiData) {
-      const tawasi = await TawasiModel.create({
-          _id: message.author.id,
-          tawasi: false,
-          one_day_tawasi_feature: true,
-      });
-      tawasi.save().catch((error) => {
-        logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
-        logger.error(error);
-        return;
-    });;
-
-    logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
-  }
-
+    
     // ユーザーブロックprofileを作成
     const BlockData = await BlockUserModel.findOne({ _id: message.author.id });
     if (!BlockData) {
@@ -100,6 +84,23 @@ module.exports = async (client, message) => {
       });;
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成に成功しました")
     }
+      
+    const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
+    // たわしさんprofileがない場合作成
+    if (!tawasiData) {
+      const tawasi = await TawasiModel.create({
+        _id: message.author.id,
+        tawasi: false,
+        one_day_tawasi_feature: true,
+    });
+    tawasi.save().catch((error) => {
+      logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
+      logger.error(error);
+      return;
+    });;
+
+  　logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
+  　}
 
     // 新規作成のときバグる可能性しかないので再取得
     const BlockData_check = await BlockUserModel.findOne({ _id: message.author.id });
