@@ -11,23 +11,23 @@ const TawasiModel = require('../utils/Schema/TawasiSchema');
 const OmikujiModel = require('../utils/Schema/OmikujiSchema');
 
 module.exports = async (client, message) => {
-      // botとDMを無視する
-      if (message.author.bot || message.channel.type === 'dm') return;
+    // botとDMを無視する
+    if (message.author.bot || message.channel.type === 'dm') return;
 
-      // URL展開
-      url.discord_com(client, message)
-      url.discord_ptb_com(client, message)
+    // URL展開
+    url.discord_com(client, message)
+    url.discord_ptb_com(client, message)
 
-      // とあるメッセージに対して画像を送ったりする
-      msg_replay(message)
+    // とあるメッセージに対して画像を送ったりする
+    msg_replay(message)
 
-      // profileデータがある場合はDBから ない場合はconfigからprefixを取得する
-      const profileData = await profileModel.findOne({ _id: message.author.id });
-      if (!profileData) {
-        var prefix =  config.bot.prefix
-      } else {
-        var prefix = profileData.prefix
-      }
+    // profileデータがある場合はDBから ない場合はconfigからprefixを取得する
+    const profileData = await profileModel.findOne({ _id: message.author.id });
+    if (!profileData) {
+      var prefix =  config.bot.prefix
+    } else {
+      var prefix = profileData.prefix
+    }
 
     // ここから先prefixを持ってない人以外無視する
     if (message.content.indexOf(prefix) !== 0) return;
@@ -36,20 +36,19 @@ module.exports = async (client, message) => {
     const command = args.shift().toLowerCase();
 
     // ユーザーprofileがない場合作成
-      if (!profileData) {
-          const profile = await profileModel.create({
-              _id: message.author.id,
-              name: message.author.username,
-              avatar: message.author.displayAvatarURL({ format: 'png' }),
-              prefix:  config.bot.prefix,
-          });
-          profile.save().catch((error) => {
-            logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成中にエラーが発生しました...")
-            logger.error(error);
-            return;
+    if (!profileData) {
+      const profile = await profileModel.create({
+          _id: message.author.id,
+          name: message.author.username,
+          avatar: message.author.displayAvatarURL({ format: 'png' }),
+          prefix:  config.bot.prefix,
+      });
+      profile.save().catch((error) => {
+        logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成中にエラーが発生しました...")
+        logger.error(error);
+        return;
       });;
-
-      logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成に成功しました")
+    logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のプロファイル作成に成功しました")
     }
     
     // ユーザーブロックprofileを作成
@@ -65,7 +64,7 @@ module.exports = async (client, message) => {
         logger.error(error);
         return;
       });;
-      logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のブロックプロファイル作成に成功しました")
+    logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のブロックプロファイル作成に成功しました")
     }
 
     const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
@@ -82,7 +81,7 @@ module.exports = async (client, message) => {
         logger.error(error);
         return;
       });;
-      logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成に成功しました")
+    logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のおみくじプロファイル作成に成功しました")
     }
       
     const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
@@ -92,13 +91,12 @@ module.exports = async (client, message) => {
         _id: message.author.id,
         tawasi: false,
         one_day_tawasi_feature: true,
-    });
-    tawasi.save().catch((error) => {
-      logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
-      logger.error(error);
-      return;
-    });;
-
+      });
+      tawasi.save().catch((error) => {
+        logger.error("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成中にエラーが発生しました...")
+        logger.error(error);
+        return;
+      });;
     logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
     }
 
