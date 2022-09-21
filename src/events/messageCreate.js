@@ -99,8 +99,8 @@ module.exports = async (client, message) => {
       return;
     });;
 
-  　logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
-  　}
+    logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のたわしさんプロファイル作成に成功しました")
+    }
 
     // 新規作成のときバグる可能性しかないので再取得
     const BlockData_check = await BlockUserModel.findOne({ _id: message.author.id });
