@@ -84,9 +84,8 @@ module.exports = async (client, message) => {
       logger.info("ユーザー名: " + message.author.username + " ユーザーID: " + message.author.id + "のブロックプロファイル作成に成功しました")
     }
 
-    // おみくじprofileをつくる
     const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
-        // ユーザーブロックprofileを作成
+    // おみくじprofileを作成
     if (!OmikujiData) {
       const omikuji = await OmikujiModel.create({
           _id: message.author.id,
