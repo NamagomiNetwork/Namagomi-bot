@@ -26,10 +26,13 @@ exports.run = (client, message, args) => {
                 title: "抽選結果",
                 description: result,
                 color: 5301186,
+                "footer": {
+                    "text":`選択肢 >> ${arr}`
+                },
                 fields: [
                     {
-                        name:  "試行回数 >> " + count + "/" + num,
-                        value:  "選択肢 >> " + arr
+                        name:  "試行回数:"
+                        value:  `${count}/${num}`
                     },
                 ]
             })
