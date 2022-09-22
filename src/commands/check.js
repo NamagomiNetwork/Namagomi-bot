@@ -105,7 +105,6 @@ exports.run = async (client, message, args) => {
                         value: "`"+ profileData.prefix + "`",
                         inline: true
                     },
-                    
                     {
                         name: "1dayおみくじ: ",
                         value: "`"+ OmikujiData.one_day_omikuji_feature + "`",
