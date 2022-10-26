@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
             if (!count) 
                 return message.channel.send({content: '試行回数を指定してください'})
             if (choices.length < 2 || count > choices.length)
-                return message.channel.send({content: `選択肢は最低2つ以上,もしくは試行回数の選択肢以下で指定してください`})
+                return message.channel.send({content: "選択肢は最低2つ以上かつ試行回数以上で指定してください"})
             var arr = choices.join()
             var num = choices.length
 
@@ -28,8 +28,12 @@ exports.run = (client, message, args) => {
                 color: 5301186,
                 fields: [
                     {
-                        name:  "試行回数 >> " + count + "/" + num,
-                        value:  "選択肢 >> " + arr
+                        name:  "試行回数:",
+                        value:  `${count}/${num}`
+                    },
+                    {
+                        name:  "選択肢:",
+                        value:  arr
                     },
                 ]
             })

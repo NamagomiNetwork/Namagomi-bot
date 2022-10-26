@@ -5,6 +5,7 @@ const profileModel = require('../utils/Schema/ProfileSchema');
 const { MessageEmbed } = require('discord.js');
 const BlockUserModel = require('../utils/Schema/BlockUserSchema');
 const TawasiModel = require('../utils/Schema/TawasiSchema');
+const OmikujiModel = require('../utils/Schema/OmikujiSchema')
 const err_embed = require('../utils/error-embed')
 
 exports.run = async (client, message, args) => {
@@ -65,7 +66,13 @@ exports.run = async (client, message, args) => {
                 logger.error("ユーザーID: " + input + " のたわしプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
                 return;
             }
-
+            const OmikujiData = await OmikujiModel.findOne({ _id: input });
+            if (!OmikujiData) {
+                message.channel.send(({embeds: [err_embed.main]}))
+                message.channel.send("エラー: ユーザーおみくじプロファイルが見つかりませんでした")
+                logger.error("ユーザーID: " + input + " のおみくじプロファイルを確認しようとしましたがプロファイルデータがありませんでした...")
+                return;
+            }
             var data = new MessageEmbed({
                 title: "ユーザー情報確認",
                 description: "DBに保存されているデータを取得しました",
@@ -96,6 +103,16 @@ exports.run = async (client, message, args) => {
                     {
                         name: "prefix: ",
                         value: "`"+ profileData.prefix + "`",
+                        inline: true
+                    },
+                    {
+                        name: "1dayおみくじ: ",
+                        value: "`"+ OmikujiData.one_day_omikuji_feature + "`",
+                        inline: true
+                    },
+                    {
+                        name: "1dayたわしさん: ",
+                        value: "`"+ tawasiData.one_day_tawasi_feature + "`",
                         inline: true
                     },
                     {
