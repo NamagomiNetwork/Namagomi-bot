@@ -1,7 +1,7 @@
 const config = require('../utils/get-config');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../modules/logger')
-const msg_replay = require('../sub-systems/message-reply')
+const msg_reply = require('../sub-systems/message-reply')
 const url = require('../sub-systems/url-show')
 
 // DBSchema
@@ -19,14 +19,15 @@ module.exports = async (client, message) => {
     url.discord_ptb_com(client, message)
 
     // とあるメッセージに対して画像を送ったりする
-    msg_replay(message)
+    msg_reply(message)
 
     // profileデータがある場合はDBから ない場合はconfigからprefixを取得する
     const profileData = await profileModel.findOne({ _id: message.author.id });
+    let prefix;
     if (!profileData) {
-      var prefix =  config.bot.prefix
+      prefix =  config.bot.prefix
     } else {
-      var prefix = profileData.prefix
+      prefix = profileData.prefix
     }
 
     // ここから先prefixを持ってない人以外無視する
