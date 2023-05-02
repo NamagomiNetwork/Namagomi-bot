@@ -8,16 +8,16 @@ exports.run = async (client, message, args) => {
     try{
         function ko(){
             const arr = ["や！","こばわ"];
-            let random = Math.floor(Math.random() * arr.length);
-            let result_ko = arr[random];
+            const random = Math.floor(Math.random() * arr.length);
+            const result_ko = arr[random];
             message.channel.send({content: result_ko});
             return result_ko;
         }
 
         function namagomi(){
             const arr = ["生ゴミ", "黙れゴミ"];
-            let random = Math.floor(Math.random() * arr.length);
-            let result_namagomi = arr[random];
+            const random = Math.floor(Math.random() * arr.length);
+            const result_namagomi = arr[random];
             message.channel.send({content: result_namagomi});
             return result_namagomi;
         }
