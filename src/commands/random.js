@@ -6,11 +6,13 @@ exports.run = (client, message, args) => {
         try{
             const [count, ...choices] = args
             if (!count) 
-                return message.channel.send({content: '試行回数を指定してください'})
+                return message.channel.send({content: "試行回数を指定してください"})
             if (!isFinite(count))
                 return message.channel.send({content: "試行回数は数字を指定してください"})
+            if (!Number.isInteger((Number(count))))
+                return message.channel.send({content: "試行回数は整数を指定してください"})
             if (count < 1) 
-                return message.channel.send({content: '試行回数は1以上の数字で指定してください'})
+                return message.channel.send({content: "試行回数は1以上の数字で指定してください"})
             if (choices.length < 2 || count > choices.length)
                 return message.channel.send({content: "選択肢は最低2つ以上かつ試行回数以上で指定してください"})
             var arr = choices.join()
