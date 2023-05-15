@@ -7,8 +7,6 @@ exports.run = (client, message, args) => {
             const [count, ...choices] = args
             if (!count) 
                 return message.channel.send({content: "試行回数を指定してください"})
-            if (Number.isNaN(Number(count)))
-                return message.channel.send({content: "試行回数は数字を指定してください"})
             if (!Number.isInteger(Number(count)))
                 return message.channel.send({content: "試行回数は整数を指定してください"})
             if (count < 1) 
