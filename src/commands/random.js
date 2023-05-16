@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
             if (!count) 
                 return message.channel.send({content: "試行回数を指定してください"})
             if (!Number.isInteger(Number(count)))
-                return message.channel.send({content: "試行回数は整数を指定してください"})
+                return message.channel.send({content: "試行回数は整数で指定してください"})
             if (count < 1) 
                 return message.channel.send({content: "試行回数は1以上の整数で指定してください"})
             if (choices.length < 2 || count > choices.length)
