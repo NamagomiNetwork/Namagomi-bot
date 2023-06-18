@@ -362,7 +362,7 @@ var day_9023 =  new MessageEmbed({
         },
         {
             name: "解除可能日",
-            value: "6/19"
+            value: "6/18"
         },
     ]
 })
