@@ -118,7 +118,7 @@ if(day === "6/12"){
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9022 ] })
 }
 // 9023
-if(day === "6/19"){
+if(day === "6/1"){
     client.channels.cache.get(config.seichi_achievement.channel).send(mention)
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9023 ] })
 }
