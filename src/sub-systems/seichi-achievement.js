@@ -1,5 +1,6 @@
 const { MessageEmbed} = require('discord.js');
 const config = require('../utils/get-config')
+const seichi_achievement = require('../utils/get-achievements')
 const seichi_achievement_embeds = require('./seichi-achievement/embed')
 const logger = require('../modules/logger')
 
@@ -63,7 +64,7 @@ if(day === "3/14"){
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9011 ] })
 }
 // 9012
-if(day === "3/21"){
+if(day === seichi_achievement.spring_equinox_day.date){
     client.channels.cache.get(config.seichi_achievement.channel).send(mention)
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9012 ] })
 }
@@ -103,7 +104,7 @@ if(day === "5/5"){
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9019 ] })
 }
 // 9020
-if(day === "5/14"){
+if(day === seichi_achievement.mothers_day.date){
     client.channels.cache.get(config.seichi_achievement.channel).send(mention)
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9020 ] })
 }
@@ -118,7 +119,7 @@ if(day === "6/12"){
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9022 ] })
 }
 // 9023
-if(day === "6/19"){
+if(day === seichi_achievement.fathers_day.date){
     client.channels.cache.get(config.seichi_achievement.channel).send(mention)
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9023 ] })
 }
@@ -188,7 +189,7 @@ if(day === "9/29"){
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9036 ] })
 }
 // 9037
-if(day === "9/21"){
+if(day === seichi_achievement.harvest_moon.date){
     client.channels.cache.get(config.seichi_achievement.channel).send(mention)
     client.channels.cache.get(config.seichi_achievement.channel).send({ embeds: [ seichi_achievement_embeds.day_9037 ] })
 }
