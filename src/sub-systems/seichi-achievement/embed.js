@@ -1,4 +1,5 @@
 const { MessageEmbed} = require('discord.js');
+const seichi_achievements = require('../../utils/get-achievements')
 
     var day_9001 =  new MessageEmbed({
         title: "今日は実績の解除が可能です",
@@ -186,7 +187,7 @@ var day_9012 =  new MessageEmbed({
         },
         {
             name: "解除可能日",
-            value: "3/21"
+            value: seichi_achievements.spring_equinox_day.date
         },
     ]
 })
@@ -314,7 +315,7 @@ var day_9020 =  new MessageEmbed({
         },
         {
             name: "解除可能日",
-            value: "5/14"
+            value: seichi_achievements.mothers_day.date
         },
     ]
 })
@@ -362,7 +363,7 @@ var day_9023 =  new MessageEmbed({
         },
         {
             name: "解除可能日",
-            value: "6/18"
+            value: seichi_achievements.fathers_day.date
         },
     ]
 })
@@ -586,7 +587,7 @@ var day_9037 =  new MessageEmbed({
         },
         {
             name: "解除可能日",
-            value: "9/21"
+            value: seichi_achievements.harvest_moon.date
         },
     ]
 })
