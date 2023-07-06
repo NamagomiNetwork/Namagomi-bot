@@ -74,7 +74,7 @@ exports.run = async (client, message, args) => {
             }    
         }
         if (unique != "true"){
-            const arr = ["ちょうだいきち", "大吉", "吉", "中吉", "小吉", "半吉", "ぶひ吉", "凶", "大凶", "ちょうだいきょう", "ﾌﾞｯｸﾌﾞｯｸ", "ﾌｸﾞｩ🐡"];
+            const arr = ["ちょうだいきち", "大吉", "吉", "中吉", "小吉", "半吉", "ぶひ吉", "区", "凶", "大凶", "ちょうだいきょう", "ﾌﾞｯｸﾌﾞｯｸ", "ﾌｸﾞｩ🐡"];
             let random = Math.floor(Math.random() * arr.length);
             result = arr[random];
         
