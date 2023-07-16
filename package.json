@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "lint": "eslint --fix src/**/*.js",
-    "format": "prettier --write src/**/*.js",
+    "lint": "eslint --fix src/**/*.{js,json,md}",
+    "format": "prettier --write src/**/*.{js,json,md}",
     "fix": "npm run format && npm run lint",
     "start": "node bot.js"
   },
