@@ -4,28 +4,42 @@ const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const child = require("child_process");
 const config = require("../utils/get-config");
+const repo_url = "https://github.com/NamagomiNetwork/Namagomi-bot/commit/";
 exports.run = (client, message) => {
 	try {
 		// commit情報を取得
-		child.exec("git rev-parse --short HEAD", (err, res) => {
-			let commit_short_hash = "";
+		child.exec("git log -n 1 --pretty=format:%H,%h,%s", (err, res) => {
+			let result;
+			let commit_hash;
+			let commit_short_hash;
+			let commit_message;
+
 			if (err) {
-				commit_short_hash = "取得エラーが発生しました...";
+				for (let i = 0; i < 3; i++) {
+					result[i] = "取得エラーが発生しました...";
+				}
 				return;
 			} else {
-				commit_short_hash = res;
+				result = res.toString().split(",");
+				commit_hash = result[0];
+				commit_short_hash = result[1];
+				commit_message = result[2];
 			}
 
 			var embed = new MessageEmbed({
 				title: "Version",
 				color: 5301186,
 				footer: {
-					text: "Version",
+					text: "Current Version",
 				},
 				fields: [
 					{
 						name: "commit short hash",
-						value: commit_short_hash,
+						value: "[" + commit_short_hash + "]" + "(" + repo_url + commit_hash + ")",
+					},
+					{
+						name: "commit message",
+						value: commit_message,
 					},
 					{
 						name: "bot-version",
