@@ -90,7 +90,20 @@ exports.discord_ptb_com = (client, message) => {
   if (!channelch) {
     return;
   }
+  const isChannelIgnored = (channel) => {
+    let id;
+    if (channel.isThread()) {
+      id = channel.parentId;
+    } else {
+      id = channel.id;
+    }
+    console.log(id);
+    return config.url_show_ignore.channels.includes(id);
+  };
 
+  if (isChannelIgnored(channelch)) {
+    return;
+  }
   channelch.messages
     .fetch(message_id)
     .then((msg) => {
