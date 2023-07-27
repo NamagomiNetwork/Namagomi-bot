@@ -5,7 +5,6 @@ exports.discord_com = (client, message) => {
   const re =
     /https:\/\/discord\.com\/channels\/(\d{16,19})\/(\d{16,19})\/(\d{16,19})/;
   const results = message.content.match(re);
-  console.log(results);
   if (!results) {
     return;
   }
@@ -28,7 +27,6 @@ exports.discord_com = (client, message) => {
     } else {
       id = channel.id;
     }
-    console.log(id);
     return config.url_show_ignore.channels.includes(id);
   };
 
