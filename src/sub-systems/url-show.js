@@ -96,7 +96,6 @@ exports.discord_ptb_com = (client, message) => {
     } else {
       id = channel.id;
     }
-    console.log(id);
     return config.url_show_ignore.channels.includes(id);
   };
 
