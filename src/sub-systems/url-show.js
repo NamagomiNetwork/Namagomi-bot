@@ -72,7 +72,8 @@ exports.discord_com = (client, message) => {
 
 exports.discord_ptb_com = (client, message) => {
   const re =
-    /https:\/\/ptb.discord\.com\/channels\/(\d{16,19})\/(\d{16,19})\/(\d{16,19})/;
+    /https:\/\/ptb\.discord\.com\/channels\/(\d{16,19})\/(\d{16,19})\/(\d{16,19})/;
+
   const results = message.content.match(re);
   if (!results) {
     return;
