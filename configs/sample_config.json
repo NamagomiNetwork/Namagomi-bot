@@ -34,5 +34,10 @@
     "kagawa_notification": {
         "channel": "987094992285749318",
         "role": "987095020639223879"
+    },
+    "url_show_ignore": {
+        "channels": [
+            "955408172514942976"
+        ]
     }
 }
