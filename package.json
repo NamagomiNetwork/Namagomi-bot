@@ -4,18 +4,7 @@
   "description": "なまごみぼっと",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
-    "lint": "eslint --fix src/**/*.{js,json,md}",
-    "format": "prettier --write src/**/*.{js,json,md}",
-    "fix": "npm run format && npm run lint",
-    "start": "node bot.js"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -39,12 +28,12 @@
     "dotenv": "^16.0.1",
     "ffmpeg-static": "^5.0.2",
     "fs": "^0.0.1-security",
+    "jishaku": "^1.0.6",
     "log4js": "^6.5.2",
     "mongoose": "^6.4.4",
     "node-cron": "^3.0.1",
     "os": "^0.1.2",
     "path": "^0.12.7",
-    "prettier-eslint": "^15.0.1",
     "tweetnacl": "^1.0.3",
     "util": "^0.10.4",
     "uuid": "^8.3.2",
@@ -52,11 +41,6 @@
     "ytdl-core": "^4.11.0"
   },
   "devDependencies": {
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^2.3.0",
     "ts-migrate": "^0.1.30"
   }
 }

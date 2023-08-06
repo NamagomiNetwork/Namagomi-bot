@@ -1,38 +1,39 @@
-const { MessageEmbed } = require("discord.js");
-const config = require("../utils/get-config");
+const { MessageEmbed} = require('discord.js');
+const config = require('../utils/get-config')
 
-module.exports = (client) => {
-	const today = new Date();
-	const dayOfweek = today.getDay();
-	let embed;
+module.exports = (client, message) => {
 
-	if (dayOfweek == 0 || dayOfweek == 6) {
-		embed = new MessageEmbed({
-			title: "香川チャレンジの時間です",
-			color: 5301186,
-			description: "Minecraft-v1.16.5を起動しましょう",
-			fields: [
-				{
-					name: "本日の香川開始時間",
-					value: "19:30",
-				},
-			],
-		});
-	} else {
-		embed = new MessageEmbed({
-			title: "香川チャレンジの時間です",
-			color: 5301186,
-			description: "Minecraft-v1.16.5を起動しましょう",
-			fields: [
-				{
-					name: "本日の香川開始時間",
-					value: "20:00",
-				},
-			],
-		});
-	}
+const today = new Date();
+const dayOfweek = today.getDay()
+let embed;
 
-	const mention = "<@&" + config.kagawa_notification.role + ">";
-	client.channels.cache.get(config.kagawa_notification.channel).send(mention);
-	client.channels.cache.get(config.kagawa_notification.channel).send({ embeds: [embed] });
-};
+if ( dayOfweek == 0 || dayOfweek == 6 ) {
+    embed =  new MessageEmbed({
+        title: "香川チャレンジの時間です",
+        color: 5301186,
+        description: "Minecraft-v1.16.5を起動しましょう",
+        fields: [
+            {
+                name: "本日の香川開始時間",
+                value: "19:30"
+            },
+        ]
+    })
+} else {
+    embed =  new MessageEmbed({
+        title: "香川チャレンジの時間です",
+        color: 5301186,
+        description: "Minecraft-v1.16.5を起動しましょう",
+        fields: [
+            {
+                name: "本日の香川開始時間",
+                value: "20:00"
+            },
+        ]
+    })    
+}
+
+const mention = "<@&" + config.kagawa_notification.role + ">"
+client.channels.cache.get(config.kagawa_notification.channel).send(mention)
+client.channels.cache.get(config.kagawa_notification.channel).send({ embeds: [ embed ] })
+}
