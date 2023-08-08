@@ -18,7 +18,6 @@ exports.run = (client, message) => {
         for (let i = 0; i < 3; i++) {
           result[i] = "取得エラーが発生しました...";
         }
-        return;
       } else {
         result = res.toString().split(",");
         commit_hash = result[0];
@@ -26,7 +25,7 @@ exports.run = (client, message) => {
         commit_message = result[2];
       }
 
-      var embed = new MessageEmbed({
+      const embed = new MessageEmbed({
         title: "Version",
         color: 5301186,
         footer: {
