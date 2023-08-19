@@ -11,6 +11,6 @@
     "rules": {
         "no-undef":"warn",
         "no-unused-vars":"warn",
-        "indent":["error",4]
+        "indent":["warn",4]
     }
 }
