@@ -45,8 +45,13 @@ exports.run = (client, message, args) => {
           value: mempercent + "%",
         },
         {
-          name: "bot-version",
+          name: "Bot Version",
           value: package.version,
+          inline: true,
+        },
+        {
+          name: "Node.js Version",
+          value: process.version,
           inline: true,
         },
         {
