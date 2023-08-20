@@ -10,14 +10,18 @@ exports.run = (client, message, args) => {
     const freemem_kb = freemem_byte / 1024;
     const freemem_mb = freemem_kb / 1024;
     const freemem_gb = freemem_mb / 1024;
+    // 合計メモリを計算
     const totalmem_byte = os.totalmem;
     const totalmem_kb = totalmem_byte / 1024;
     const totalmem_mb = totalmem_kb / 1024;
     const totalmem_gb = totalmem_mb / 1024;
+    // メモリ使用率を計算
     const mem_gb_per = (freemem_gb / totalmem_gb) * 100;
+
     function floorDecimal(val, digit) {
       return Math.floor(val * Math.pow(10, digit)) / Math.pow(10, digit);
     }
+    // 小数桁の切り下げ
     const freemem = floorDecimal(freemem_gb, 3);
     const totalmem = floorDecimal(totalmem_gb, 3);
     const mempercent = floorDecimal(mem_gb_per, 2);
