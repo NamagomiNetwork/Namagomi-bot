@@ -3,7 +3,6 @@ const package = require("../../package.json");
 const os = require("os");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
-const mem_
 exports.run = (client, message, args) => {
   try {
     // 空きメモリを計算
@@ -21,11 +20,11 @@ exports.run = (client, message, args) => {
       },
       fields: [
         {
-          name: "Os Information",
+          name: "OS Information",
           value: os.type() + "," + os.version() + " " + os.arch(),
         },
         {
-          name: "Free Memory",
+          name: "OS Free Memory",
           value: freemem + " GB",
         },
         {
