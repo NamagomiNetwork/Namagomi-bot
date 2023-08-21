@@ -17,14 +17,19 @@ exports.run = (client, message, args) => {
     const totalmem_gb = totalmem_mb / 1024;
     // メモリ使用率を計算
     const mem_gb_per = (freemem_gb / totalmem_gb) * 100;
+    // プロセス全体の使用メモリを計算
+    const heapmem_byte = process.memoryUsage().rss;
+    const heapmem_mb = heapmem_byte / Math.pow(1024, 2);
 
     function floorDecimal(val, digit) {
       return Math.floor(val * Math.pow(10, digit)) / Math.pow(10, digit);
     }
+
     // 小数桁の切り下げ
-    const freemem = floorDecimal(freemem_gb, 3);
-    const totalmem = floorDecimal(totalmem_gb, 3);
+    const freemem = floorDecimal(freemem_gb, 2);
+    const totalmem = floorDecimal(totalmem_gb, 2);
     const mempercent = floorDecimal(mem_gb_per, 2);
+    const heapmem = floorDecimal(heapmem_mb, 2);
     var embed = new MessageEmbed({
       title: "SystemStatus",
       color: 5301186,
@@ -43,6 +48,10 @@ exports.run = (client, message, args) => {
         {
           name: "OS Memory Usage Per",
           value: mempercent + "%",
+        },
+        {
+          name: "Process Total Memory",
+          value: heapmem + "MB",
         },
         {
           name: "Bot Version",
