@@ -9,20 +9,12 @@ var top= new MessageEmbed({
             value: "------------------------------ \n このbotの基本的なコマンドを表示します \n コマンドは、設定したprefix + コマンド名 で動作します \n ------------------------------"
         },
         {
-            name:  "`about`",
-            value: "botの情報を表示します"
-        },
-        {
-            name:  "`license`",
-            value: "このbotのライセンスを表示します"
-        },
-        {
             name:  "`ping`",
             value: "ping値を表示します"
         },
         {
-            name:  "`user [メンションもしくはID]`",
-            value: "ユーザー情報を表示します"
+            name:  "`omikuji`",
+            value: "おみくじをします"
         },
         {
             name:  "`vote [タイトル] [投票1] [投票2] ● ● ●`",
@@ -32,26 +24,7 @@ var top= new MessageEmbed({
             name:  "`random [試行回数] [選択肢1] [選択肢2] ● ● ●`",
             value: "抽選を行います"
         },
-        {
-            name:  "`omikuji`",
-            value: "おみくじをします"
-        },
-        {
-            name:  "`one-day-kuji`",
-            value: "おみくじを1日限定にするかを設定します"
-        },
-        {
-            name:  "`one-day-tawasi`",
-            value: "1日1たわしさんを有効にするかを設定します"
-        },
-        {
-            name:  "`status`",
-            value: "botのステータスを表示します"
-        },
-        {
-            name:  "`help-(pageID)`",
-            value: "指定したページID(例: 2)のhelpを表示します"
-        },
+
         {
             name: "次のページを表示する",
             value:  "`help-2`"
@@ -62,12 +35,20 @@ var page2 = new MessageEmbed({
     title: "Page(2/4)",
     fields: [
         {
-            name: "音楽コマンド",
-            value: "------------------------------ \n このbotの音楽機能に関するコマンドを表示します \n ------------------------------"
+            name:  "`about`",
+            value: "botの情報を表示します"
         },
         {
-            name: "TODO: musicできたらやる",
-            value: "  {commandName}"
+            name:  "`license`",
+            value: "このbotのライセンスを表示します"
+        },
+        {
+            name:  "`status`",
+            value: "botのステータスを表示します"
+        },
+        {
+            name:  "`user [メンションもしくはID]`",
+            value: "ユーザー情報を表示します"
         },
         {
             name: "次のページを表示する",
@@ -85,6 +66,14 @@ var page3 = new MessageEmbed({
         {
             name: "`set-prefix 【設定したいprefix】`",
             value: "接頭辞を設定します(設定は設定を行ったユーザーのみに)"
+        },
+        {
+            name:  "`one-day-kuji`",
+            value: "おみくじを1日限定にするかを設定します"
+        },
+        {
+            name:  "`one-day-tawasi`",
+            value: "1日1たわしさんを有効にするかを設定します"
         },
         {
             name: "`update-profile`",
