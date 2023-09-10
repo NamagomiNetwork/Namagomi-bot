@@ -46,6 +46,10 @@ var page2 = new MessageEmbed({
             value: "botのステータスを表示します"
         },
         {
+            name:  "`version`",
+            value: "botのバージョンを表示します"
+        },
+        {
             name:  "`license`",
             value: "このbotのライセンスを表示します"
         },
@@ -75,7 +79,7 @@ var page3 = new MessageEmbed({
             value: "1日1たわしさんを有効にするかを設定します"
         },
         {
-            name: "`update-profile`",
+            name: "`profile-update`",
             value: "profileを最新のものに更新します"
         },
         {
@@ -110,6 +114,10 @@ var page4 = new MessageEmbed({
         {
             name: "`check 【調べるユーザーのID】`",
             value:   "DBに保存されているデータを表示します"
+        },
+        {
+            name:  "`shutdown`",
+            value: "botをシャットダウンします"
         },
         {
             name: "`reset-tawasi 【1日1たわしをリセットするユーザーのID】`",
