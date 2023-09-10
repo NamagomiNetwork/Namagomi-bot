@@ -24,7 +24,10 @@ var top= new MessageEmbed({
             name:  "`random [試行回数] [選択肢1] [選択肢2] ● ● ●`",
             value: "抽選を行います"
         },
-
+        {
+            name:  "`help-(pageID)`",
+            value: "指定したページID(例: 2)のhelpを表示します"
+        },
         {
             name: "次のページを表示する",
             value:  "`help-2`"
@@ -39,12 +42,12 @@ var page2 = new MessageEmbed({
             value: "botの情報を表示します"
         },
         {
-            name:  "`license`",
-            value: "このbotのライセンスを表示します"
-        },
-        {
             name:  "`status`",
             value: "botのステータスを表示します"
+        },
+        {
+            name:  "`license`",
+            value: "このbotのライセンスを表示します"
         },
         {
             name:  "`user [メンションもしくはID]`",
@@ -64,10 +67,6 @@ var page3 = new MessageEmbed({
             value: "------------------------------ \n このbotの設定機能に関するコマンドを表示します \n ------------------------------"
         },
         {
-            name: "`set-prefix 【設定したいprefix】`",
-            value: "接頭辞を設定します(設定は設定を行ったユーザーのみに)"
-        },
-        {
             name:  "`one-day-kuji`",
             value: "おみくじを1日限定にするかを設定します"
         },
@@ -78,6 +77,10 @@ var page3 = new MessageEmbed({
         {
             name: "`update-profile`",
             value: "profileを最新のものに更新します"
+        },
+        {
+            name: "`set-prefix 【設定したいprefix】`",
+            value: "接頭辞を設定します(設定は設定を行ったユーザーのみに)"
         },
         {
             name: "次のページを表示する",
