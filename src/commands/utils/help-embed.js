@@ -9,10 +9,6 @@ var top= new MessageEmbed({
             value: "------------------------------ \n このbotの基本的なコマンドを表示します \n コマンドは、設定したprefix + コマンド名 で動作します \n ------------------------------"
         },
         {
-            name:  "`ping`",
-            value: "ping値を表示します"
-        },
-        {
             name:  "`omikuji`",
             value: "おみくじをします"
         },
@@ -37,6 +33,14 @@ var top= new MessageEmbed({
 var page2 = new MessageEmbed({
     title: "Page(2/4)",
     fields: [
+        {
+        name: "詳細コマンド",
+        value: "------------------------------ \n このbotのシステムに関するコマンドを表示します \n ------------------------------"
+        },
+        {
+            name:  "`ping`",
+            value: "ping値を表示します"
+        },
         {
             name:  "`about`",
             value: "botの情報を表示します"
