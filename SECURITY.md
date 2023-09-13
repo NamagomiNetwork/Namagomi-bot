@@ -13,4 +13,4 @@
 
 ## Reporting a Vulnerability
 
-このリポジトリの Issue もしくは、 `mail<at_mark>nabr2730.com` にて報告してください
+このリポジトリの Issue もしくは、 `iloveikazuchi<at_mark>gmail.com` にて報告してください
