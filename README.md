@@ -32,6 +32,6 @@ npm i
 
 ### 起動する
 
-```
+```shell
 node bot.js
 ```
