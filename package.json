@@ -37,7 +37,6 @@
     "tweetnacl": "^1.0.3",
     "util": "^0.12.0",
     "uuid": "^9.0.0",
-    "voicevox-api-client": "^1.1.0",
     "ytdl-core": "^4.11.0"
   },
   "devDependencies": {
