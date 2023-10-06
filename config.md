@@ -1,53 +1,83 @@
-# configファイルの作成
+# config ファイルの作成
 
-このセクションでは、configの作成を行います
+このセクションでは、config の作成方法について記載します
 
-## sampleConfigからのコピー
+## sample_config からのコピー
 
-- `configs` ディレクトリにある `sample_config.json` を `config.json` に名称を変更します
+- `configs` ディレクトリにある `sample_config.json` を `config.json` にファイル名称を変更します
 
-## configファイルの編集
+## config ファイルの編集
 
 ### カテゴリー: bot
 
 - `token`
-    - botのTOKENを指定します
+  - Bot の TOKEN を指定します
 - `prefix`
-    - 初期のprefixを設定します
-    - これらはユーザーごとに変更可能です
+  - prefix の初期値を設定します
+  - `set-prefix`コマンドによりユーザ単位で変更可能です
 - `owner`
-    - botのownerを指定します
-    - eval(コード実行) などの管理コマンドが実行可能になります
+  - Bot の owner を指定します
+  - `eval`(コード実行) などの管理コマンドが実行可能になります
 
 ### カテゴリー: mongodb
 
 - `url`
-    - mongodbの接続URLを指定します
-    - 例: `mongodb+srv://user:pass@hogehoge_namagmoi_bot_sample.dhpsa.mongodb.net/namagomibot?retryWrites=true&w=majority`
+  - MongoDB の接続 URL を指定します
+  - 例: `mongodb+srv://user:pass@hogehoge_namagmoi_bot_sample.dhpsa.mongodb.net/namagomibot?retryWrites=true&w=majority`
 
 ### カテゴリー: debug
 
 - `enable`
-    - `true`もしくは、`false` を指定してください
-    - `true`に設定すると、詳細なログ出力,コマンド実行エラー時に詳細を表示します
+  - `true`もしくは、`false` を指定してください
+  - `true`に設定すると、詳細なログ出力,コマンド実行エラー時に詳細を表示します
+
+### カテゴリー: syslog
+
+- `syslog`
+  - Bot の一部ログを Discord に送信します
+  - ログを送信するチャンネル ID を指定します
 
 ### カテゴリー: command_settings
 
-この項目では一部コマンドの無効化を行えます。
+このカテゴリーでは一部コマンドの無効化が可能です
 
-- trueで有効,falseで無効化します
+- `true` でコマンドの有効化、`false`でコマンドの無効化を設定します
+- 対象コマンドは以下となります
+  - eval
+  - shell
+  - shutdown
 
 ### カテゴリー: seichi_vote_notification
 
-この項目では、整地鯖投票通知を行えます
+このカテゴリーでは、整地鯖投票通知に関する設定が可能です
 
 - `channel`
-    - 投票通知を送信するチャンネルIDを設定します
+  - 投票通知を送信するチャンネル ID を設定します
 - `role`
-    - メンションを行うユーザーIDもしくは、ロールを設定します
+  - メンションを行うユーザー ID もしくは、ロールを設定します
 
-### カテゴリー: その他
+### カテゴリー: seichi_achievement
 
-- `syslog`
-    - botの一部ログをDiscordに送信します
-    - チャンネルIDを指定してください
+このカテゴリーでは、整地鯖実績通知に関する設定が可能です
+
+- `channel`
+  - 投票通知を送信するチャンネル ID を設定します
+- `role`
+  - メンションを行うユーザー ID もしくは、ロールを設定します
+
+### カテゴリー: kagawa_notification
+
+このカテゴリーでは、香川チャレンジ通知に関する設定が可能です
+
+- `channel`
+  - 投票通知を送信するチャンネル ID を設定します
+- `role`
+  - メンションを行うユーザー ID もしくは、ロールを設定します
+
+### カテゴリー: url_show_ignore
+
+このカテゴリーでは、URL 展開機能を無視するチャンネルの指定が可能です
+
+- `channels`
+  - URL 展開機能を無視するチャンネル ID を設定します（複数設定可）
+  - 指定のチャンネル・スレッドからはメッセージ取得せず、その他のチャンネル・スレッドへの展開を行いません

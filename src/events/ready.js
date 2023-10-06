@@ -3,10 +3,10 @@ const logger = require("../modules/logger")
 const config = require("../utils/get-config");
 const seichi_vote = require('../sub-systems/seichi-vote')
 const seichi_achievement = require('../sub-systems/seichi-achievement')
+const set_seichi_achievement = require('../utils/set-achievements')
 const kagawa_notice = require('../sub-systems/kagawa-notification')
 const TawasiModel = require('../utils/Schema/TawasiSchema');
 const OmikujiModel = require('../utils/Schema/OmikujiSchema')
-
 module.exports = (client) => {
       client.user.setActivity( config.bot.prefix + 'help' + ' | ぶおおお', {type: 'PLAYING'});
 
@@ -66,5 +66,8 @@ module.exports = (client) => {
     cron.schedule('0 0 0 * * *', () => {
       one_day_tawasi_reset()
       one_day_kuji_reset()
+    })
+    cron.schedule('0 0 0 1 1 *', () =>{
+      set_seichi_achievement(client)
     })
 }
