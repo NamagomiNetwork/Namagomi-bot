@@ -14,4 +14,4 @@ cp /config.json /Namagomi-bot/config.json
 cd Namagomi-bot
 
 # ここで起動
-node index.js
+node bot.js

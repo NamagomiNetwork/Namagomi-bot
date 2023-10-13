@@ -22,4 +22,4 @@ RUN git clone https://github.com/NamagomiNetwork/Namagomi-bot.git
 WORKDIR /Namagomi-bot
 RUN npm i
 
-CMD node index.js
+CMD node bot.js
