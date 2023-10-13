@@ -5,7 +5,6 @@ set -e
 
 if [ ! -e /config.json ];then
     echo "config.jsonファイルが /config.json にマウントされていません..."
-    echo "https://github.com/NamagomiNetwork/Namagomi-bot/blob/main/docker.md を参照してください"
     exit 1
 fi
 
