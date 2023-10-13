@@ -8,7 +8,7 @@ RUN apt update && apt upgrade -y && apt install -y
 
 # install nodejs
 RUN apt install nodejs npm curl -y
-RUN npm install -g n && n 16.6.0
+RUN npm install -g n && n 18.17.0
 RUN apt purge nodejs npm -y
 RUN node -v
 
