@@ -19,8 +19,8 @@ exports.run = (client, message, args) => {
       return message.channel.send({
         content: "選択肢は最低2つ以上かつ試行回数以上で指定してください",
       });
-    var arr = choices.join();
-    var num = choices.length;
+    let arr = choices.join();
+    let num = choices.length;
 
     const results = [];
 
