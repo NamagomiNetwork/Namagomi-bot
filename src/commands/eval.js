@@ -10,7 +10,7 @@ const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 
 exports.run = (client, message, args) => {
-  var permission_check = check_admin(message, client);
+  const permission_check = check_admin(message, client);
 
   if (permission_check == "owner: no") {
     return;

@@ -9,7 +9,7 @@ const err_embed = require("../utils/error-embed");
 
 exports.run = (client, message, args) => {
   try {
-    var permission_check = check_admin(message, client);
+    const permission_check = check_admin(message, client);
 
     if (permission_check == "owner: no") {
       return;
