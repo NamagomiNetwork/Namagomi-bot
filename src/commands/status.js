@@ -30,7 +30,7 @@ exports.run = (client, message, args) => {
     const totalmem = floorDecimal(totalmem_gb, 2);
     const mempercent = floorDecimal(mem_gb_per, 2);
     const heapmem = floorDecimal(heapmem_mb, 2);
-    var embed = new MessageEmbed({
+    const embed = new MessageEmbed({
       title: "SystemStatus",
       color: 5301186,
       footer: {
