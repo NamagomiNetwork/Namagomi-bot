@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Message } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
     const regex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
@@ -12,21 +12,33 @@ exports.x_twitter_com = (client, message) => {
     fetch(replaceURL)
         .then((res) => res.json())
         .then((post) => {
-            const msgpanel = new MessageEmbed()
-                .setDescription(`${post.text}`)
-                .setAuthor({
-                    name: `${post.user_name}` + `(@` + `${post.user_screen_name}` + `)`,
-                })
-                .setURL(post.tweetURL)
-                .setDescription(post.text + `\n\n[Xで表示する](` + post.tweetURL + `)`)
-                .setTimestamp(post.date)
-                .setFooter({
+            let embeds = [];
+            const embed = new MessageEmbed({
+                author: {
+                    name: `${post.user_name} ` + `(@` + `${post.user_screen_name}` + `)`,
+                },
+                description: post.text + `\n\n[Xで表示する](` + post.tweetURL + `)`,
+                url: post.tweetURL,
+                timestamp: post.date,
+                footer: {
                     text: `${post.user_screen_name}`,
-                    iconURL: `https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png`,
-                });
-            if (post.media_extend) {
-                msgpanel.setImage(`${post.mediaURLs.map((media_extend) => media_extend.thumbnail_url)}`);
+                    iconURL: `https://www.freepnglogos.com/uploads/twitter-x-logo-png/twitter-x-logo-png-9.png`,
+                },
+            });
+            embeds.push(embed);
+            if (post.mediaURLs) {
+                if (post.mediaURLs.length > 1) {
+                    post.mediaURLs.forEach((mediaElment) => {
+                        embeds.push({
+                            url: `${post.tweetURL}`,
+                            image: {
+                                url: mediaElment,
+                            },
+                        });
+                    });
+                }
             }
-            message.channel.send({ embeds: [msgpanel] });
+            console.log(embeds);
+            message.channel.send({ embeds: embeds });
         });
 };
