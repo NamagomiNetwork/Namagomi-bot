@@ -1,4 +1,4 @@
-const { MessageEmbed, Message } = require("discord.js");
+const { MessageEmbed, Message, MessageAttachment } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
     const regex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
@@ -13,6 +13,7 @@ exports.x_twitter_com = (client, message) => {
         .then((res) => res.json())
         .then((post) => {
             let embeds = [];
+            let attachment;
             const embed = new MessageEmbed({
                 author: {
                     name: `${post.user_name} ` + `(@` + `${post.user_screen_name}` + `)`,
@@ -26,19 +27,26 @@ exports.x_twitter_com = (client, message) => {
                 },
             });
             embeds.push(embed);
+
             if (post.mediaURLs) {
-                if (post.mediaURLs.length > 1) {
-                    post.mediaURLs.forEach((mediaElment) => {
+                post.mediaURLs.forEach((mediaElment) => {
+                    if (mediaElment.includes("video.twimg.com")) {
+                        attachment = mediaElment;
+                        console.log(mediaElment);
+                        console.log(attachment);
+                        return;
+                    }
+                    if (post.mediaURLs.length > 1) {
                         embeds.push({
                             url: `${post.tweetURL}`,
                             image: {
                                 url: mediaElment,
                             },
                         });
-                    });
-                }
+                    }
+                });
             }
             console.log(embeds);
-            message.channel.send({ embeds: embeds });
+            message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
         });
 };
