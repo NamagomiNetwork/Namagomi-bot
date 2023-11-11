@@ -7,7 +7,6 @@ exports.x_twitter_com = (client, message) => {
     if (!results) return;
 
     let replaceURL = results[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
-    console.log(results[0]);
 
     fetch(replaceURL)
         .then((res) => res.json())
@@ -27,26 +26,24 @@ exports.x_twitter_com = (client, message) => {
                 },
             });
             embeds.push(embed);
-
-            if (post.mediaURLs) {
+            if (post.mediaURLs.length === 0) {
+                message.channel.send({ embeds: [embed] });
+                return;
+            } else if (post.mediaURLs.length >= 1) {
                 post.mediaURLs.forEach((mediaElment) => {
                     if (mediaElment.includes("video.twimg.com")) {
                         attachment = mediaElment;
-                        console.log(mediaElment);
-                        console.log(attachment);
+                        message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
                         return;
                     }
-                    if (post.mediaURLs.length > 1) {
-                        embeds.push({
-                            url: `${post.tweetURL}`,
-                            image: {
-                                url: mediaElment,
-                            },
-                        });
-                    }
+                    embeds.push({
+                        url: `${post.tweetURL}`,
+                        image: {
+                            url: mediaElment,
+                        },
+                    });
                 });
+                message.channel.send({ embeds: embeds });
             }
-            console.log(embeds);
-            message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
         });
 };
