@@ -1,4 +1,4 @@
-const { MessageEmbed, Message, MessageAttachment } = require("discord.js");
+const { MessageEmbed, MessageAttachment } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
     const regex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
