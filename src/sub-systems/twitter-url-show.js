@@ -17,15 +17,16 @@ exports.x_twitter_com = (client, message) => {
                 author: {
                     name: `${post.user_name} ` + `(@` + `${post.user_screen_name}` + `)`,
                 },
-                description: post.text + `\n\n[Twitterで表示する](` + post.tweetURL + `)`,
+                description: post.text + `\n\n[WEBで表示する](` + post.tweetURL + `)`,
                 url: post.tweetURL,
                 timestamp: post.date,
                 footer: {
                     text: `${post.user_screen_name}`,
-                    iconURL: `https://www.freepnglogos.com/uploads/twitter-x-logo-png/twitter-x-logo-png-9.png`,
+                    iconURL: `https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png`,
                 },
             });
             embeds.push(embed);
+
             if (post.mediaURLs.length === 0) {
                 message.channel.send({ embeds: [embed] });
                 return;
@@ -33,7 +34,6 @@ exports.x_twitter_com = (client, message) => {
                 post.mediaURLs.forEach((mediaElment) => {
                     if (mediaElment.includes("video.twimg.com")) {
                         attachment = mediaElment;
-                        message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
                         return;
                     }
                     embeds.push({
@@ -43,7 +43,12 @@ exports.x_twitter_com = (client, message) => {
                         },
                     });
                 });
-                message.channel.send({ embeds: embeds });
+
+                if (attachment === undefined) {
+                    message.channel.send({ embeds: embeds });
+                } else {
+                    message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
+                }
             }
         });
 };
