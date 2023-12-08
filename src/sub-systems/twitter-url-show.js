@@ -22,7 +22,7 @@ exports.x_twitter_com = (client, message) => {
                 timestamp: post.date,
                 footer: {
                     text: `${post.user_screen_name}`,
-                    iconURL: `https://www.freepnglogos.com/uploads/twitter-x-logo-png/twitter-x-logo-png-9.png`,
+                    iconURL: `https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png`,
                 },
             });
             embeds.push(embed);
