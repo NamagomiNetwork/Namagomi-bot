@@ -18,7 +18,11 @@ exports.run = async (client, message, args) => {
         }
 
         const args = message.content.split(" ").slice(1);
-        const input = args.join(" ");
+        let input = args.join(" ");
+        const result = input.match(/[0-9]+/);
+        if (result) {
+            input = result[0];
+        }
 
         // ユーザーIDが指定されていない場合
         const err_argument = new MessageEmbed({
