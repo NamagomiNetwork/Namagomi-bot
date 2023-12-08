@@ -26,6 +26,7 @@ exports.x_twitter_com = (client, message) => {
                 },
             });
             embeds.push(embed);
+
             if (post.mediaURLs.length === 0) {
                 message.channel.send({ embeds: [embed] });
                 return;
@@ -33,18 +34,21 @@ exports.x_twitter_com = (client, message) => {
                 post.mediaURLs.forEach((mediaElment) => {
                     if (mediaElment.includes("video.twimg.com")) {
                         attachment = mediaElment;
-                        message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
                         return;
-                    } else {
-                        embeds.push({
-                            url: `${post.tweetURL}`,
-                            image: {
-                                url: mediaElment,
-                            },
-                        });
-                        message.channel.send({ embeds: embeds });
                     }
+                    embeds.push({
+                        url: `${post.tweetURL}`,
+                        image: {
+                            url: mediaElment,
+                        },
+                    });
                 });
+
+                if (attachment === undefined) {
+                    message.channel.send({ embeds: embeds });
+                } else {
+                    message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
+                }
             }
         });
 };
