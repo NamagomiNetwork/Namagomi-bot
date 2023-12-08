@@ -17,7 +17,7 @@ exports.x_twitter_com = (client, message) => {
                 author: {
                     name: `${post.user_name} ` + `(@` + `${post.user_screen_name}` + `)`,
                 },
-                description: post.text + `\n\n[Twitterで表示する](` + post.tweetURL + `)`,
+                description: post.text + `\n\n[WEBで表示する](` + post.tweetURL + `)`,
                 url: post.tweetURL,
                 timestamp: post.date,
                 footer: {
