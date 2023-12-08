@@ -35,15 +35,16 @@ exports.x_twitter_com = (client, message) => {
                         attachment = mediaElment;
                         message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
                         return;
+                    } else {
+                        embeds.push({
+                            url: `${post.tweetURL}`,
+                            image: {
+                                url: mediaElment,
+                            },
+                        });
+                        message.channel.send({ embeds: embeds });
                     }
-                    embeds.push({
-                        url: `${post.tweetURL}`,
-                        image: {
-                            url: mediaElment,
-                        },
-                    });
                 });
-                message.channel.send({ embeds: embeds });
             }
         });
 };
