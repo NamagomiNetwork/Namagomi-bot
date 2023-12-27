@@ -75,7 +75,7 @@ exports.run = async (client, message, args) => {
         }
 
         if (BlockData.hardblock.includes("true")) {
-            const block_notify = new MessageEmbed({
+            const hardblock_notify = new MessageEmbed({
                 title: "通知: 指定のユーザIDはハードブロック状態です",
                 color: 4886754,
                 timestamp: new Date(),
@@ -96,7 +96,7 @@ exports.run = async (client, message, args) => {
                     },
                 ],
             });
-            message.channel.send({ embeds: [block_notify] });
+            message.channel.send({ embeds: [hardblock_notify] });
             return;
         }
         await BlockData.updateOne({
