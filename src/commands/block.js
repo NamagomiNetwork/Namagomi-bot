@@ -71,7 +71,7 @@ exports.run = async (client, message, args) => {
 
         if (BlockData.enable.includes("true")) {
             const block_notify = new MessageEmbed({
-                title: "通知: 指定のユーザIDはブロック状態です",
+                title: "通知: 指定のユーザはすでにブロックされています",
                 color: 4886754,
                 timestamp: new Date(),
                 fields: [
