@@ -76,7 +76,7 @@ exports.run = async (client, message, args) => {
         }
 
         if (BlockData.hardblock.includes("true")) {
-            message.channel.send({ embeds: [notify_embed.msg_hardblocked] });
+            message.channel.send({ embeds: [notify_embed.msg_hardblocked(input, profileData)] });
             return;
         }
         await BlockData.updateOne({
