@@ -72,6 +72,7 @@ exports.run = async (client, message, args) => {
 
         if (BlockData.hardblock.includes("true")) {
             message.channel.send({ embeds: [notify_embed.msg_hardblocked(input, profileData)] });
+            return;
         }
         if (BlockData.enable.includes("true")) {
             message.channel.send({ embeds: [notify_embed.msg_blocked(input, profileData)] });
