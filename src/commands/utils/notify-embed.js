@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 const msg_blocked = (input, profileData) => {
-    new MessageEmbed({
+    const msg = new MessageEmbed({
         title: "通知: 指定のユーザはすでにブロックされています",
         color: 4886754,
         timestamp: new Date(),
@@ -22,9 +22,10 @@ const msg_blocked = (input, profileData) => {
             },
         ],
     });
+    return msg;
 };
-const msg_hardblocked = (input, profileData) =>
-    new MessageEmbed({
+const msg_hardblocked = (input, profileData) => {
+    const msg = new MessageEmbed({
         title: "通知: 指定のユーザはすでにハードブロックされています",
         color: 4886754,
         timestamp: new Date(),
@@ -45,6 +46,8 @@ const msg_hardblocked = (input, profileData) =>
             },
         ],
     });
+    return msg;
+};
 
 // #region exports const MessageEmbed
 exports.msg_blocked = msg_blocked;
