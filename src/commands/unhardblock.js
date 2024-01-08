@@ -79,7 +79,7 @@ exports.run = async (client, message, args) => {
 
     const data = new MessageEmbed({
       title: "ハードブロックの解除",
-      description: "ユーザーをハードブロックを解除しました",
+      description: "ユーザーのハードブロックを解除しました",
       color: 3853014,
       timestamp: new Date(),
       thumbnail: {
