@@ -12,7 +12,7 @@ RUN npm install -g n && n 18.17.0
 RUN apt purge nodejs npm -y
 RUN node -v
 
-# install nodejs
+# install git
 RUN apt-get install -y software-properties-common \
     && add-apt-repository ppa:git-core/ppa \
     && apt-get update -y
