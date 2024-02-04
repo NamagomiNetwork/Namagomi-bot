@@ -6,8 +6,8 @@ exports.x_twitter_com = (client, message) => {
     const spoilerTag = /\|\||</;
     if(message.content.match(spoilerTag)) return;
 
-    const regex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
-    const results = message.content.match(regex);
+    const postURL = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
+    const results = message.content.match(postURL);
 
     if (!results) return;
 
