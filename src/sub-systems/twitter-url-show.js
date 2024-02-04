@@ -2,7 +2,6 @@ const { MessageEmbed, MessageAttachment } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
     // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)されている時は埋め込み展開しない
-    console.log(message);
     const spoilerTag = /\|\||</;
     if(message.content.match(spoilerTag)) return;
 
