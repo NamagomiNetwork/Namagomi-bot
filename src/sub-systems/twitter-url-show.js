@@ -1,8 +1,8 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
-    // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)されている時は埋め込み展開しない
-    const ignoreSymbols = /\|\||</;
+    // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)・インラインコードブロック(``)・引用(>)されている時は埋め込み展開しない
+    const ignoreSymbols = /\|\||<|`|>/;
     if(message.content.match(ignoreSymbols)) return;
 
     const postURL = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
