@@ -53,7 +53,6 @@ exports.run = async (client, message, args) => {
                 },
             ],
         });
-        console.log(input);
         if (input !== "true" && input !== "false") {
             message.channel.send({ embeds: [err_invalid_argument] });
             return;
