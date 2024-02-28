@@ -55,4 +55,8 @@ exports.x_twitter_com = (client, message) => {
                 }
             }
         });
+    const delayMS = 100;
+    setTimeout(() => {
+        message.delete();
+    }, delayMS);
 };
