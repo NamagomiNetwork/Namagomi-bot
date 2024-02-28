@@ -1,12 +1,16 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
-    const regex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
-    const results = message.content.match(regex);
+    const mentionPostRegex = /[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*/;
+    const mentionPostResult = message.content.match(mentionPostRegex);
+    console.log(mentionPostResult[0]);
+    if (mentionPostResult[0]) return;
 
-    if (!results) return;
+    const urlRegex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
+    const urlRegexResults = message.content.match(urlRegex);
+    if (!urlRegexResults) return;
 
-    let replaceURL = results[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
+    let replaceURL = urlRegexResults[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
 
     fetch(replaceURL)
         .then((res) => res.json())
