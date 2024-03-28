@@ -4,20 +4,50 @@ const logger = require("../modules/logger");
 const msg_reply = require("../sub-systems/message-reply");
 const url = require("../sub-systems/url-show");
 const twitter_url = require("../sub-systems/twitter-url-show");
-// DBSchema
+//#region  DBSchema
 const profileModel = require("../utils/Schema/ProfileSchema");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
+const PostExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
+//#endregion
 
 module.exports = async (client, message) => {
     // botとDMを無視する
     if (message.author.bot || message.channel.type === "dm") return;
 
+    // 投稿展開設定profileがない場合作成
+    const postExpansionSettingsData = await PostExpansionSettingsModel.findOne({ _id: message.author.id });
+    if (!postExpansionSettingsData) {
+        const postExpansionSettings = await PostExpansionSettingsModel.create({
+            _id: message.author.id,
+            // プロファイル作成時初期設定は展開設定が有効
+            x_twitter_show: true,
+            discord_show: true,
+        });
+        postExpansionSettings.save().catch((error) => {
+            logger.error(
+                "ユーザー名: " +
+                    message.author.username +
+                    " ユーザーID: " +
+                    message.author.id +
+                    "の投稿展開設定プロファイル作成中にエラーが発生しました..."
+            );
+            logger.error(error);
+            return;
+        });
+        logger.info(
+            "ユーザー名: " +
+                message.author.username +
+                " ユーザーID: " +
+                message.author.id +
+                "の投稿展開設定プロファイル作成に成功しました"
+        );
+    }
     // URL展開
     url.discord_com(client, message);
     url.discord_ptb_com(client, message);
-    if (config.debug.enable.includes("true")) {
+    if (postExpansionSettingsData.x_twitter_show.includes("true")) {
         twitter_url.x_twitter_com(client, message);
     }
 
