@@ -4,7 +4,7 @@
 
 ## この Bot のコマンド一覧をみたい場合
 
-[wiki](https://github.com/NamagomiNetwork/Namagomi-bot/wiki) をごらんください。<br>
+[NamagomiNetwork.github.io](https://namagominetwork.github.io/) をごらんください。<br>
 コマンドの一覧,使用方法をまとめています
 
 ## 前提要件
