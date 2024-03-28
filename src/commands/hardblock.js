@@ -5,6 +5,7 @@ const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const err_embed = require("../utils/error-embed");
+const notify_embed = require("./utils/notify-embed");
 
 exports.run = async (client, message, args) => {
     try {
@@ -75,28 +76,7 @@ exports.run = async (client, message, args) => {
         }
 
         if (BlockData.hardblock.includes("true")) {
-            const hardblock_notify = new MessageEmbed({
-                title: "通知: 指定のユーザはすでにハードブロックされています",
-                color: 4886754,
-                timestamp: new Date(),
-                fields: [
-                    {
-                        name: "ユーザーID: ",
-                        value: "`" + input + "`",
-                        inline: true,
-                    },
-                    {
-                        name: "ユーザー名: ",
-                        value: "`" + profileData.name + "`",
-                        inline: true,
-                    },
-                    {
-                        name: "Note: ",
-                        value: "ブロックを解除する場合は `unblock` コマンドを \n ハードブロックする場合は `hardblock` コマンドを実行してください",
-                    },
-                ],
-            });
-            message.channel.send({ embeds: [hardblock_notify] });
+            message.channel.send({ embeds: [notify_embed.msg_hardblocked(input, profileData)] });
             return;
         }
         await BlockData.updateOne({
