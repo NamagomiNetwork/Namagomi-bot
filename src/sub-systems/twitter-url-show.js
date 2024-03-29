@@ -3,9 +3,12 @@ const { MessageEmbed, MessageAttachment } = require("discord.js");
 exports.x_twitter_com = (client, message) => {
     const mentionPostRegex = /[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*/;
     const mentionPostResult = message.content.match(mentionPostRegex);
-    console.log(mentionPostResult[0]);
     if (mentionPostResult[0]) return;
-
+  
+    // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)・インラインコードブロック(``)・引用(>)されている時は埋め込み展開しない
+    const ignoreSymbols = /\|\||<|`|>/;
+    if(message.content.match(ignoreSymbols)) return;
+  
     const urlRegex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
     const urlRegexResults = message.content.match(urlRegex);
     if (!urlRegexResults) return;
