@@ -30,7 +30,7 @@ module.exports = (client) => {
             .send({ embeds: [seichi_achievement_embeds.day_9003] });
     }
     // 9004
-    if (day === "4/1") {
+    if (day === "1/1") {
         client.channels.cache.get(config.seichi_achievement.channel).send(mention);
         client.channels.cache
             .get(config.seichi_achievement.channel)
