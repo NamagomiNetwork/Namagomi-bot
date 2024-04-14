@@ -191,10 +191,10 @@ exports.run = (client, message, args) => {
                 message.channel.send({ embeds: [page5] });
             }
         } catch (err) {
-            logger.error("コマンド評価エラーが発生しました");
+            logger.error("コマンド評価時にエラーをキャッチしました");
             logger.error(err);
             const err_detail = new MessageEmbed({
-                title: "コマンド評価エラー内容",
+                title: "エラーキャッチ内容",
                 description: "",
                 color: 3853014,
                 fields: [
