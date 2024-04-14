@@ -74,11 +74,11 @@ exports.run = (client, message, args) => {
                     fields: [
                         {
                             name: "入力",
-                            value: "```\n" + "入力値が1000文字以上でした..." + "\n```",
+                            value: "```js\n" + "入力値が1000文字以上でした..." + "\n```",
                         },
                         {
                             name: "出力",
-                            value: "```sh\n" + "N/A" + "\n```",
+                            value: "```js\n" + "N/A" + "\n```",
                         },
                     ],
                 });
@@ -94,11 +94,11 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "入力",
-                        value: "```\n" + input + "\n```",
+                        value: "```js\n" + input + "\n```",
                     },
                     {
                         name: "出力",
-                        value: "```\n" + "N/A" + "\n```",
+                        value: "```js\n" + "N/A" + "\n```",
                     },
                 ],
             });
@@ -123,11 +123,11 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "入力",
-                        value: "```\n" + input + "\n```",
+                        value: "```js\n" + input + "\n```",
                     },
                     {
                         name: "出力",
-                        value: "```sh\n" + output_1 + "\n```",
+                        value: "```js\n" + output_1 + "\n```",
                     },
                 ],
             });
@@ -138,7 +138,7 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "2ページ目",
-                        value: "```sh\n" + output_2 + "\n```",
+                        value: "```js\n" + output_2 + "\n```",
                     },
                 ],
             });
@@ -149,7 +149,7 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "3ページ目",
-                        value: "```sh\n" + output_3 + "\n```",
+                        value: "```js\n" + output_3 + "\n```",
                     },
                 ],
             });
@@ -160,7 +160,7 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "4ページ目",
-                        value: "```sh\n" + output_4 + "\n```",
+                        value: "```js\n" + output_4 + "\n```",
                     },
                 ],
             });
@@ -171,7 +171,7 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "5ページ目",
-                        value: "```sh\n" + output_5 + "\n```",
+                        value: "```js\n" + output_5 + "\n```",
                     },
                 ],
             });
@@ -200,11 +200,11 @@ exports.run = (client, message, args) => {
                 fields: [
                     {
                         name: "入力",
-                        value: "```\n" + input + "\n```",
+                        value: "```js\n" + input + "\n```",
                     },
                     {
                         name: "出力",
-                        value: "```sh\n" + err + "\n```",
+                        value: "```js\n" + err + "\n```",
                     },
                 ],
             });
