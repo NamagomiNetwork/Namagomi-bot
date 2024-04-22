@@ -1,9 +1,24 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
+const err_embed = require("../utils/error-embed");
+const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 
-exports.x_twitter_com = (client, message) => {
+exports.x_twitter_com = async (client, message) => {
+    const postExpansionSettingsData = await postExpansionSettingsModel.findOne({ _id: message.author.id });
+    if (!postExpansionSettingsData) {
+        message.channel.send({ embeds: [err_embed.main] });
+        logger.error(
+            "ユーザーID: " +
+                message.author.id +
+                " のTwitter投稿展開機能を設定しようとしましたがプロファイルデータがありませんでした..."
+        );
+        return;
+    }
+
+    if (postExpansionSettingsData.x_twitter_show.includes("false")) return;
+
     // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)・インラインコードブロック(``)・引用(>)されている時は埋め込み展開しない
     const ignoreSymbols = /\|\||<|`|>/;
-    if(message.content.match(ignoreSymbols)) return;
+    if (message.content.match(ignoreSymbols)) return;
 
     const postURL = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
     const results = message.content.match(postURL);
