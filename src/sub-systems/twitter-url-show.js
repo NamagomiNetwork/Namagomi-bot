@@ -1,16 +1,19 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
 
 exports.x_twitter_com = (client, message) => {
+    const mentionPostRegex = /[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*/;
+    const mentionPostResult = message.content.match(mentionPostRegex);
+    if (mentionPostResult[0]) return;
+  
     // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)・インラインコードブロック(``)・引用(>)されている時は埋め込み展開しない
     const ignoreSymbols = /\|\||<|`|>/;
     if(message.content.match(ignoreSymbols)) return;
+  
+    const urlRegex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
+    const urlRegexResults = message.content.match(urlRegex);
+    if (!urlRegexResults) return;
 
-    const postURL = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
-    const results = message.content.match(postURL);
-
-    if (!results) return;
-
-    let replaceURL = results[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
+    let replaceURL = urlRegexResults[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
 
     fetch(replaceURL)
         .then((res) => res.json())
@@ -55,4 +58,8 @@ exports.x_twitter_com = (client, message) => {
                 }
             }
         });
+    const delayMS = 100;
+    setTimeout(() => {
+        message.delete();
+    }, delayMS);
 };
