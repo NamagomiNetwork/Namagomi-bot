@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "prettier"
+    ],
+    "rules": {
+        "no-undef":"warn",
+        "no-unused-vars":"warn",
+        "indent":["warn",4]
+    }
+}

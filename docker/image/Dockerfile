@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list
 RUN sed -i.bak -e "s%http://security.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list
@@ -8,11 +8,11 @@ RUN apt update && apt upgrade -y && apt install -y
 
 # install nodejs
 RUN apt install nodejs npm curl -y
-RUN npm install -g n && n 16.6.0
+RUN npm install -g n && n 18.17.0
 RUN apt purge nodejs npm -y
 RUN node -v
 
-# install nodejs
+# install git
 RUN apt-get install -y software-properties-common \
     && add-apt-repository ppa:git-core/ppa \
     && apt-get update -y

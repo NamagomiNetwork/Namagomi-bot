@@ -5,9 +5,10 @@ module.exports = (client, message) => {
 
 const today = new Date();
 const dayOfweek = today.getDay()
+let embed;
 
 if ( dayOfweek == 0 || dayOfweek == 6 ) {
-    var embed =  new MessageEmbed({
+    embed =  new MessageEmbed({
         title: "香川チャレンジの時間です",
         color: 5301186,
         description: "Minecraft-v1.16.5を起動しましょう",
@@ -19,7 +20,7 @@ if ( dayOfweek == 0 || dayOfweek == 6 ) {
         ]
     })
 } else {
-    var embed =  new MessageEmbed({
+    embed =  new MessageEmbed({
         title: "香川チャレンジの時間です",
         color: 5301186,
         description: "Minecraft-v1.16.5を起動しましょう",
