@@ -60,4 +60,4 @@ exports.run = (client, message, args) => {
   }
 };
 
-exports.name = "random";
+exports.name = "random-num";
