@@ -18,8 +18,12 @@ const top = new MessageEmbed({
       value: "投票を行います",
     },
     {
-      name: "`random [試行回数] [選択肢1] [選択肢2] ● ● ●`",
+      name: "`random [選択肢1] [選択肢2] ● ● ●`",
       value: "抽選を行います",
+    },
+    {
+      name: "`random-num [試行回数] [選択肢1] [選択肢2] ● ● ●`",
+      value: "任意の回数抽選を行います",
     },
     {
       name: "`help-(pageID)`",
