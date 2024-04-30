@@ -6,6 +6,7 @@ const { MessageEmbed } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
+const PostExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 const err_embed = require("../utils/error-embed");
 
 exports.run = async (client, message, args) => {
@@ -93,6 +94,16 @@ exports.run = async (client, message, args) => {
             );
             return;
         }
+        const PostExpansionSettingsData = await PostExpansionSettingsModel.findOne({ _id: message.author.id });
+        if (!PostExpansionSettingsData) {
+            message.channel.send({ embeds: [err_embed.main] });
+            logger.error(
+                "ユーザーID: " +
+                    message.author.id +
+                    " のTwitter投稿展開機能を設定しようとしましたがプロファイルデータがありませんでした..."
+            );
+            return;
+        }
         const data = new MessageEmbed({
             title: "ユーザー情報確認",
             description: "DBに保存されているデータを取得しました",
@@ -152,6 +163,20 @@ exports.run = async (client, message, args) => {
                 {
                     name: "ハードブロックの有無",
                     value: "`" + BlockData.hardblock + "`",
+                    inline: true,
+                },
+                {
+                    name: "投稿展開設定情報",
+                    value: "DBに保存されているブロック情報を表示します",
+                },
+                {
+                    name: "Twitterポスト展開設定有無",
+                    value: "`" + PostExpansionSettingsData.x_twitter_show + "`",
+                    inline: true,
+                },
+                {
+                    name: "Discord投稿設定有無(未使用)",
+                    value: "`" + PostExpansionSettingsData.discord_show + "`",
                     inline: true,
                 },
             ],
