@@ -25,9 +25,9 @@ exports.run = async (client, message, args) => {
         function buta(){
             const arr = ["黙れ豚"];
             const random = Math.floor(Math.random() * arr.length);
-            const result_namagomi = arr[random];
-            message.channel.send({content: result_namagomi});
-            return result_namagomi;
+            const result_buta = arr[random];
+            message.channel.send({content: result_buta});
+            return result_buta;
         }
         
         const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
