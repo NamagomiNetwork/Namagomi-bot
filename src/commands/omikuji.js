@@ -7,7 +7,7 @@ const { MessageEmbed } = require('discord.js');
 exports.run = async (client, message, args) => {
     try{
         function ko(){
-            const arr = ["や！","こばわ"];
+            const arr = ["や！", "こばわ"];
             const random = Math.floor(Math.random() * arr.length);
             const result_ko = arr[random];
             message.channel.send({content: result_ko});
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         }
 
         function buta(){
-            const arr = ["黙れ豚", "しね豚"];
+            const arr = ["黙れ豚", "しばくぞ豚"];
             const random = Math.floor(Math.random() * arr.length);
             const result_buta = arr[random];
             message.channel.send({content: result_buta});
