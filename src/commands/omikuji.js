@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         }
 
         function buta(){
-            const arr = ["黙れ豚"];
+            const arr = ["黙れ豚", "しね豚"];
             const random = Math.floor(Math.random() * arr.length);
             const result_buta = arr[random];
             message.channel.send({content: result_buta});
@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
         //ぶた
         if(message.author.id.includes("281902125909409792")){
             let random = Math.floor(Math.random() * 2);
-            if(random >= 0){
+            if(random == 1){
                 unique = "true"
                 result = buta()
             }    
