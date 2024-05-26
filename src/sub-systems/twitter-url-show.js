@@ -24,10 +24,6 @@ exports.x_twitter_com = async (client, message) => {
     const mentionPostResult = message.content.match(mentionPostRegex);
     if (mentionPostResult[0]) return;
   
-    // X or TwitterのツイートURLがスポイラー(||)・不等号囲い(<>)・インラインコードブロック(``)・引用(>)されている時は埋め込み展開しない
-    const ignoreSymbols = /\|\||<|`|>/;
-    if(message.content.match(ignoreSymbols)) return;
-  
     const urlRegex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
     const urlRegexResults = message.content.match(urlRegex);
     if (!urlRegexResults) return;
