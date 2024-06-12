@@ -215,7 +215,6 @@ module.exports = async (client, message) => {
 
     const cmd = client.commands.get(command);
     let indicateDisplay = () => {
-        console.log(command);
         const input = command.toLowerCase();
         for (const [key, value] of client.commands) {
             if (key.toLowerCase().startsWith(input)) {
@@ -241,7 +240,6 @@ module.exports = async (client, message) => {
         description: "コマンドが存在しません。helpを確認してください",
     });
     if (!cmd) {
-        console.log(indicateCmdName);
         message.channel.send({ embeds: [unknown_command] });
         return;
     }
