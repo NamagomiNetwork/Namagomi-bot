@@ -216,7 +216,7 @@ module.exports = async (client, message) => {
     const cmd = client.commands.get(command);
     let indicateDisplay = () => {
         const input = command.toLowerCase();
-        for (const [key, value] of client.commands) {
+        for (const [key] of client.commands) {
             if (key.toLowerCase().startsWith(input)) {
                 return key;
             }
