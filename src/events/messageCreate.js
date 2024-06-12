@@ -49,7 +49,6 @@ module.exports = async (client, message) => {
     url.discord_ptb_com(client, message);
     twitter_url.x_twitter_com(client, message);
 
-
     // とあるメッセージに対して画像を送ったりする
     msg_reply(message);
 
@@ -213,16 +212,36 @@ module.exports = async (client, message) => {
         message.channel.send({ embeds: [your_block] });
         return;
     }
+
+    const cmd = client.commands.get(command);
+    let indicateDisplay = () => {
+        console.log(command);
+        const input = command.toLowerCase();
+        for (const [key, value] of client.commands) {
+            if (key.toLowerCase().startsWith(input)) {
+                return key;
+            }
+        }
+
+        return null;
+    };
+    const indicateCmdName = indicateDisplay(cmd);
     const unknown_command = new MessageEmbed({
         title: "コマンドが不明です😉",
         color: 16601703,
+        fields: [
+            {
+                name: "もしかして：",
+                value: "`" + indicateCmdName + "`",
+            },
+        ],
         footer: {
             text: "??? 「そんなコマンドないで」",
         },
         description: "コマンドが存在しません。helpを確認してください",
     });
-    const cmd = client.commands.get(command);
     if (!cmd) {
+        console.log(indicateCmdName);
         message.channel.send({ embeds: [unknown_command] });
         return;
     }
