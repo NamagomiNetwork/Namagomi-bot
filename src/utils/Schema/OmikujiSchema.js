@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const omikujiSchema = new mongoose.Schema({
     _id: { type: String }, //ユーザーID
@@ -7,6 +7,6 @@ const omikujiSchema = new mongoose.Schema({
     mae_no_omikuji_kekka: { type: String }, //前のおみくじ結果
 });
 
-const model = mongoose.model('omikujis', omikujiSchema);
+const model = mongoose.model("omikujis", omikujiSchema);
 
 module.exports = model;

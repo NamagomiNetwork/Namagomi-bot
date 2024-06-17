@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const BlockUserSchema = new mongoose.Schema({
     _id: { type: String }, //ユーザーID
@@ -8,6 +8,6 @@ const BlockUserSchema = new mongoose.Schema({
     avatar: { type: String }, //アバター
 });
 
-const model = mongoose.model('Blocks', BlockUserSchema);
+const model = mongoose.model("Blocks", BlockUserSchema);
 
 module.exports = model;
