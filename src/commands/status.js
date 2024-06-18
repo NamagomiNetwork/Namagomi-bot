@@ -1,8 +1,10 @@
 const { MessageEmbed } = require("discord.js");
-const package = require("../../package.json");
 const os = require("os");
+const package = require("../../package.json");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
+const config = require("../utils/get-config");
+
 exports.run = (client, message) => {
     function floorDecimal(val, digit) {
         return Math.floor(val * Math.pow(10, digit)) / Math.pow(10, digit);

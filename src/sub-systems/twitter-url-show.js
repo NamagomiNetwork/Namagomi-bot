@@ -1,4 +1,5 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
+const logger = require("./src/modules/logger");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 

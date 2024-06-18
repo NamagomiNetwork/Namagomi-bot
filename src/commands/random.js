@@ -1,6 +1,7 @@
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const { MessageEmbed } = require("discord.js");
+const config = require("../utils/get-config");
 
 exports.run = (client, message, args) => {
     try {

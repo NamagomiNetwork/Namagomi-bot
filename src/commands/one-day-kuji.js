@@ -1,5 +1,6 @@
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
+const config = require("../utils/get-config");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const { MessageEmbed } = require("discord.js");
 
