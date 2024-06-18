@@ -54,14 +54,12 @@ exports.discord_com = (client, message) => {
 
             if (msg.attachments) {
                 msgpanel.setImage(`${msg.attachments.map((attachment) => attachment.url)}`);
-            } else {
             }
 
             message.channel.send({ embeds: [msgpanel] });
 
             if (msg.embeds[0]) {
                 message.channel.send({ embeds: [msg.embeds[0]] });
-            } else {
             }
         })
         .catch(console.error);
@@ -119,14 +117,12 @@ exports.discord_ptb_com = (client, message) => {
 
             if (msg.attachments) {
                 msgpanel.setImage(`${msg.attachments.map((attachment) => attachment.url)}`);
-            } else {
             }
 
             message.channel.send({ embeds: [msgpanel] });
 
             if (msg.embeds[0]) {
                 message.channel.send({ embeds: [msg.embeds[0]] });
-            } else {
             }
         })
         .catch(console.error);
