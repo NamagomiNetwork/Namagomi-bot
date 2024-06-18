@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const config = require("../utils/get-config");
 
-module.exports = (client, message) => {
+module.exports = (client) => {
     const embed = new MessageEmbed({
         title: "投票の時間です",
         color: 5301186,
