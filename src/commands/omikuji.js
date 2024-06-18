@@ -5,31 +5,31 @@ const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
 exports.run = async (client, message, args) => {
+    function ko() {
+        const arr = ["や！", "こばわ"];
+        const random = Math.floor(Math.random() * arr.length);
+        const result_ko = arr[random];
+        message.channel.send({ content: result_ko });
+        return result_ko;
+    }
+
+    function namagomi() {
+        const arr = ["生ゴミ", "黙れゴミ"];
+        const random = Math.floor(Math.random() * arr.length);
+        const result_namagomi = arr[random];
+        message.channel.send({ content: result_namagomi });
+        return result_namagomi;
+    }
+
+    function buta() {
+        const arr = ["黙れ豚", "しばくぞ豚"];
+        const random = Math.floor(Math.random() * arr.length);
+        const result_buta = arr[random];
+        message.channel.send({ content: result_buta });
+        return result_buta;
+    }
+
     try {
-        function ko() {
-            const arr = ["や！", "こばわ"];
-            const random = Math.floor(Math.random() * arr.length);
-            const result_ko = arr[random];
-            message.channel.send({ content: result_ko });
-            return result_ko;
-        }
-
-        function namagomi() {
-            const arr = ["生ゴミ", "黙れゴミ"];
-            const random = Math.floor(Math.random() * arr.length);
-            const result_namagomi = arr[random];
-            message.channel.send({ content: result_namagomi });
-            return result_namagomi;
-        }
-
-        function buta() {
-            const arr = ["黙れ豚", "しばくぞ豚"];
-            const random = Math.floor(Math.random() * arr.length);
-            const result_buta = arr[random];
-            message.channel.send({ content: result_buta });
-            return result_buta;
-        }
-
         const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
         const profileData = await profileModel.findOne({ _id: message.author.id });
         if (!OmikujiData) {

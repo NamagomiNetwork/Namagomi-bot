@@ -4,6 +4,9 @@ const os = require("os");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 exports.run = (client, message, args) => {
+    function floorDecimal(val, digit) {
+        return Math.floor(val * Math.pow(10, digit)) / Math.pow(10, digit);
+    }
     try {
         // 空きメモリを計算
         const freemem_byte = os.freemem;
@@ -20,10 +23,6 @@ exports.run = (client, message, args) => {
         // プロセス全体の使用メモリを計算
         const heapmem_byte = process.memoryUsage().rss;
         const heapmem_mb = heapmem_byte / Math.pow(1024, 2);
-
-        function floorDecimal(val, digit) {
-            return Math.floor(val * Math.pow(10, digit)) / Math.pow(10, digit);
-        }
 
         // 小数桁の切り下げ
         const freemem = floorDecimal(freemem_gb, 2);

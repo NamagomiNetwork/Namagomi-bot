@@ -7,6 +7,10 @@ const check_admin = require("../utils/check-admin");
 const err_embed = require("../utils/error-embed");
 
 exports.run = (client, message, args) => {
+    async function send_msg(data) {
+        await message.channel.send({ embeds: [data] });
+        process.exit(0);
+    }
     try {
         const permission_check = check_admin(message, client);
 
@@ -22,11 +26,8 @@ exports.run = (client, message, args) => {
                 color: 3853014,
                 timestamp: new Date(),
             });
-            async function send_msg() {
-                await message.channel.send({ embeds: [data] });
-                process.exit(0);
-            }
-            send_msg();
+
+            send_msg(data);
         }
     } catch (err) {
         logger.error("コマンド実行エラーが発生しました");
