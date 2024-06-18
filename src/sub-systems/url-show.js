@@ -11,7 +11,7 @@ exports.discord_com = (client, message) => {
         return;
     }
 
-    const guild_id = results[1];
+    // const guild_id = results[1]; 使ってないのでコメントアウト
     const channel_id = results[2];
     const message_id = results[3];
 
@@ -75,7 +75,7 @@ exports.discord_ptb_com = (client, message) => {
     if (message.author.bot) {
         return;
     }
-    const guild_id = results[1];
+    // const guild_id = results[1]; 使ってないのでコメントアウト
     const channel_id = results[2];
     const message_id = results[3];
 

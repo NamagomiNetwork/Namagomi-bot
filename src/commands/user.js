@@ -1,6 +1,3 @@
-const { MessageEmbed } = require("discord.js");
-const package = require("../../package.json");
-const os = require("os");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 

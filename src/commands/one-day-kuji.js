@@ -3,7 +3,7 @@ const err_embed = require("../utils/error-embed");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const { MessageEmbed } = require("discord.js");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     try {
         const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
 

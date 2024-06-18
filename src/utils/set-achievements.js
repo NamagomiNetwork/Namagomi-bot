@@ -1,5 +1,4 @@
-const { MessageEmbed } = require("discord.js");
-module.exports = (client) => {
+module.exports = () => {
     const current_year = new Date().getFullYear();
     const fs = require("fs");
     const config_path = "/../../configs/seichi_achievements.json";

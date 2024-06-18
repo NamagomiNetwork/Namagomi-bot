@@ -1,11 +1,10 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
-const check_admin = require("../utils/check-admin");
 const { MessageEmbed } = require("discord.js");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     try {
         const postExpansionSettingsData = await postExpansionSettingsModel.findOne({ _id: message.author.id });
         const args = message.content.split(" ").slice(1);

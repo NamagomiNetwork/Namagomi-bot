@@ -3,7 +3,7 @@ const package = require("../../package.json");
 const os = require("os");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
     function floorDecimal(val, digit) {
         return Math.floor(val * Math.pow(10, digit)) / Math.pow(10, digit);
     }

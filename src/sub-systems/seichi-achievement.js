@@ -1,8 +1,6 @@
-const { MessageEmbed } = require("discord.js");
 const config = require("../utils/get-config");
 const seichi_achievements = require("../utils/get-achievements");
 const seichi_achievement_embeds = require("./seichi-achievement/embed");
-const logger = require("../modules/logger");
 
 module.exports = (client) => {
     let today = new Date();

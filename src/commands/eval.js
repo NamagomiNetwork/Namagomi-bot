@@ -2,12 +2,6 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const { MessageEmbed } = require("discord.js");
-const err_embed = require("../utils/error-embed");
-const seichi_vote = require("../sub-systems/seichi-vote");
-const seichi_achievement_embeds = require("../sub-systems/seichi-achievement/embed");
-const profileModel = require("../utils/Schema/ProfileSchema");
-const BlockUserModel = require("../utils/Schema/BlockUserSchema");
-const TawasiModel = require("../utils/Schema/TawasiSchema");
 
 exports.run = (client, message, args) => {
     const permission_check = check_admin(message, client);

@@ -1,4 +1,3 @@
-const config = require("../../utils/get-config");
 const { MessageEmbed } = require("discord.js");
 
 const top = new MessageEmbed({

@@ -5,7 +5,7 @@ const TawasiModel = require("../utils/Schema/TawasiSchema");
 const { MessageEmbed } = require("discord.js");
 const err_embed = require("../utils/error-embed");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     try {
         const permission_check = check_admin(message, client);
 

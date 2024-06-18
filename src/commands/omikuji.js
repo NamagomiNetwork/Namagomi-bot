@@ -4,7 +4,7 @@ const err_embed = require("../utils/error-embed");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     function ko() {
         const arr = ["や！", "こばわ"];
         const random = Math.floor(Math.random() * arr.length);

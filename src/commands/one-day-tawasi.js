@@ -4,7 +4,7 @@ const config = require("../utils/get-config");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 const { MessageEmbed } = require("discord.js");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     try {
         const tawasiData = await TawasiModel.findOne({ _id: message.author.id });
 

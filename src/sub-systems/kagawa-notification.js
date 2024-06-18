@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const config = require("../utils/get-config");
 
-module.exports = (client, message) => {
+module.exports = (client) => {
     const today = new Date();
     const dayOfweek = today.getDay();
     let embed;

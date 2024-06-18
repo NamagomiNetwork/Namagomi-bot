@@ -1,12 +1,10 @@
 const { MessageEmbed } = require("discord.js");
-const package = require("../../package.json");
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
-const sleep = require("../modules/sleep");
 const check_admin = require("../utils/check-admin");
 const err_embed = require("../utils/error-embed");
 
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
     async function send_msg(data) {
         await message.channel.send({ embeds: [data] });
         process.exit(0);

@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
     try {
         const embed = new MessageEmbed({
             title: "🏓pong!",

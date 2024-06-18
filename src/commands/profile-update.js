@@ -1,10 +1,9 @@
 const logger = require("../modules/logger");
-const config = require("../utils/get-config");
 const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
 const err_embed = require("../utils/error-embed");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     const profileData = await profileModel.findOne({ _id: message.author.id });
 
     // profileがあるかどうかを確認

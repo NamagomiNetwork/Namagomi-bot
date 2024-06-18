@@ -1,10 +1,8 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
-const { MessageEmbed, MessageButton } = require("discord.js");
-const util = require("util");
+const { MessageEmbed } = require("discord.js");
 const child = require("child_process");
-const sleep = require("../modules/sleep");
 const err_embed = require("../utils/error-embed");
 
 exports.run = (client, message, args) => {

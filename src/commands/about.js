@@ -5,7 +5,7 @@ const config = require("../utils/get-config");
 const prefix = config.bot.prefix;
 const err_embed = require("../utils/error-embed");
 
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
     try {
         const embed = new MessageEmbed({
             title: "about",

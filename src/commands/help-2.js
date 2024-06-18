@@ -1,10 +1,9 @@
-const { MessageEmbed } = require("discord.js");
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const embed = require("./utils/help-embed");
 const err_embed = require("../utils/error-embed");
 
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
     try {
         message.channel.send({ embeds: [embed.page2] });
     } catch (err) {
