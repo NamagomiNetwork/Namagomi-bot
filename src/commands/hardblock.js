@@ -7,7 +7,7 @@ const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const err_embed = require("../utils/error-embed");
 const notify_embed = require("./utils/notify-embed");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     try {
         const permission_check = check_admin(message, client);
 

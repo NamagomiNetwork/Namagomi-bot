@@ -9,7 +9,7 @@ const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const PostExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 const err_embed = require("../utils/error-embed");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message) => {
     try {
         // 権限の確認
         const permission_check = check_admin(message, client);

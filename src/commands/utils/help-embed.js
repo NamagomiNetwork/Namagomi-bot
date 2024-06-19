@@ -1,39 +1,37 @@
-const config = require("../../utils/get-config");
 const { MessageEmbed } = require("discord.js");
 
 const top = new MessageEmbed({
-  title: "Page(1/4)",
-  fields: [
-    {
-      name: "基本コマンド",
-      value:
-        "------------------------------ \n このbotの基本的なコマンドを表示します \n コマンドは、設定したprefix + コマンド名 で動作します \n ------------------------------",
-    },
-    {
-      name: "`omikuji`",
-      value: "おみくじをします",
-    },
-    {
-      name: "`vote [タイトル] [投票1] [投票2] ● ● ●`",
-      value: "投票を行います",
-    },
-    {
-      name: "`random [選択肢1] [選択肢2] ● ● ●`",
-      value: "抽選を行います",
-    },
-    {
-      name: "`random-num [試行回数] [選択肢1] [選択肢2] ● ● ●`",
-      value: "任意の回数抽選を行います",
-    },
-    {
-      name: "`help-(pageID)`",
-      value: "指定したページID(例: 2)のhelpを表示します",
-    },
-    {
-      name: "次のページを表示する",
-      value: "`help-2`",
-    },
-  ],
+    title: "Page(1/4)",
+    fields: [
+        {
+            name: "基本コマンド",
+            value: "------------------------------ \n このbotの基本的なコマンドを表示します \n コマンドは、設定したprefix + コマンド名 で動作します \n ------------------------------",
+        },
+        {
+            name: "`omikuji`",
+            value: "おみくじをします",
+        },
+        {
+            name: "`vote [タイトル] [投票1] [投票2] ● ● ●`",
+            value: "投票を行います",
+        },
+        {
+            name: "`random [選択肢1] [選択肢2] ● ● ●`",
+            value: "抽選を行います",
+        },
+        {
+            name: "`random-num [試行回数] [選択肢1] [選択肢2] ● ● ●`",
+            value: "任意の回数抽選を行います",
+        },
+        {
+            name: "`help-(pageID)`",
+            value: "指定したページID(例: 2)のhelpを表示します",
+        },
+        {
+            name: "次のページを表示する",
+            value: "`help-2`",
+        },
+    ],
 });
 const page2 = new MessageEmbed({
     title: "Page(2/4)",

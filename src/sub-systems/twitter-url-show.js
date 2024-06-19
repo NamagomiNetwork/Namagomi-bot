@@ -1,4 +1,5 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
+const logger = require("./src/modules/logger");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 
@@ -23,7 +24,7 @@ exports.x_twitter_com = async (client, message) => {
     const mentionPostRegex = /[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*/;
     const mentionPostResult = message.content.match(mentionPostRegex);
     if (mentionPostResult[0]) return;
-  
+
     const urlRegex = /https:\/\/(twitter\.com|x\.com)\/[A-Za-z0-9_]*\/status\/(\d+)/;
     const urlRegexResults = message.content.match(urlRegex);
     if (!urlRegexResults) return;
