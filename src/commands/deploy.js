@@ -1,11 +1,8 @@
 const { MessageEmbed } = require("discord.js");
-const package = require("../../package.json");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const child = require("child_process");
 const config = require("../utils/get-config");
-const { check } = require("prettier");
-const repo_url = "https://github.com/NamagomiNetwork/Namagomi-bot/commit/";
 
 exports.run = (client, message) => {
     try {
