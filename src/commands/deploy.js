@@ -58,4 +58,4 @@ exports.run = (client, message) => {
     }
 };
 
-exports.name = "version";
+exports.name = "deploy";
