@@ -4,57 +4,44 @@ const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const child = require("child_process");
 const config = require("../utils/get-config");
+const { check } = require("prettier");
 const repo_url = "https://github.com/NamagomiNetwork/Namagomi-bot/commit/";
 
 exports.run = (client, message) => {
     try {
         // リモートリポジトリから
-        
         child.exec("git pull origin main", (err, res) => {
-            let result;
-            let commit_hash;
-            let commit_short_hash;
-            let commit_message;
-
-            if (err) {
-                for (let i = 0; i < 3; i++) {
-                    result[i] = "取得エラーが発生しました...";
+            let details;
+            let isAlready = "";
+            const checkDetailsforAlready = (str) => {
+                if (str.includes("Already")) {
+                    isAlready = "???「もう最新に反映されとるで」";
                 }
+            };
+            if (err) {
+                details[0] = "取得エラーが発生しました...";
             } else {
-                result = res.toString().split(",");
-                commit_hash = result[0];
-                commit_short_hash = result[1];
-                commit_message = result[2];
+                details = res.toString();
             }
 
-            const embed = new MessageEmbed({
+            checkDetailsforAlready(details);
+
+            const deploy_embed = new MessageEmbed({
                 title: "Deploy now...",
                 color: 5301186,
-                footer: {
-                    text: "Current Version",
-                },
+                timestamp: new Date(),
                 fields: [
                     {
-                        name: "commit short hash",
-                        value: "[" + commit_short_hash + "]" + "(" + repo_url + commit_hash + ")",
-                    },
-                    {
-                        name: "commit message",
-                        value: commit_message,
-                    },
-                    {
-                        name: "bot-version",
-                        value: package.version,
-                        inline: true,
-                    },
-                    {
-                        name: "Discord.js Version",
-                        value: require("discord.js").version,
+                        name: "Deploy Info",
+                        value: "```sh\n" + details + "```",
                         inline: true,
                     },
                 ],
+                footer: {
+                    text: isAlready,
+                },
             });
-            message.channel.send({ embeds: [embed] });
+            message.channel.send({ embeds: [deploy_embed] });
         });
     } catch (err) {
         logger.error("コマンド実行エラーが発生しました");
