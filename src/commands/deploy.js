@@ -4,7 +4,7 @@ const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const child = require("child_process");
 const config = require("../utils/get-config");
-
+const color = require("../utils/color-code");
 exports.run = (client, message) => {
     try {
         const permission_check = check_admin(message, client);
@@ -31,7 +31,7 @@ exports.run = (client, message) => {
 
             const deploy_embed = new MessageEmbed({
                 title: "Deploy now...",
-                color: 5301186,
+                color: color.CMD_RUN,
                 timestamp: new Date(),
                 fields: [
                     {
