@@ -154,6 +154,10 @@ const page4 = new MessageEmbed({
             name: "`unhardblock 【ハードブロックを解除するユーザーのID】`",
             value: "ユーザーのハードブロックを解除します",
         },
+        {
+            name: "`deploy`",
+            value: "`git pull origin main`を実行します",
+        },
     ],
 });
 exports.top = top;
