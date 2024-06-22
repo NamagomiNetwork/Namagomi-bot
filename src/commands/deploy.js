@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const check_admin = require("../utils/check-admin");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const child = require("child_process");
@@ -6,6 +7,11 @@ const config = require("../utils/get-config");
 
 exports.run = (client, message) => {
     try {
+        const permission_check = check_admin(message, client);
+
+        if (permission_check == "owner: no") {
+            return;
+        }
         // リモートリポジトリから
         child.exec("git pull origin main", (err, res) => {
             let details;
