@@ -2,6 +2,7 @@ const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const { MessageEmbed } = require("discord.js");
 const config = require("../utils/get-config");
+const color = require("../utils/color-code");
 
 exports.run = (client, message, args) => {
     try {
@@ -35,7 +36,7 @@ exports.run = (client, message, args) => {
         const success = new MessageEmbed({
             title: "抽選結果",
             description: result,
-            color: 5301186,
+            color: color.CMD_RUN,
             fields: [
                 {
                     name: "試行回数:",

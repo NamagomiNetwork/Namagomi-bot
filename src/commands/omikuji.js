@@ -1,9 +1,11 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
+
 exports.run = async (client, message) => {
     function ko() {
         const arr = ["や！", "こばわ"];
@@ -59,7 +61,7 @@ exports.run = async (client, message) => {
                 let sudeni_1day_true = new MessageEmbed({
                     title: "おみくじ",
                     description: "すでに今日はおみくじを実行しています",
-                    color: 5301186,
+                    color: color.CMD_RUN,
                     footer: {
                         text: "ぶひ",
                     },
@@ -124,7 +126,7 @@ exports.run = async (client, message) => {
             let success = new MessageEmbed({
                 title: "おみくじ",
                 description: "おみくじをしたよ～",
-                color: 5301186,
+                color: color.CMD_RUN,
                 footer: {
                     text: "ぶひ",
                 },

@@ -1,6 +1,7 @@
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
+const color = require("../utils/color-code");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const { MessageEmbed } = require("discord.js");
 
@@ -24,7 +25,7 @@ exports.run = async (client, message) => {
             const disenable = new MessageEmbed({
                 title: "1日1おみくじの無効化",
                 description: "1日1おみくじを無効化しました",
-                color: 5301186,
+                color: color.CMD_RUN,
                 footer: {
                     text: "ぶひ",
                 },
@@ -44,7 +45,7 @@ exports.run = async (client, message) => {
             const enable = new MessageEmbed({
                 title: "1日1おみくじの有効化",
                 description: "1日1おみくじを有効化しました",
-                color: 5301186,
+                color: color.CMD_RUN,
                 footer: {
                     text: "ぶひ",
                 },

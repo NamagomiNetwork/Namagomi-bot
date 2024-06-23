@@ -4,6 +4,7 @@ const package = require("../../package.json");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
+const color = require("../utils/color-code");
 
 exports.run = (client, message) => {
     function floorDecimal(val, digit) {
@@ -33,7 +34,7 @@ exports.run = (client, message) => {
         const heapmem = floorDecimal(heapmem_mb, 2);
         const embed = new MessageEmbed({
             title: "SystemStatus",
-            color: 5301186,
+            color: color.CMD_RUN,
             footer: {
                 text: "System Status",
             },
