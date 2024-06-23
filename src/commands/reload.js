@@ -3,6 +3,7 @@ const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const { MessageEmbed } = require("discord.js");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = (client, message, args) => {
     try {
@@ -29,7 +30,7 @@ exports.run = (client, message, args) => {
         const reload_success = new MessageEmbed({
             title: "リロード成功",
             description: commandName + "コマンドをリロードしました",
-            color: 4886754,
+            color: color.NOTIFY,
             timestamp: new Date(),
         });
 
