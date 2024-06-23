@@ -2,13 +2,14 @@ const { MessageEmbed } = require("discord.js");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
+const color = require("../utils/color-code");
 
 exports.run = (client, message) => {
     try {
         const embed = new MessageEmbed({
             title: "🏓pong!",
             description: "ping値を表示します",
-            color: 0xffff12,
+            color: color.DETAIL,
             timestamp: new Date(),
             fields: [
                 {
