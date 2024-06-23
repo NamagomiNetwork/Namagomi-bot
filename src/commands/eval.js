@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
     const err_not_args = new MessageEmbed({
         title: "コードの評価",
         description: "ERROR: 評価するコードが入力されていません",
-        color: color.ATTENTION,
+        color: color.ERROR,
         fields: [
             {
                 name: "入力",
@@ -65,7 +65,7 @@ exports.run = (client, message, args) => {
                 const err_input_long = new MessageEmbed({
                     title: "コードの評価",
                     description: "ERROR: 入力値が1000文字を超えたため表示しません...",
-                    color: color.ATTENTION,
+                    color: color.ERROR,
                     fields: [
                         {
                             name: "入力",

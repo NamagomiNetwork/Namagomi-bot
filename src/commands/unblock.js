@@ -22,7 +22,7 @@ exports.run = async (client, message) => {
         const err_argument = new MessageEmbed({
             title: "ユーザーブロックの解除",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: color.ATTENTION,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",

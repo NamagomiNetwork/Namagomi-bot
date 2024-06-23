@@ -22,7 +22,7 @@ exports.run = async (client, message) => {
         const err_no_argument = new MessageEmbed({
             title: "Twitter投稿展開機能の設定",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: color.ATTENTION,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",
@@ -41,7 +41,7 @@ exports.run = async (client, message) => {
         const err_invalid_argument = new MessageEmbed({
             title: "Twitter投稿展開機能の設定",
             description: "コマンド実行エラー: 引数がtrue/false以外です",
-            color: color.ATTENTION,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",

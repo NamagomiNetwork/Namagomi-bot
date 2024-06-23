@@ -33,7 +33,7 @@ exports.run = (client, message, args) => {
             const err_input_long = new MessageEmbed({
                 title: "シェルコマンド実行",
                 description: "ERROR: 入力値が1000文字を超えました...",
-                color: color.ATTENTION,
+                color: color.ERROR,
                 fields: [
                     {
                         name: "入力",
@@ -61,7 +61,7 @@ exports.run = (client, message, args) => {
             const err_shell = new MessageEmbed({
                 title: "シェルコマンド実行",
                 description: "シェルコマンドを実行しました",
-                color: color.ATTENTION,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "入力",
@@ -165,7 +165,7 @@ exports.run = (client, message, args) => {
         const err_argument = new MessageEmbed({
             title: "シェルコマンド実行",
             description: "ERROR: 引数が指定されていません",
-            color: color.ATTENTION,
+            color: color.ERROR,
             fields: [
                 {
                     name: "入力",
