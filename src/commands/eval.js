@@ -2,6 +2,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const { MessageEmbed } = require("discord.js");
+const color = require("../utils/color-code");
 
 exports.run = (client, message, args) => {
     const permission_check = check_admin(message, client);
@@ -13,7 +14,7 @@ exports.run = (client, message, args) => {
     const err_not_args = new MessageEmbed({
         title: "コードの評価",
         description: "ERROR: 評価するコードが入力されていません",
-        color: 16601703,
+        color: color.ATTENTION,
         fields: [
             {
                 name: "入力",
@@ -64,7 +65,7 @@ exports.run = (client, message, args) => {
                 const err_input_long = new MessageEmbed({
                     title: "コードの評価",
                     description: "ERROR: 入力値が1000文字を超えたため表示しません...",
-                    color: 16601703,
+                    color: color.ATTENTION,
                     fields: [
                         {
                             name: "入力",

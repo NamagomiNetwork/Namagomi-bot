@@ -8,6 +8,7 @@ const TawasiModel = require("../utils/Schema/TawasiSchema");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const PostExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = async (client, message) => {
     try {
@@ -29,7 +30,7 @@ exports.run = async (client, message) => {
         const err_argument = new MessageEmbed({
             title: "ユーザー情報確認",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: 16601703,
+            color: color.ATTENTION,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",
