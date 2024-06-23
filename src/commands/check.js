@@ -108,7 +108,7 @@ exports.run = async (client, message) => {
         const data = new MessageEmbed({
             title: "ユーザー情報確認",
             description: "DBに保存されているデータを取得しました",
-            color: 3853014,
+            color: color.NOTIFY,
             timestamp: new Date(),
             thumbnail: {
                 url: profileData.avatar,

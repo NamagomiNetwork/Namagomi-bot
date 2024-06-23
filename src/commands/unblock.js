@@ -82,7 +82,7 @@ exports.run = async (client, message) => {
         const data = new MessageEmbed({
             title: "ユーザーブロックの解除",
             description: "ユーザーのブロックを解除しました",
-            color: 3853014,
+            color: color.CMD_RUN,
             timestamp: new Date(),
             thumbnail: {
                 url: profileData.avatar,

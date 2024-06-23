@@ -87,7 +87,7 @@ exports.run = async (client, message) => {
         const data = new MessageEmbed({
             title: "ハードブロック",
             description: "ユーザーをハードブロックしました",
-            color: 3853014,
+            color: color.BLOCKED_NOTIFY,
             timestamp: new Date(),
             thumbnail: {
                 url: profileData.avatar,

@@ -65,7 +65,7 @@ exports.run = async (client, message) => {
         const update_success = new MessageEmbed({
             title: "Twitter投稿展開機能の設定",
             description: "DBに保存されているTwitter投稿展開機能の設定を更新しました",
-            color: 3853014,
+            color: 3853014, //★設定更新系の色を新しく定義したい。
             fields: [
                 {
                     name: "Twitter投稿展開機能の現在の設定",

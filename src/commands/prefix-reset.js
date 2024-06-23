@@ -59,7 +59,7 @@ exports.run = async (client, message) => {
         const success = new MessageEmbed({
             title: "prefixのリセット",
             description: "prefix(接頭辞)をリセットしました",
-            color: 3853014,
+            color: 3853014, //★設定更新系の色を新しく定義したい。
             fields: [
                 {
                     name: "リセットしたユーザー",

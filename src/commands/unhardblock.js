@@ -77,7 +77,7 @@ exports.run = async (client, message) => {
         const data = new MessageEmbed({
             title: "ハードブロックの解除",
             description: "ユーザーのハードブロックを解除しました",
-            color: 3853014,
+            color: color.CMD_RUN,
             timestamp: new Date(),
             thumbnail: {
                 url: profileData.avatar,

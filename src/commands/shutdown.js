@@ -21,7 +21,7 @@ exports.run = (client, message) => {
             const data = new MessageEmbed({
                 title: "システムの終了",
                 description: "システムを終了を開始します... \n まもなくbotがシャットダウンします",
-                color: 3853014,
+                color: color.CMD_RUN,
                 timestamp: new Date(),
             });
 

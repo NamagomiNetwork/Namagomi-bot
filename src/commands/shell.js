@@ -83,7 +83,7 @@ exports.run = (client, message, args) => {
         const page1 = new MessageEmbed({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (1ページ目)",
-            color: 3853014,
+            color: color.CMD_RUN,
             fields: [
                 {
                     name: "入力",
@@ -98,7 +98,7 @@ exports.run = (client, message, args) => {
         const page2 = new MessageEmbed({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (2ページ目)",
-            color: 3853014,
+            color: color.CMD_RUN,
             fields: [
                 {
                     name: "2ページ目",
@@ -109,7 +109,7 @@ exports.run = (client, message, args) => {
         const page3 = new MessageEmbed({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (3ページ目)",
-            color: 3853014,
+            color: color.CMD_RUN,
             fields: [
                 {
                     name: "3ページ目",
@@ -120,7 +120,7 @@ exports.run = (client, message, args) => {
         const page4 = new MessageEmbed({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (4ページ目)",
-            color: 3853014,
+            color: color.CMD_RUN,
             fields: [
                 {
                     name: "4ページ目",
@@ -131,7 +131,7 @@ exports.run = (client, message, args) => {
         const page5 = new MessageEmbed({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (最終ページ)",
-            color: 3853014,
+            color: color.CMD_RUN,
             fields: [
                 {
                     name: "5ページ目",

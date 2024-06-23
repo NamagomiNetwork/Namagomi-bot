@@ -54,7 +54,7 @@ exports.run = async (client, message) => {
         const success = new MessageEmbed({
             title: "1日1たわしさんのリセット",
             description: "1日1たわしさんをリセット",
-            color: 3853014,
+            color: 3853014, //★設定更新系の色を新しく定義したい。
             fields: [
                 {
                     name: "リセットしたユーザーID: ",

@@ -32,7 +32,7 @@ exports.run = async (client, message) => {
     const data = new MessageEmbed({
         title: "あたらしいprofile",
         description: "DBに保存されているデータを更新しました",
-        color: 3853014,
+        color: 3853014, //★設定更新系の色を新しく定義したい。
         timestamp: new Date(),
     });
     await message.channel.send({ embeds: [data] });
