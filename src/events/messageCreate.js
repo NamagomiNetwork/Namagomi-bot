@@ -11,6 +11,7 @@ const TawasiModel = require("../utils/Schema/TawasiSchema");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const PostExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
 //#endregion
+const color = require("../utils/color-code");
 
 module.exports = async (client, message) => {
     // botとDMを無視する
@@ -194,7 +195,7 @@ module.exports = async (client, message) => {
         logger.info("ユーザーID: " + message.author.id + " はブロックされています");
         const your_block = new MessageEmbed({
             title: "警告: あなたはブロックされています",
-            color: 16601703,
+            color: color.ATTENTION,
             footer: {
                 text: "なまごみ",
             },
@@ -227,7 +228,7 @@ module.exports = async (client, message) => {
     const indicateCmdName = indicateDisplay(cmd);
     const unknown_command = new MessageEmbed({
         title: "コマンドが不明です😉",
-        color: 16601703,
+        color: color.ATTENTION,
         fields: [
             {
                 name: "もしかして：",

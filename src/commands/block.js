@@ -2,10 +2,11 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const profileModel = require("../utils/Schema/ProfileSchema");
-const { MessageEmbed } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const err_embed = require("../utils/error-embed");
 const notify_embed = require("./utils/notify-embed");
+const color = require("../utils/color-code");
+const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message) => {
     try {
@@ -23,7 +24,7 @@ exports.run = async (client, message) => {
         const err_argument = new MessageEmbed({
             title: "ユーザーブロック",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: 16601703,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",
@@ -85,7 +86,7 @@ exports.run = async (client, message) => {
         const data = new MessageEmbed({
             title: "ユーザーブロック",
             description: "ユーザーをブロックしました",
-            color: 3853014,
+            color: color.BLOCKED_NOTIFY,
             timestamp: new Date(),
             thumbnail: {
                 url: profileData.avatar,

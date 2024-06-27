@@ -5,6 +5,7 @@ const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = async (client, message) => {
     try {
@@ -21,7 +22,7 @@ exports.run = async (client, message) => {
         const err_argument = new MessageEmbed({
             title: "ユーザーブロックの解除",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: 16601703,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",
@@ -81,7 +82,7 @@ exports.run = async (client, message) => {
         const data = new MessageEmbed({
             title: "ユーザーブロックの解除",
             description: "ユーザーのブロックを解除しました",
-            color: 3853014,
+            color: color.CMD_RUN,
             timestamp: new Date(),
             thumbnail: {
                 url: profileData.avatar,

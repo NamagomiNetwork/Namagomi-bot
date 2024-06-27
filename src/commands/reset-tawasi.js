@@ -4,6 +4,7 @@ const check_admin = require("../utils/check-admin");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 const { MessageEmbed } = require("discord.js");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = async (client, message) => {
     try {
@@ -31,7 +32,7 @@ exports.run = async (client, message) => {
         const err_argument = new MessageEmbed({
             title: "1日1たわしさんのリセット",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: 16601703,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",
@@ -53,7 +54,7 @@ exports.run = async (client, message) => {
         const success = new MessageEmbed({
             title: "1日1たわしさんのリセット",
             description: "1日1たわしさんをリセット",
-            color: 3853014,
+            color: 3853014, //★設定更新系の色を新しく定義したい。
             fields: [
                 {
                     name: "リセットしたユーザーID: ",

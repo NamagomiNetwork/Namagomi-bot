@@ -2,6 +2,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const { MessageEmbed } = require("discord.js");
+const color = require("../utils/color-code");
 
 exports.run = (client, message, args) => {
     const permission_check = check_admin(message, client);
@@ -13,7 +14,7 @@ exports.run = (client, message, args) => {
     const err_not_args = new MessageEmbed({
         title: "コードの評価",
         description: "ERROR: 評価するコードが入力されていません",
-        color: 16601703,
+        color: color.ERROR,
         fields: [
             {
                 name: "入力",
@@ -64,7 +65,7 @@ exports.run = (client, message, args) => {
                 const err_input_long = new MessageEmbed({
                     title: "コードの評価",
                     description: "ERROR: 入力値が1000文字を超えたため表示しません...",
-                    color: 16601703,
+                    color: color.ERROR,
                     fields: [
                         {
                             name: "入力",
@@ -84,7 +85,7 @@ exports.run = (client, message, args) => {
             const err_not_output = new MessageEmbed({
                 title: "コードの評価",
                 description: "出力がありませんでしたが、コードの実行には成功しました",
-                color: 3853014,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "入力",
@@ -113,7 +114,7 @@ exports.run = (client, message, args) => {
             const page1 = new MessageEmbed({
                 title: "コードの評価",
                 description: "コードを評価しました (1ページ目)",
-                color: 3853014,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "入力",
@@ -128,7 +129,7 @@ exports.run = (client, message, args) => {
             const page2 = new MessageEmbed({
                 title: "コードの評価",
                 description: "コードを評価しました (2ページ目)",
-                color: 3853014,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "2ページ目",
@@ -139,7 +140,7 @@ exports.run = (client, message, args) => {
             const page3 = new MessageEmbed({
                 title: "コードの評価",
                 description: "コードを評価しました (3ページ目)",
-                color: 3853014,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "3ページ目",
@@ -150,7 +151,7 @@ exports.run = (client, message, args) => {
             const page4 = new MessageEmbed({
                 title: "コードの評価",
                 description: "コードを評価しました (4ページ目)",
-                color: 3853014,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "4ページ目",
@@ -161,7 +162,7 @@ exports.run = (client, message, args) => {
             const page5 = new MessageEmbed({
                 title: "コードの評価",
                 description: "コードを評価しました (最終ページ)",
-                color: 3853014,
+                color: color.CMD_RUN,
                 fields: [
                     {
                         name: "5ページ目",
@@ -190,7 +191,7 @@ exports.run = (client, message, args) => {
             const err_detail = new MessageEmbed({
                 title: "エラーキャッチ内容",
                 description: "",
-                color: 3853014,
+                color: color.NOTIFY,
                 fields: [
                     {
                         name: "入力",

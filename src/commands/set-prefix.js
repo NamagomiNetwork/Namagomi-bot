@@ -3,6 +3,7 @@ const config = require("../utils/get-config");
 const profileModel = require("../utils/Schema/ProfileSchema");
 const { MessageEmbed } = require("discord.js");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = async (client, message) => {
     try {
@@ -25,7 +26,7 @@ exports.run = async (client, message) => {
         const err_argument = new MessageEmbed({
             title: "prefixの設定",
             description: "コマンド実行エラー: 引数が指定されていません",
-            color: 16601703,
+            color: color.ERROR,
             fields: [
                 {
                     name: "コマンド実行に必要な引数",
@@ -50,7 +51,7 @@ exports.run = async (client, message) => {
         const success = new MessageEmbed({
             title: "prefixの設定",
             description: "prefix(接頭辞)を更新しました",
-            color: 3853014,
+            color: 3853014, //★設定更新系の色を新しく定義したい。
             fields: [
                 {
                     name: "新しいprefix",

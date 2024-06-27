@@ -1,10 +1,12 @@
 const { MessageEmbed } = require("discord.js");
 const package = require("../../package.json");
 const logger = require("../modules/logger");
-const err_embed = require("../utils/error-embed");
 const child = require("child_process");
+const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
+const color = require("../utils/color-code");
 const repo_url = "https://github.com/NamagomiNetwork/Namagomi-bot/commit/";
+
 exports.run = (client, message) => {
     try {
         // commit情報を取得
@@ -27,7 +29,7 @@ exports.run = (client, message) => {
 
             const embed = new MessageEmbed({
                 title: "Version",
-                color: 5301186,
+                color: color.CMD_RUN,
                 footer: {
                     text: "Current Version",
                 },

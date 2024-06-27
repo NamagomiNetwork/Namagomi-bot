@@ -1,9 +1,10 @@
 const { MessageEmbed } = require("discord.js");
+const color = require("../../utils/color-code");
 
 const msg_blocked = (input, profileData) => {
     const msg = new MessageEmbed({
         title: "通知: 指定のユーザはすでにブロックされています",
-        color: 4886754,
+        color: color.NOTIFY,
         timestamp: new Date(),
         fields: [
             {
@@ -27,7 +28,7 @@ const msg_blocked = (input, profileData) => {
 const msg_hardblocked = (input, profileData) => {
     const msg = new MessageEmbed({
         title: "通知: 指定のユーザはすでにハードブロックされています",
-        color: 4886754,
+        color: color.NOTIFY,
         timestamp: new Date(),
         fields: [
             {

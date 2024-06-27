@@ -4,13 +4,14 @@ const package = require("../../package.json");
 const config = require("../utils/get-config");
 const prefix = config.bot.prefix;
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = (client, message) => {
     try {
         const embed = new MessageEmbed({
             title: "about",
             description: "botの詳細を表示します",
-            color: 0xffff12,
+            color: color.DETAIL,
             fields: [
                 {
                     name: "Repository",
