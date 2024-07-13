@@ -1,6 +1,7 @@
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
+const color = require("../utils/color-code");
 
 exports.run = (client, message, args) => {
     try {
@@ -16,7 +17,7 @@ exports.run = (client, message, args) => {
                 {
                     title: `───${member.user?.username}の情報───`,
                     description: `${member.user?.username}の情報を表示しています`,
-                    color: "RANDOM",
+                    color: color.NOTIFY,
                     timestamp: new Date(),
                     footer: {
                         icon_url: message.guild.iconURL(),
