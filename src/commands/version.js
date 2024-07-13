@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const pkg = require("../../pkg.json");
+const pkg = require("../../package.json");
 const logger = require("../modules/logger");
 const child = require("child_process");
 const err_embed = require("../utils/error-embed");
