@@ -51,7 +51,6 @@ exports.run = (client, message, args) => {
 
     async function run() {
         // Get our input arguments
-        console.log(message.content);
         const args = message.content.split(" ").slice(1);
         const input = args.join(" ");
         // In case something fails, we to catch errors

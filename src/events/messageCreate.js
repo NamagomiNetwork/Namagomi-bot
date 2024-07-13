@@ -247,5 +247,4 @@ module.exports = async (client, message) => {
 
     // こまんどじっこう
     cmd.run(client, message, args);
-    console.log(cmd);
 };
