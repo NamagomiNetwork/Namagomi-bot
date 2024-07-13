@@ -1,9 +1,9 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../utils/get-config");
 const color = require("../utils/color-code");
 
 module.exports = (client) => {
-    const embed = new MessageEmbed({
+    const embed = new EmbedBuilder({
         title: "投票の時間です",
         color: color.CMD_RUN,
         description: "投票しましょう",

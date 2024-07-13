@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
@@ -18,7 +18,7 @@ exports.run = (client, message) => {
 
         if (config.bot.owner.includes(message.author.id)) {
             logger.info("システムを終了します...");
-            const data = new MessageEmbed({
+            const data = new EmbedBuilder({
                 title: "システムの終了",
                 description: "システムを終了を開始します... \n まもなくbotがシャットダウンします",
                 color: color.CMD_RUN,

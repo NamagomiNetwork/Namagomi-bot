@@ -3,7 +3,7 @@ const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
 const color = require("../utils/color-code");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 exports.run = async (client, message) => {
     try {
@@ -22,7 +22,7 @@ exports.run = async (client, message) => {
         }
 
         if (tawasiData.one_day_tawasi_feature.includes("true")) {
-            const disenable = new MessageEmbed({
+            const disenable = new EmbedBuilder({
                 title: "1日1たわしの無効化",
                 description: "1日1たわしを無効化しました",
                 color: color.CMD_RUN,
@@ -42,7 +42,7 @@ exports.run = async (client, message) => {
             });
             return;
         } else {
-            const enable = new MessageEmbed({
+            const enable = new EmbedBuilder({
                 title: "1日1たわしの有効化",
                 description: "1日1たわしを有効化しました",
                 color: color.CMD_RUN,

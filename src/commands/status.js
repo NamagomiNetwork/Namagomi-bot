@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const os = require("os");
 const package = require("../../package.json");
 const logger = require("../modules/logger");
@@ -32,7 +32,7 @@ exports.run = (client, message) => {
         const totalmem = floorDecimal(totalmem_gb, 2);
         const mempercent = floorDecimal(mem_gb_per, 2);
         const heapmem = floorDecimal(heapmem_mb, 2);
-        const embed = new MessageEmbed({
+        const embed = new EmbedBuilder({
             title: "SystemStatus",
             color: color.CMD_RUN,
             footer: {

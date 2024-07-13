@@ -31,7 +31,7 @@
     "axios": "^1.0.0",
     "child_process": "^1.0.2",
     "discord-job-panel": "^1.0.8",
-    "discord.js": "^13.9.0",
+    "discord.js": "^14.15.3",
     "dotenv": "^16.0.1",
     "fs": "^0.0.1-security",
     "log4js": "^6.5.2",
@@ -49,6 +49,6 @@
     "husky": "^9.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.0",
-    "ts-migrate": "^0.1.30"
+    "ts-migrate": "^0.0.0"
   }
 }

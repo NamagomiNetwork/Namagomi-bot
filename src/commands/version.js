@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const package = require("../../package.json");
 const logger = require("../modules/logger");
 const child = require("child_process");
@@ -27,7 +27,7 @@ exports.run = (client, message) => {
                 commit_message = result[2];
             }
 
-            const embed = new MessageEmbed({
+            const embed = new EmbedBuilder({
                 title: "Version",
                 color: color.CMD_RUN,
                 footer: {

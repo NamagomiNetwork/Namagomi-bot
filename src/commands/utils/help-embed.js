@@ -1,6 +1,6 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
-const top = new MessageEmbed({
+const top = new EmbedBuilder({
     title: "Page(1/4)",
     fields: [
         {
@@ -33,7 +33,7 @@ const top = new MessageEmbed({
         },
     ],
 });
-const page2 = new MessageEmbed({
+const page2 = new EmbedBuilder({
     title: "Page(2/4)",
     fields: [
         {
@@ -70,7 +70,7 @@ const page2 = new MessageEmbed({
         },
     ],
 });
-const page3 = new MessageEmbed({
+const page3 = new EmbedBuilder({
     title: "Page(3/4)",
     fields: [
         {
@@ -103,7 +103,7 @@ const page3 = new MessageEmbed({
         },
     ],
 });
-const page4 = new MessageEmbed({
+const page4 = new EmbedBuilder({
     title: "Page(4/4)",
     fields: [
         {

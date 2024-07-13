@@ -1,7 +1,7 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const color = require("../utils/color-code");
 
 exports.run = (client, message, args) => {
@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
         return;
     }
 
-    const err_not_args = new MessageEmbed({
+    const err_not_args = new EmbedBuilder({
         title: "コードの評価",
         description: "ERROR: 評価するコードが入力されていません",
         color: color.ERROR,
@@ -62,7 +62,7 @@ exports.run = (client, message, args) => {
 
             // 入力値規制
             if (args.length >= 1000) {
-                const err_input_long = new MessageEmbed({
+                const err_input_long = new EmbedBuilder({
                     title: "コードの評価",
                     description: "ERROR: 入力値が1000文字を超えたため表示しません...",
                     color: color.ERROR,
@@ -82,7 +82,7 @@ exports.run = (client, message, args) => {
                 return;
             }
 
-            const err_not_output = new MessageEmbed({
+            const err_not_output = new EmbedBuilder({
                 title: "コードの評価",
                 description: "出力がありませんでしたが、コードの実行には成功しました",
                 color: color.CMD_RUN,
@@ -111,7 +111,7 @@ exports.run = (client, message, args) => {
             const output_3 = cleaned.slice(3000, 4000);
             const output_4 = cleaned.slice(4000, 5000);
             const output_5 = cleaned.slice(5000, 6000);
-            const page1 = new MessageEmbed({
+            const page1 = new EmbedBuilder({
                 title: "コードの評価",
                 description: "コードを評価しました (1ページ目)",
                 color: color.CMD_RUN,
@@ -126,7 +126,7 @@ exports.run = (client, message, args) => {
                     },
                 ],
             });
-            const page2 = new MessageEmbed({
+            const page2 = new EmbedBuilder({
                 title: "コードの評価",
                 description: "コードを評価しました (2ページ目)",
                 color: color.CMD_RUN,
@@ -137,7 +137,7 @@ exports.run = (client, message, args) => {
                     },
                 ],
             });
-            const page3 = new MessageEmbed({
+            const page3 = new EmbedBuilder({
                 title: "コードの評価",
                 description: "コードを評価しました (3ページ目)",
                 color: color.CMD_RUN,
@@ -148,7 +148,7 @@ exports.run = (client, message, args) => {
                     },
                 ],
             });
-            const page4 = new MessageEmbed({
+            const page4 = new EmbedBuilder({
                 title: "コードの評価",
                 description: "コードを評価しました (4ページ目)",
                 color: color.CMD_RUN,
@@ -159,7 +159,7 @@ exports.run = (client, message, args) => {
                     },
                 ],
             });
-            const page5 = new MessageEmbed({
+            const page5 = new EmbedBuilder({
                 title: "コードの評価",
                 description: "コードを評価しました (最終ページ)",
                 color: color.CMD_RUN,
@@ -188,7 +188,7 @@ exports.run = (client, message, args) => {
         } catch (err) {
             logger.error("コマンド評価時にエラーをキャッチしました");
             logger.error(err);
-            const err_detail = new MessageEmbed({
+            const err_detail = new EmbedBuilder({
                 title: "エラーキャッチ内容",
                 description: "",
                 color: color.NOTIFY,

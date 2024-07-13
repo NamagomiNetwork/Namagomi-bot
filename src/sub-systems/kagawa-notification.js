@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../utils/get-config");
 const color = require("../utils/color-code");
 
@@ -8,7 +8,7 @@ module.exports = (client) => {
     let embed;
 
     if (dayOfweek == 0 || dayOfweek == 6) {
-        embed = new MessageEmbed({
+        embed = new EmbedBuilder({
             title: "香川チャレンジの時間です",
             color: color.CMD_RUN,
             description: "Minecraft-v1.16.5を起動しましょう",
@@ -20,7 +20,7 @@ module.exports = (client) => {
             ],
         });
     } else {
-        embed = new MessageEmbed({
+        embed = new EmbedBuilder({
             title: "香川チャレンジの時間です",
             color: color.CMD_RUN,
             description: "Minecraft-v1.16.5を起動しましょう",

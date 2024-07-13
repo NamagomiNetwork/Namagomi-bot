@@ -1,6 +1,6 @@
 const logger = require("../modules/logger");
 const profileModel = require("../utils/Schema/ProfileSchema");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const err_embed = require("../utils/error-embed");
 
 exports.run = async (client, message) => {
@@ -29,7 +29,7 @@ exports.run = async (client, message) => {
         logger.error(err);
         return;
     }
-    const data = new MessageEmbed({
+    const data = new EmbedBuilder({
         title: "あたらしいprofile",
         description: "DBに保存されているデータを更新しました",
         color: 3853014, //★設定更新系の色を新しく定義したい。

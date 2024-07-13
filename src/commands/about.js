@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const package = require("../../package.json");
 const config = require("../utils/get-config");
@@ -8,7 +8,7 @@ const color = require("../utils/color-code");
 
 exports.run = (client, message) => {
     try {
-        const embed = new MessageEmbed({
+        const embed = new EmbedBuilder({
             title: "about",
             description: "botの詳細を表示します",
             color: color.DETAIL,

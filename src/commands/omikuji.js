@@ -4,7 +4,7 @@ const err_embed = require("../utils/error-embed");
 const color = require("../utils/color-code");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
 const profileModel = require("../utils/Schema/ProfileSchema");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 exports.run = async (client, message) => {
     function ko() {
@@ -58,7 +58,7 @@ exports.run = async (client, message) => {
         }
         if (OmikujiData.one_day_omikuji_feature.includes("true")) {
             if (OmikujiData.one_day_omikuji.includes("true")) {
-                let sudeni_1day_true = new MessageEmbed({
+                let sudeni_1day_true = new EmbedBuilder({
                     title: "おみくじ",
                     description: "すでに今日はおみくじを実行しています",
                     color: color.CMD_RUN,
@@ -123,7 +123,7 @@ exports.run = async (client, message) => {
             result = arr[random];
 
             let maeno_data = OmikujiData.mae_no_omikuji_kekka;
-            let success = new MessageEmbed({
+            let success = new EmbedBuilder({
                 title: "おみくじ",
                 description: "おみくじをしたよ～",
                 color: color.CMD_RUN,

@@ -1,6 +1,6 @@
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../utils/get-config");
 const color = require("../utils/color-code");
 
@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
         const random = Math.floor(Math.random() * choices.length);
         const result = choices[random];
 
-        const success = new MessageEmbed({
+        const success = new EmbedBuilder({
             title: "抽選結果",
             description: result,
             color: color.CMD_RUN,

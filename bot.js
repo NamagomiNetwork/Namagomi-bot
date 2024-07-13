@@ -2,8 +2,8 @@ const logger = require('./src/modules/logger')
 logger.info('Botを起動中です...')
 
 // モジュールの読み込み
-const { Client, Intents, Collection, MessageEmbed} = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_VOICE_STATES] });
+const { Client, GatewayIntentBits, Collection, EmbedBuilder} = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildVoiceStates] });
 const fs = require("fs");
 client.commands = new Collection();
 logger.info("外部モジュールの読み込みが完了しました");

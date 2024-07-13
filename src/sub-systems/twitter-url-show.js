@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, MessageAttachment } = require("discord.js");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
@@ -36,7 +36,7 @@ exports.x_twitter_com = async (client, message) => {
         .then((post) => {
             let embeds = [];
             let attachment;
-            const embed = new MessageEmbed({
+            const embed = new EmbedBuilder({
                 author: {
                     name: `${post.user_name} ` + `(@` + `${post.user_screen_name}` + `)`,
                 },

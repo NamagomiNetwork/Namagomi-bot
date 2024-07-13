@@ -1,9 +1,9 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = (message, client) => {
-    const syslog = new MessageEmbed({
+    const syslog = new EmbedBuilder({
         title: "権限がない人が管理コマンドを実行しました",
         description: "このメッセージはBot管理者でない人が評価しようとしたため送信します",
         fields: [
@@ -14,7 +14,7 @@ module.exports = (message, client) => {
         ],
     });
 
-    const user_notification = new MessageEmbed({
+    const user_notification = new EmbedBuilder({
         title: "権限がありません",
         description: "このコマンドを実行する権限がありません",
         fields: [
