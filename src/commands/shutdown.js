@@ -3,6 +3,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const err_embed = require("../utils/error-embed");
+const color = require("../utils/color-code");
 
 exports.run = (client, message) => {
     async function send_msg(data) {
