@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const os = require("os");
-const package = require("../../package.json");
+const pkg = require("../../pkg.json");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const config = require("../utils/get-config");
@@ -57,7 +57,7 @@ exports.run = (client, message) => {
                 },
                 {
                     name: "Bot Version",
-                    value: package.version,
+                    value: pkg.version,
                     inline: true,
                 },
                 {

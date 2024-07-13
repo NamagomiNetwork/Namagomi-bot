@@ -1,11 +1,11 @@
 const logger = require("./logger");
-const package = require("../utils/get-package");
+const pkg = require("../utils/get-pkg");
 const os = require("os");
 
 // bot情報
 logger.info("=====Bot Status=====");
 logger.info("Discord js Version: " + require("discord.js").version);
-logger.info("Botバージョン: " + package.version);
+logger.info("Botバージョン: " + pkg.version);
 logger.info("Repository: https://github.com/NamagomiNetwork/Namagomi-bot");
 logger.info("====================");
 
