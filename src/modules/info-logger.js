@@ -1,5 +1,5 @@
 const logger = require("./logger");
-const pkg = require("../utils/get-pkg");
+const pkg = require("../utils/get-package");
 const os = require("os");
 
 // bot情報
