@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const os = require("os");
 const color = require("./color-code");
 
@@ -6,7 +6,7 @@ const freemem_byte = os.freemem();
 const freemem_kb = freemem_byte / 1024;
 const freemem = freemem_kb / 1024;
 
-const msg = new MessageEmbed({
+const msg = new EmbedBuilder({
     title: "コマンドの実行に失敗しました...",
     color: color.ERROR,
     description: "管理者にお問い合わせください",
@@ -17,7 +17,7 @@ const msg = new MessageEmbed({
         },
     ],
 });
-const msg_debug = new MessageEmbed({
+const msg_debug = new EmbedBuilder({
     title: "debug mode",
     color: color.ERROR,
     description: "debug information",

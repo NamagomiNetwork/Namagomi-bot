@@ -2,7 +2,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const profileModel = require("../utils/Schema/ProfileSchema");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const err_embed = require("../utils/error-embed");
 const color = require("../utils/color-code");
@@ -20,7 +20,7 @@ exports.run = async (client, message) => {
         const input = args.join(" ");
 
         // ユーザーIDが指定されていない場合
-        const err_argument = new MessageEmbed({
+        const err_argument = new EmbedBuilder({
             title: "ハードブロック",
             description: "コマンド実行エラー: 引数が指定されていません",
             color: color.ERROR,
@@ -74,7 +74,7 @@ exports.run = async (client, message) => {
             hardblock: false,
         });
 
-        const data = new MessageEmbed({
+        const data = new EmbedBuilder({
             title: "ハードブロックの解除",
             description: "ユーザーのハードブロックを解除しました",
             color: color.CMD_RUN,

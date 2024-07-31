@@ -1,7 +1,7 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const child = require("child_process");
 const err_embed = require("../utils/error-embed");
 const color = require("../utils/color-code");
@@ -30,7 +30,7 @@ exports.run = (client, message, args) => {
         const input = command;
         const input_count = input.length;
         if (input_count >= 1000) {
-            const err_input_long = new MessageEmbed({
+            const err_input_long = new EmbedBuilder({
                 title: "シェルコマンド実行",
                 description: "ERROR: 入力値が1000文字を超えました...",
                 color: color.ERROR,
@@ -58,7 +58,7 @@ exports.run = (client, message, args) => {
         const output_4 = res.slice(4000, 5000);
         const output_5 = res.slice(5000, 6000);
         if (err) {
-            const err_shell = new MessageEmbed({
+            const err_shell = new EmbedBuilder({
                 title: "シェルコマンド実行",
                 description: "シェルコマンドを実行しました",
                 color: color.CMD_RUN,
@@ -80,7 +80,7 @@ exports.run = (client, message, args) => {
         }
 
         // 実行成功時
-        const page1 = new MessageEmbed({
+        const page1 = new EmbedBuilder({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (1ページ目)",
             color: color.CMD_RUN,
@@ -95,7 +95,7 @@ exports.run = (client, message, args) => {
                 },
             ],
         });
-        const page2 = new MessageEmbed({
+        const page2 = new EmbedBuilder({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (2ページ目)",
             color: color.CMD_RUN,
@@ -106,7 +106,7 @@ exports.run = (client, message, args) => {
                 },
             ],
         });
-        const page3 = new MessageEmbed({
+        const page3 = new EmbedBuilder({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (3ページ目)",
             color: color.CMD_RUN,
@@ -117,7 +117,7 @@ exports.run = (client, message, args) => {
                 },
             ],
         });
-        const page4 = new MessageEmbed({
+        const page4 = new EmbedBuilder({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (4ページ目)",
             color: color.CMD_RUN,
@@ -128,7 +128,7 @@ exports.run = (client, message, args) => {
                 },
             ],
         });
-        const page5 = new MessageEmbed({
+        const page5 = new EmbedBuilder({
             title: "シェルコマンド実行",
             description: "シェルコマンドを実行しました (最終ページ)",
             color: color.CMD_RUN,
@@ -162,7 +162,7 @@ exports.run = (client, message, args) => {
         }
         const command = args.join(" ");
 
-        const err_argument = new MessageEmbed({
+        const err_argument = new EmbedBuilder({
             title: "シェルコマンド実行",
             description: "ERROR: 引数が指定されていません",
             color: color.ERROR,

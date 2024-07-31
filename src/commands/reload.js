@@ -1,7 +1,7 @@
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const err_embed = require("../utils/error-embed");
 const color = require("../utils/color-code");
 
@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
             return;
         }
 
-        const not_args = new MessageEmbed({
+        const not_args = new EmbedBuilder({
             title: "リロード失敗",
             description: "コマンドのリロードに失敗しました...",
             color: 13632027,
@@ -27,14 +27,14 @@ exports.run = (client, message, args) => {
 
         if (!args || args.length < 1) return message.channel.send({ embeds: [not_args] });
         const commandName = args[0];
-        const reload_success = new MessageEmbed({
+        const reload_success = new EmbedBuilder({
             title: "リロード成功",
             description: commandName + "コマンドをリロードしました",
             color: color.NOTIFY,
             timestamp: new Date(),
         });
 
-        const reload_unknown = new MessageEmbed({
+        const reload_unknown = new EmbedBuilder({
             title: "リロード失敗",
             description: commandName + "コマンドのリロードに失敗しました...",
             color: 13632027,

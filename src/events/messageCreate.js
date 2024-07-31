@@ -1,5 +1,5 @@
 const config = require("../utils/get-config");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const msg_reply = require("../sub-systems/message-reply");
 const url = require("../sub-systems/url-show");
@@ -193,7 +193,7 @@ module.exports = async (client, message) => {
     // ブロックされているか確認
     if (BlockData_check.enable.includes("true")) {
         logger.info("ユーザーID: " + message.author.id + " はブロックされています");
-        const your_block = new MessageEmbed({
+        const your_block = new EmbedBuilder({
             title: "警告: あなたはブロックされています",
             color: color.ATTENTION,
             footer: {
@@ -226,7 +226,7 @@ module.exports = async (client, message) => {
         return null;
     };
     const indicateCmdName = indicateDisplay(cmd);
-    const unknown_command = new MessageEmbed({
+    const unknown_command = new EmbedBuilder({
         title: "コマンドが不明です😉",
         color: color.ATTENTION,
         fields: [

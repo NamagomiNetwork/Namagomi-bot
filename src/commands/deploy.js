@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const check_admin = require("../utils/check-admin");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
@@ -29,7 +29,7 @@ exports.run = (client, message) => {
 
             checkDetailsforAlready(details);
 
-            const deploy_embed = new MessageEmbed({
+            const deploy_embed = new EmbedBuilder({
                 title: "Deploy now...",
                 color: color.CMD_RUN,
                 timestamp: new Date(),

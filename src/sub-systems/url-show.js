@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../utils/get-config");
 
 exports.discord_com = (client, message) => {
@@ -36,7 +36,7 @@ exports.discord_com = (client, message) => {
     channelch.messages
         .fetch(message_id)
         .then((msg) => {
-            const msgpanel = new MessageEmbed()
+            const msgpanel = new EmbedBuilder()
                 .setDescription(`${msg.content}`)
                 .setAuthor({
                     name: `${msg.author.username}`,
@@ -99,7 +99,7 @@ exports.discord_ptb_com = (client, message) => {
     channelch.messages
         .fetch(message_id)
         .then((msg) => {
-            const msgpanel = new MessageEmbed()
+            const msgpanel = new EmbedBuilder()
                 .setDescription(`${msg.content}`)
                 .setAuthor({
                     name: `${msg.author.username}`,

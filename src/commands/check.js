@@ -2,7 +2,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
 const profileModel = require("../utils/Schema/ProfileSchema");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
@@ -27,7 +27,7 @@ exports.run = async (client, message) => {
         }
 
         // ユーザーIDが指定されていない場合
-        const err_argument = new MessageEmbed({
+        const err_argument = new EmbedBuilder({
             title: "ユーザー情報確認",
             description: "コマンド実行エラー: 引数が指定されていません",
             color: color.ERROR,
@@ -105,7 +105,7 @@ exports.run = async (client, message) => {
             );
             return;
         }
-        const data = new MessageEmbed({
+        const data = new EmbedBuilder({
             title: "ユーザー情報確認",
             description: "DBに保存されているデータを取得しました",
             color: color.NOTIFY,

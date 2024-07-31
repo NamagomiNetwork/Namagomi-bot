@@ -1,5 +1,5 @@
-const { MessageEmbed } = require("discord.js");
-const package = require("../../package.json");
+const { EmbedBuilder } = require("discord.js");
+const pkg = require("../../package.json");
 const logger = require("../modules/logger");
 const child = require("child_process");
 const err_embed = require("../utils/error-embed");
@@ -27,7 +27,7 @@ exports.run = (client, message) => {
                 commit_message = result[2];
             }
 
-            const embed = new MessageEmbed({
+            const embed = new EmbedBuilder({
                 title: "Version",
                 color: color.CMD_RUN,
                 footer: {
@@ -44,7 +44,7 @@ exports.run = (client, message) => {
                     },
                     {
                         name: "bot-version",
-                        value: package.version,
+                        value: pkg.version,
                         inline: true,
                     },
                     {
