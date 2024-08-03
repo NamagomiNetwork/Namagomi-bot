@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
     "lint": "eslint --fix src/**/*.{js,json,md}",
     "format": "prettier --write src/**/*.{js,json,md}",
     "fix": "npm run format && npm run lint",
@@ -50,7 +49,6 @@
   "devDependencies": {
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
-    "husky": "^9.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.0",
     "ts-migrate": "^0.0.0"
