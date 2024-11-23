@@ -94,7 +94,6 @@ exports.x_twitter_com = async (client, message) => {
                 return;
             } else if (post.mediaURLs.length >= 1) {
                 post.mediaURLs.forEach((mediaElment) => {
-                    console.log(mediaElment);
                     if (mediaElment.includes("video.twimg.com")) {
                         attachment = mediaElment;
                         return;
