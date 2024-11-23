@@ -1,8 +1,48 @@
-const { EmbedBuilder, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
+async function sendVideoFileFromURL(message, embeds, url){
+    // ボットが入力中の状態へ遷移
+    const typingPromise = message.channel.sendTyping();
+    
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+
+    // 一時ファイルを保存するディレクトリ
+    const tempDir = path.join(__dirname, 'temp');
+    const tempFilePath = path.join(tempDir, 'temporary_video.mp4');
+
+    // 一時ディレクトリが存在しない場合は作成
+    if (!fs.existsSync(tempDir)) {
+        fs.mkdirSync(tempDir);
+    }
+
+    fs.writeFileSync(tempFilePath, response.data);
+    const attachment = new AttachmentBuilder(tempFilePath);
+    try
+    {
+        // Attachmentとして送信
+        await message.channel.send({
+            embeds: embeds,
+            files: [attachment],
+        });
+
+    }
+    catch(ex)
+    {
+        logger.error("ファイル送信エラー",ex);
+    }
+    finally
+    {
+        // 一時ファイルを削除
+        fs.unlinkSync(tempFilePath);
+        typingPromise;
+    }
+}
 exports.x_twitter_com = async (client, message) => {
     const postExpansionSettingsData = await postExpansionSettingsModel.findOne({ _id: message.author.id });
     if (!postExpansionSettingsData) {
@@ -30,10 +70,9 @@ exports.x_twitter_com = async (client, message) => {
     if (!urlRegexResults) return;
 
     let replaceURL = urlRegexResults[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
-
     fetch(replaceURL)
         .then((res) => res.json())
-        .then((post) => {
+        .then(async (post) => {
             let embeds = [];
             let attachment;
             const embed = new EmbedBuilder({
@@ -55,6 +94,7 @@ exports.x_twitter_com = async (client, message) => {
                 return;
             } else if (post.mediaURLs.length >= 1) {
                 post.mediaURLs.forEach((mediaElment) => {
+                    console.log(mediaElment);
                     if (mediaElment.includes("video.twimg.com")) {
                         attachment = mediaElment;
                         return;
@@ -66,15 +106,15 @@ exports.x_twitter_com = async (client, message) => {
                         },
                     });
                 });
-
+                
                 if (attachment === undefined) {
                     message.channel.send({ embeds: embeds });
                 } else {
-                    message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
+                    await sendVideoFileFromURL(message, embeds, attachment);
                 }
             }
         });
-    const delayMS = 100;
+    const delayMS = 10;
     setTimeout(() => {
         message.delete();
     }, delayMS);
