@@ -1,3 +1,4 @@
+# ベースイメージの設定
 FROM ubuntu:24.04
 
 # ロケールとタイムゾーンの設定
@@ -15,12 +16,13 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && apt update \
     && apt clean
 
-# Node.js 18.xx系最新のLTSをインストール
+# Namagomi-botの動作要件を満たすため、Node.js 18.xx系最新のLTSをインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt install -y nodejs \
+    && apt install -y nodejs \  
     && npm install -g npm@latest \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
+
 # Node.jsのバージョン確認
 RUN node -v && npm -v
 
@@ -31,9 +33,9 @@ RUN git clone https://github.com/NamagomiNetwork/Namagomi-bot.git /app
 # Namagomi-botの設定ファイルをコンテナ内にコピー
 COPY ./configs/config.json /app/configs/config.json
 
-# 作業ディレクトリと依存関係のインストール
+# 作業ディレクトリを設定し、依存関係のインストール
 WORKDIR /app
 RUN npm ci
 
-# Namagomi-bot起動コマンドを実行
+# Namagomi-bot起動コマンドを実行し、プロセス起動
 CMD ["node", "bot.js"]
