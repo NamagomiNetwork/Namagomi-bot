@@ -39,32 +39,32 @@ exports.discord_com = (client, message) => {
         .then((msg) => {
             let embeds = [];
             const msgpanel = new EmbedBuilder()
-                .setDescription(msg.content || ' ')
+                .setDescription(msg.content || " ")
                 .setTimestamp(msg.createdAt)
                 .setAuthor({
-                    name: (msg.author.username || ' '),
-                    iconURL: (msg.author.avatarURL({ dynamic: true }) )
+                    name: msg.author.username || " ",
+                    iconURL: msg.author.avatarURL({ dynamic: true }),
                 });
 
-                if (msg.guild && msg.channel) {
-                    msgpanel.setFooter({
-                        text: msg.channel.name || '不明なチャンネル',
-                        iconURL:
-                            msg.guild.iconURL() ||
-                            'https://www.freepnglogos.com/uploads/discord-logo-png/discord-logo-logodownload-download-logotipos-1.png',
+            if (msg.guild && msg.channel) {
+                msgpanel.setFooter({
+                    text: msg.channel.name || "不明なチャンネル",
+                    iconURL:
+                        msg.guild.iconURL() ||
+                        "https://www.freepnglogos.com/uploads/discord-logo-png/discord-logo-logodownload-download-logotipos-1.png",
+                });
+            }
+            embeds.push(msgpanel);
+            if (msg.attachments.size > 0) {
+                msg.attachments.forEach((attachment) => {
+                    embeds.push({
+                        url: `${message.content}`,
+                        image: {
+                            url: attachment.url,
+                        },
                     });
-                }
-                embeds.push(msgpanel);
-                if (msg.attachments.size > 0) {
-                    msg.attachments.forEach((attachment) => {
-                        embeds.push({
-                            url: `${message.content}`,
-                            image: {
-                                url: attachment.url,
-                            },
-                        });
-                    });
-                }
+                });
+            }
 
             message.channel.send({ embeds: embeds });
             if (msg.embeds[0]) {

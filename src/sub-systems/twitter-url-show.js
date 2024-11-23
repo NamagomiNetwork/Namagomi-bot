@@ -2,19 +2,19 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
-const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
 
-async function sendVideoFileFromURL(message, embeds, url){
+async function sendVideoFileFromURL(message, embeds, url) {
     // ボットが入力中の状態へ遷移
     const typingPromise = message.channel.sendTyping();
-    
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
+
+    const response = await axios.get(url, { responseType: "arraybuffer" });
 
     // 一時ファイルを保存するディレクトリ
-    const tempDir = path.join(__dirname, 'temp');
-    const tempFilePath = path.join(tempDir, 'temporary_video.mp4');
+    const tempDir = path.join(__dirname, "temp");
+    const tempFilePath = path.join(tempDir, "temporary_video.mp4");
 
     // 一時ディレクトリが存在しない場合は作成
     if (!fs.existsSync(tempDir)) {
@@ -23,21 +23,15 @@ async function sendVideoFileFromURL(message, embeds, url){
 
     fs.writeFileSync(tempFilePath, response.data);
     const attachment = new AttachmentBuilder(tempFilePath);
-    try
-    {
+    try {
         // Attachmentとして送信
         await message.channel.send({
             embeds: embeds,
             files: [attachment],
         });
-
-    }
-    catch(ex)
-    {
-        logger.error("ファイル送信エラー",ex);
-    }
-    finally
-    {
+    } catch (ex) {
+        logger.error("ファイル送信エラー", ex);
+    } finally {
         // 一時ファイルを削除
         fs.unlinkSync(tempFilePath);
         typingPromise;
@@ -105,7 +99,7 @@ exports.x_twitter_com = async (client, message) => {
                         },
                     });
                 });
-                
+
                 if (attachment === undefined) {
                     message.channel.send({ embeds: embeds });
                 } else {
