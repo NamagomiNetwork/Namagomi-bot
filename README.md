@@ -1,10 +1,10 @@
 # Namagomi-bot
 
-生ゴミ鯖用に色々便利機能をつけた Bot
+生ゴミ鯖用に色々便利機能をつけた bot
 
 ## この Bot のコマンド一覧をみたい場合
 
-[wiki](https://github.com/NamagomiNetwork/Namagomi-bot/wiki) をごらんください。<br>
+[NamagomiNetwork.github.io](https://namagominetwork.github.io/) をごらんください。<br>
 コマンドの一覧,使用方法をまとめています
 
 ## 前提要件

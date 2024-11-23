@@ -9,6 +9,7 @@
         "prettier"
     ],
     "rules": {
+        "no-redeclare":"error",
         "no-undef":"warn",
         "no-unused-vars":"warn",
         "indent":["warn",4]

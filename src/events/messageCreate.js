@@ -1,19 +1,50 @@
 const config = require("../utils/get-config");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const msg_reply = require("../sub-systems/message-reply");
 const url = require("../sub-systems/url-show");
 const twitter_url = require("../sub-systems/twitter-url-show");
-// DBSchema
+//#region  DBSchema
 const profileModel = require("../utils/Schema/ProfileSchema");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
 const OmikujiModel = require("../utils/Schema/OmikujiSchema");
+const PostExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
+//#endregion
+const color = require("../utils/color-code");
 
 module.exports = async (client, message) => {
     // botとDMを無視する
     if (message.author.bot || message.channel.type === "dm") return;
 
+    // 投稿展開設定profileがない場合作成
+    const postExpansionSettingsData = await PostExpansionSettingsModel.findOne({ _id: message.author.id });
+    if (!postExpansionSettingsData) {
+        const postExpansionSettings = await PostExpansionSettingsModel.create({
+            _id: message.author.id,
+            // プロファイル作成時初期設定は展開設定が有効
+            x_twitter_show: true,
+            discord_show: true,
+        });
+        postExpansionSettings.save().catch((error) => {
+            logger.error(
+                "ユーザー名: " +
+                    message.author.username +
+                    " ユーザーID: " +
+                    message.author.id +
+                    "の投稿展開設定プロファイル作成中にエラーが発生しました..."
+            );
+            logger.error(error);
+            return;
+        });
+        logger.info(
+            "ユーザー名: " +
+                message.author.username +
+                " ユーザーID: " +
+                message.author.id +
+                "の投稿展開設定プロファイル作成に成功しました"
+        );
+    }
     // URL展開
     url.discord_com(client, message);
     url.discord_ptb_com(client, message);
@@ -162,9 +193,9 @@ module.exports = async (client, message) => {
     // ブロックされているか確認
     if (BlockData_check.enable.includes("true")) {
         logger.info("ユーザーID: " + message.author.id + " はブロックされています");
-        const your_block = new MessageEmbed({
+        const your_block = new EmbedBuilder({
             title: "警告: あなたはブロックされています",
-            color: 16601703,
+            color: color.ATTENTION,
             footer: {
                 text: "なまごみ",
             },
@@ -182,15 +213,33 @@ module.exports = async (client, message) => {
         message.channel.send({ embeds: [your_block] });
         return;
     }
-    const unknown_command = new MessageEmbed({
+
+    const cmd = client.commands.get(command);
+    let indicateDisplay = () => {
+        const input = command.toLowerCase();
+        for (const [key] of client.commands) {
+            if (key.toLowerCase().startsWith(input)) {
+                return key;
+            }
+        }
+
+        return null;
+    };
+    const indicateCmdName = indicateDisplay(cmd);
+    const unknown_command = new EmbedBuilder({
         title: "コマンドが不明です😉",
-        color: 16601703,
+        color: color.ATTENTION,
+        fields: [
+            {
+                name: "もしかして：",
+                value: "`" + indicateCmdName + "`",
+            },
+        ],
         footer: {
             text: "??? 「そんなコマンドないで」",
         },
         description: "コマンドが存在しません。helpを確認してください",
     });
-    const cmd = client.commands.get(command);
     if (!cmd) {
         message.channel.send({ embeds: [unknown_command] });
         return;

@@ -1,11 +1,10 @@
 {
   "name": "namagomi-bot",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "なまごみぼっと",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
     "lint": "eslint --fix src/**/*.{js,json,md}",
     "format": "prettier --write src/**/*.{js,json,md}",
     "fix": "npm run format && npm run lint",
@@ -28,34 +27,30 @@
   },
   "homepage": "https://github.com/NamagomiNetwork/Namagomi-bot",
   "dependencies": {
-    "@discordjs/opus": "^0.8.0",
-    "@discordjs/voice": "^0.10.0",
-    "aurora-mongo": "^1.1.3",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.7.0",
+    "@eslint/migrate-config": "^1.1.2",
     "axios": "^1.0.0",
     "child_process": "^1.0.2",
-    "cron": "^2.0.0",
     "discord-job-panel": "^1.0.8",
-    "discord.js": "^13.9.0",
+    "discord.js": "^14.15.3",
     "dotenv": "^16.0.1",
-    "ffmpeg-static": "^5.0.2",
     "fs": "^0.0.1-security",
+    "globals": "^15.8.0",
     "log4js": "^6.5.2",
-    "mongoose": "^7.0.0",
+    "mongoose": "^8.0.0",
     "node-cron": "^3.0.1",
     "os": "^0.1.2",
     "path": "^0.12.7",
-    "prettier-eslint": "^15.0.1",
-    "tweetnacl": "^1.0.3",
+    "prettier-eslint": "^16.0.0",
     "util": "^0.12.0",
-    "uuid": "^9.0.0",
-    "ytdl-core": "^4.11.0"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^2.3.0",
-    "ts-migrate": "^0.1.30"
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.0.0",
+    "ts-migrate": "^0.0.0"
   }
 }

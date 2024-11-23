@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const profileSchema = new mongoose.Schema({
     _id: { type: String }, //ユーザーID
@@ -7,6 +7,6 @@ const profileSchema = new mongoose.Schema({
     prefix: { type: String }, //ユーザーprefix
 });
 
-const model = mongoose.model('Profiles', profileSchema);
+const model = mongoose.model("Profiles", profileSchema);
 
 module.exports = model;
