@@ -67,7 +67,7 @@ exports.x_twitter_com = async (client, message) => {
     fetch(replaceURL)
         .then((res) => res.json())
         .then(async (post) => {
-            let embeds = [];
+            const embeds = [];
             let attachment;
             const embed = new EmbedBuilder({
                 author: {

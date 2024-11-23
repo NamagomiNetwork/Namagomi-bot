@@ -37,7 +37,7 @@ exports.discord_com = (client, message) => {
     channelch.messages
         .fetch(message_id)
         .then((msg) => {
-            let embeds = [];
+            const embeds = [];
             const msgpanel = new EmbedBuilder()
                 .setDescription(msg.content || " ")
                 .setTimestamp(msg.createdAt)
