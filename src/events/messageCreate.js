@@ -47,7 +47,6 @@ module.exports = async (client, message) => {
     }
     // URL展開
     url.discord_com(client, message);
-    url.discord_ptb_com(client, message);
     twitter_url.x_twitter_com(client, message);
 
     // とあるメッセージに対して画像を送ったりする
