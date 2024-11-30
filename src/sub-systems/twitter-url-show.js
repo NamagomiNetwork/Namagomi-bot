@@ -12,18 +12,16 @@ async function sendVideoFileFromURL(message, embeds, url) {
 
     const response = await axios.get(url, { responseType: "arraybuffer" });
 
-    // 一時ファイルを保存するディレクトリ
-    const tempDir = path.join(__dirname, "temp");
-    const tempFilePath = path.join(tempDir, "temporary_video.mp4");
-
-    // 一時ディレクトリが存在しない場合は作成
-    if (!fs.existsSync(tempDir)) {
-        fs.mkdirSync(tempDir);
-    }
-
-    fs.writeFileSync(tempFilePath, response.data);
-    const attachment = new AttachmentBuilder(tempFilePath);
+    // OSの一時ディレクトリを基準として、一時ディレクトリを作成
+    const tempDirectoryPrefix = path.join(require('os').tmpdir(), 'Namagomi-bot-temp-');
+    const tempDirectory = fs.mkdtempSync(tempDirectoryPrefix);
+    const tempVideoFilePath = path.join(tempDirectory, "temporary_video.mp4");
+    console.log(tempVideoFilePath)
     try {
+        // 一時ファイルにデータ書き込み
+        fs.writeFileSync(tempVideoFilePath, response.data);
+        const attachment = new AttachmentBuilder(tempVideoFilePath);
+
         // Attachmentとして送信
         await message.channel.send({
             embeds: embeds,
@@ -32,11 +30,26 @@ async function sendVideoFileFromURL(message, embeds, url) {
     } catch (ex) {
         logger.error("ファイル送信エラー", ex);
     } finally {
-        // 一時ファイルを削除
-        fs.unlinkSync(tempFilePath);
+        try{
+            fs.unlinkSync(tempVideoFilePath);
+        }
+        catch(fileDeleteError)
+        {
+            logger.error("一時ファイル削除エラー",fileDeleteError)
+        }
+        try
+        {
+            fs.rmdirSync(tempDirectory);
+        }
+        catch(directoryDeleteError)
+        {
+            logger.error("一時ディレクトリ削除エラー", directoryDeleteError)
+        }
+        // ボットが入力完了の状態へ遷移
         typingPromise;
     }
 }
+
 exports.x_twitter_com = async (client, message) => {
     const postExpansionSettingsData = await postExpansionSettingsModel.findOne({ _id: message.author.id });
     if (!postExpansionSettingsData) {
