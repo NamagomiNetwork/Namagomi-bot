@@ -35,3 +35,11 @@ npm i
 ```shell
 node bot.js
 ```
+
+### Dockerコンテナで起動する
+
+事前に、Dockerの[インストール](https://docs.docker.jp/engine/install/index.html)を行ってください。
+Dockerコンテナは以下のコマンドで起動できます
+```shell
+docker-compose up --build
+```
