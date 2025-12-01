@@ -1,7 +1,49 @@
-const { EmbedBuilder, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const err_embed = require("../utils/error-embed");
 const postExpansionSettingsModel = require("../utils/Schema/PostExpansionSettingsSchema");
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
+
+async function sendVideoFileFromURL(message, embeds, url) {
+    // ボットが入力中の状態へ遷移
+    const typingPromise = message.channel.sendTyping();
+
+    const response = await axios.get(url, { responseType: "arraybuffer" });
+
+    // OSの一時ディレクトリを基準として、一時ディレクトリを作成
+    const tempDirectoryPrefix = path.join(require("os").tmpdir(), "Namagomi-bot-temp-");
+    const tempDirectory = fs.mkdtempSync(tempDirectoryPrefix);
+    const tempVideoFilePath = path.join(tempDirectory, "temporary_video.mp4");
+
+    try {
+        // 一時ファイルにデータ書き込み
+        fs.writeFileSync(tempVideoFilePath, response.data);
+        const attachment = new AttachmentBuilder(tempVideoFilePath);
+
+        // Attachmentとして送信
+        await message.channel.send({
+            embeds: embeds,
+            files: [attachment],
+        });
+    } catch (ex) {
+        logger.error("ファイル送信エラー", ex);
+    } finally {
+        try {
+            fs.unlinkSync(tempVideoFilePath);
+        } catch (fileDeleteError) {
+            logger.error("一時ファイル削除エラー", fileDeleteError);
+        }
+        try {
+            fs.rmdirSync(tempDirectory);
+        } catch (directoryDeleteError) {
+            logger.error("一時ディレクトリ削除エラー", directoryDeleteError);
+        }
+        // ボットが入力完了の状態へ遷移
+        typingPromise;
+    }
+}
 
 exports.x_twitter_com = async (client, message) => {
     const postExpansionSettingsData = await postExpansionSettingsModel.findOne({ _id: message.author.id });
@@ -30,11 +72,10 @@ exports.x_twitter_com = async (client, message) => {
     if (!urlRegexResults) return;
 
     let replaceURL = urlRegexResults[0].replace(/twitter.com|x.com/, "api.vxtwitter.com");
-
     fetch(replaceURL)
         .then((res) => res.json())
-        .then((post) => {
-            let embeds = [];
+        .then(async (post) => {
+            const embeds = [];
             let attachment;
             const embed = new EmbedBuilder({
                 author: {
@@ -70,11 +111,11 @@ exports.x_twitter_com = async (client, message) => {
                 if (attachment === undefined) {
                     message.channel.send({ embeds: embeds });
                 } else {
-                    message.channel.send({ embeds: embeds, files: [new MessageAttachment(attachment)] });
+                    await sendVideoFileFromURL(message, embeds, attachment);
                 }
             }
         });
-    const delayMS = 100;
+    const delayMS = 10;
     setTimeout(() => {
         message.delete();
     }, delayMS);
