@@ -39,7 +39,7 @@
     "globals": "^15.8.0",
     "log4js": "^6.5.2",
     "mongoose": "^8.0.0",
-    "node-cron": "^3.0.1",
+    "node-cron": "^4.0.0",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "prettier-eslint": "^16.0.0",
