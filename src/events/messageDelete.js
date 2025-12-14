@@ -4,7 +4,7 @@ const color = require("../utils/color-code");
 
 module.exports = async (client, message) => { 
     const embed = new EmbedBuilder({
-        title:  "メッセージが削除されました",
+        title: "メッセージが削除されました",
         description: "削除されたメッセージのデータを表示します",
         color: color.NOTIFY,
         fields: [
