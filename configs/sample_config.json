@@ -7,7 +7,7 @@
             "538308521985572867"
         ]
     },
-    "mongodb":  {
+    "mongodb": {
         "url": "mongodb://127.0.0.1:8080/namagomi-bot"
     },
     "debug": {
