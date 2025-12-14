@@ -36,7 +36,7 @@
     "discord.js": "^14.15.3",
     "dotenv": "^17.0.0",
     "fs": "^0.0.1-security",
-    "globals": "^15.8.0",
+    "globals": "^16.0.0",
     "log4js": "^6.5.2",
     "mongoose": "^8.0.0",
     "node-cron": "^4.0.0",
