@@ -15,14 +15,18 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     build-essential \
     libsqlite3-dev \
     pkg-config \
+    gcc \
+    g++ \
+    libtool \
+    automake \
     && sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list \
     && sed -i.bak -e "s%http://security.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list \
     && apt update \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Namagomi-botの動作要件を満たすため、Node.js 22.xx系最新のLTSをインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh \
+# Namagomi-botの動作要件を満たすため、Node.js 20.xx系LTSをインストール
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt update \
     && apt install -y nodejs \
@@ -39,17 +43,11 @@ RUN node -v && npm -v
 WORKDIR /app
 
 # 2. 依存関係ファイルのみをコピーし、npm ciを実行（キャッシュ効率を最大化）
-#    ※ package.jsonがリポジトリルートにあることを前提としています
 COPY package.json package-lock.json ./
 RUN npm ci
 
 # 3. 依存関係のインストール後、残りのアプリケーションファイル全体をコピー
-#    （package.json, package-lock.json は上書きされますが、問題ありません）
 COPY . .
-
-# 4. config.json の処理を明確化
-#    NOTE: config.json がリポジトリに含まれておらず、ビルドコンテキストの /configs ディレクトリに手動で配置されている場合、以下の行のコメントアウトを外してください。
-# COPY ./configs/config.json ./configs/config.json
 
 # Namagomi-bot起動コマンドを実行し、プロセス起動
 CMD ["node", "bot.js"]
