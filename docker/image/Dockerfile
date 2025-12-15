@@ -19,21 +19,23 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && apt clean
 
 # Namagomi-botの動作要件を満たすため、Node.js 22.xx系最新のLTSをインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt install -y nodejs \  
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh \
+    && bash nodesource_setup.sh \
+    && apt update \
+    && apt install -y nodejs \
     && npm install -g npm@latest \
     && apt clean \
+    && rm -f nodesource_setup.sh \
     && rm -rf /var/lib/apt/lists/*
 
 # Node.jsのバージョン確認
 RUN node -v && npm -v
 
-# Namagomi-botのリポジトリを/app配下に持ってくる
-RUN git clone https://github.com/NamagomiNetwork/Namagomi-bot.git /app
+# アプリケーションのリポジトリ全体をコンテナの /app ディレクトリにコピー
+COPY . /app
 
-# NOTE:事前にdocker/full-imageディレクトリ配下に`config.json`を配置する必要がある。
-# Namagomi-botの設定ファイルをコンテナ内にコピー
-COPY ./configs/config.json /app/configs/config.json
+# NOTE:もしconfig.jsonをリポジトリルートに含めていない場合、ここでコピーする
+# COPY ./configs/config.json /app/configs/config.json
 
 # 作業ディレクトリを設定し、依存関係のインストール
 WORKDIR /app
