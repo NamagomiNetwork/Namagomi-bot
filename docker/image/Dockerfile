@@ -11,13 +11,15 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     curl \
     software-properties-common \
     git \
+    python3 \
+    build-essential \
     && sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list \
     && sed -i.bak -e "s%http://security.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list \
     && apt update \
     && apt clean
 
 # Namagomi-botの動作要件を満たすため、Node.js 18.xx系最新のLTSをインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt install -y nodejs \  
     && npm install -g npm@latest \
     && apt clean \
