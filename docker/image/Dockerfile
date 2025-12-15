@@ -31,7 +31,7 @@ RUN git clone https://github.com/NamagomiNetwork/Namagomi-bot.git /app
 
 # NOTE:事前にdocker/full-imageディレクトリ配下に`config.json`を配置する必要がある。
 # Namagomi-botの設定ファイルをコンテナ内にコピー
-COPY /configs/config.json /app/configs/config.json
+COPY ./configs/config.json /app/configs/config.json
 
 # 作業ディレクトリを設定し、依存関係のインストール
 WORKDIR /app
