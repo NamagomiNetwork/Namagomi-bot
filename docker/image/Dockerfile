@@ -42,6 +42,8 @@ RUN node -v && npm -v
 # 1. 作業ディレクトリを設定
 WORKDIR /app
 
+RUN mkdir -p /configs
+
 # 2. 依存関係ファイルのみをコピーし、npm ciを実行（キャッシュ効率を最大化）
 COPY package.json package-lock.json ./
 RUN npm ci
