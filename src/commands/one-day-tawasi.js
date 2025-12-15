@@ -19,7 +19,7 @@ exports.run = async (client, message) => {
             );
             message.channel.send({ embeds: [err_embed.main] });
             return;
-        }
+        };
 
         if (tawasiData.one_day_tawasi_feature.includes("true")) {
             const disenable = new EmbedBuilder({
@@ -60,7 +60,7 @@ exports.run = async (client, message) => {
             await tawasiData.updateOne({
                 one_day_tawasi_feature: true,
             });
-        }
+        };
     } catch (err) {
         logger.error("コマンド実行エラーが発生しました");
         logger.error(err);
@@ -69,8 +69,8 @@ exports.run = async (client, message) => {
             message.channel.send({ embeds: [err_embed.debug] });
             message.channel.send("エラー内容: ");
             message.channel.send("```\n" + err + "\n```");
-        }
-    }
+        };
+    };
 };
 
 exports.name = "one_day_tawasi";

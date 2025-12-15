@@ -7,51 +7,17 @@ const profileModel = require("../utils/Schema/ProfileSchema");
 const { EmbedBuilder } = require("discord.js");
 
 exports.run = async (client, message) => {
-    function ko() {
-        const arr = ["や！", "こばわ"];
-        const random = Math.floor(Math.random() * arr.length);
-        const result_ko = arr[random];
-        message.channel.send({ content: result_ko });
-        return result_ko;
-    }
-
-    function namagomi() {
-        const arr = ["生ゴミ", "黙れゴミ"];
-        const random = Math.floor(Math.random() * arr.length);
-        const result_namagomi = arr[random];
-        message.channel.send({ content: result_namagomi });
-        return result_namagomi;
-    }
-
-    function buta() {
-        const arr = ["黙れ豚", "しばくぞ豚"];
-        const random = Math.floor(Math.random() * arr.length);
-        const result_buta = arr[random];
-        message.channel.send({ content: result_buta });
-        return result_buta;
-    }
-
     try {
+        //プロファイルチェック
         const OmikujiData = await OmikujiModel.findOne({ _id: message.author.id });
         const profileData = await profileModel.findOne({ _id: message.author.id });
-        if (!OmikujiData) {
+        if (!OmikujiData || !profileData) {
             logger.error(
                 "ユーザー名: " +
                     message.author.username +
                     " ユーザーID: " +
                     message.author.id +
                     "のおみくじプロファイルが見つかりませんでした..."
-            );
-            message.channel.send({ embeds: [err_embed.main] });
-            return;
-        }
-        if (!profileData) {
-            logger.error(
-                "ユーザー名: " +
-                    message.author.username +
-                    " ユーザーID: " +
-                    message.author.id +
-                    "のプロファイルが見つかりませんでした..."
             );
             message.channel.send({ embeds: [err_embed.main] });
             return;
@@ -74,36 +40,39 @@ exports.run = async (client, message) => {
                 });
                 message.channel.send({ embeds: [sudeni_1day_true] });
                 return;
-            }
-        }
+            };
+        };
 
-        let result;
-        let unique;
-        //ごみ
+        //変数宣言
+        let result = "";
+        let unique = false;
+        const arrKo = ["や！", "こばわ"];
+        const arrButa = ["黙れ豚", "しばくぞ豚"];
+        const arrNamagomi = ["生ゴミ", "黙れゴミ"];
+
+        //個人用おみくじ        
+        const uniqueOmikuji = arr => {
+            if (Math.random() < 0.5){
+                const randomNum = Math.floor(Math.random() * arr.length);
+                result = arr[randomNum];
+                message.channel.send({ content: result });
+                unique = true;
+                return;
+            };
+        };
         if (message.author.id.includes("538308521985572867")) {
-            let random = Math.floor(Math.random() * 2);
-            if (random == 1) {
-                unique = "true";
-                result = namagomi();
-            }
-        }
-        //ko
-        if (message.author.id.includes("666277504260112429")) {
-            let random = Math.floor(Math.random() * 2);
-            if (random == 1) {
-                unique = "true";
-                result = ko();
-            }
-        }
-        //ぶた
-        if (message.author.id.includes("281902125909409792")) {
-            let random = Math.floor(Math.random() * 2);
-            if (random == 1) {
-                unique = "true";
-                result = buta();
-            }
-        }
-        if (unique != "true") {
+            //namagomi
+            uniqueOmikuji(arrNamagomi);
+        } else if (message.author.id.includes("666277504260112429")) {
+            //ko
+            uniqueOmikuji(arrKo);
+        } else if (message.author.id.includes("281902125909409792")) {
+            //ぶた
+            uniqueOmikuji(arrButa);
+        };
+
+        //通常おみくじ
+        if (!unique) {
             const arr = [
                 "ちょうだいきち",
                 "大吉",
@@ -119,8 +88,8 @@ exports.run = async (client, message) => {
                 "ﾌﾞｯｸﾌﾞｯｸ",
                 "ﾌｸﾞｩ🐡",
             ];
-            let random = Math.floor(Math.random() * arr.length);
-            result = arr[random];
+            let randomNum = Math.floor(Math.random() * arr.length);
+            result = arr[randomNum];
 
             let maeno_data = OmikujiData.mae_no_omikuji_kekka;
             let success = new EmbedBuilder({
@@ -142,12 +111,12 @@ exports.run = async (client, message) => {
                 ],
             });
             message.channel.send({ embeds: [success] });
-        }
+        };
         if (OmikujiData.one_day_omikuji_feature.includes("true")) {
             await OmikujiData.updateOne({
                 one_day_omikuji: true,
             });
-        }
+        };
         await OmikujiData.updateOne({
             mae_no_omikuji_kekka: result,
         });
@@ -159,8 +128,8 @@ exports.run = async (client, message) => {
             message.channel.send({ embeds: [err_embed.debug] });
             message.channel.send("エラー内容: ");
             message.channel.send("```\n" + err + "\n```");
-        }
-    }
+        };
+    };
 };
 
 exports.name = "omikuji";
