@@ -39,7 +39,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh \
 RUN node -v && npm -v
 
 # アプリケーションファイルをコピー
-# ★★★ 最終修正: configディレクトリを作成し、Secret filesのマウントに備える ★★★
 RUN mkdir -p /configs
 
 # 1. 作業ディレクトリを設定
