@@ -9,7 +9,8 @@ const client = new Client({
 		GatewayIntentBits.GuildMessages, 
 		GatewayIntentBits.GuildPresences, 
 		GatewayIntentBits.GuildVoiceStates,
-		GatewayIntentBits.MessageContent
+		GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers
 	] });
 const fs = require("fs");
 client.commands = new Collection();
@@ -20,7 +21,7 @@ if(!fs.existsSync("./configs/config.json") ){
       logger.error("configファイルがありません (config not found) \n ./configs/sample_config.jsonをもとに ./configs/config.json を作成してください")
       logger.error("Error: ENOENT: no such file or directory, open configs/config.json")
       return;
-}
+};
 
 const config = require('./src/utils/get-config.js');
 logger.info("configの読み込みに成功しました")
@@ -29,8 +30,8 @@ logger.info("configの読み込みに成功しました")
 function debug_logger(msg){
   if(config.debug.enable.includes("true")){
     logger.debug(msg)
-  }
-}
+  };
+};
 
 // mongodbに接続
 debug_logger("Connected to mongodb")
@@ -44,7 +45,7 @@ for (const file of events) {
   const event = require(`./src/events/${file}`);
   client.on(eventName, event.bind(null, client));
   debug_logger("Loading Event: " + eventName)
-}
+};
 logger.info("イベントの読み込みに成功しました")
 
 const commands = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
@@ -53,8 +54,8 @@ for (const file of commands) {
   const command = require(`./src/commands/${file}`);
 
   client.commands.set(commandName, command);
-  debug_logger("Loading command: " + commandName)
-}
+  debug_logger("Loading command: " + commandName);
+};
 logger.info("コマンドの読み込みに成功しました")
 
 // Discord login

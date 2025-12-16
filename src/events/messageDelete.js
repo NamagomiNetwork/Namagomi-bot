@@ -23,7 +23,7 @@ module.exports = async (client, message) => {
             {
                 name: "内容",
                 value: message.content
-            },
+            }
         ],
         timestamp: new Date()
     });

@@ -52,8 +52,8 @@ module.exports = (client) => {
             return;
         } else {
             await TawasiModel.updateMany({ tawasi: true }, { $set: { tawasi: false } });
-        }
-    }
+        };
+    };
     async function one_day_kuji_reset() {
         const OmikujiData = await OmikujiModel.find({ one_day_omikuji: true });
         if (!OmikujiData) {
@@ -61,8 +61,8 @@ module.exports = (client) => {
             return;
         } else {
             await OmikujiModel.updateMany({ one_day_omikuji: true }, { $set: { one_day_omikuji: false } });
-        }
-    }
+        };
+    };
     cron.schedule("0 0 0 * * *", () => {
         one_day_tawasi_reset();
         one_day_kuji_reset();
