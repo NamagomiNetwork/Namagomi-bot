@@ -10,7 +10,7 @@ const client = new Client({
 		GatewayIntentBits.GuildPresences, 
 		GatewayIntentBits.GuildVoiceStates,
 		GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers
+        GatewayIntentBits.GuildMembers
 	] });
 const fs = require("fs");
 client.commands = new Collection();
