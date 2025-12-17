@@ -68,4 +68,3 @@ client.login( config.bot.token).catch(err => logger.error(err));
 // ログを表示
 
 require("./src/modules/info-logger")
-
