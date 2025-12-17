@@ -34,7 +34,6 @@ exports.run = (client, message) => {
                 fields: [
                     {
                         name: "commit short hash",
-                        // DiscordAPIError防止のため、空にならないよう連結
                         value: "[" + commit_short_hash + "]" + "(" + repo_url + commit_hash + ")",
                     },
                     {
@@ -56,7 +55,16 @@ exports.run = (client, message) => {
             
             message.channel.send({ embeds: [embed] }).catch((e) => logger.error(e));
         });
+    } catch (err) {
+        logger.error("コマンド実行エラーが発生しました");
+        logger.error(err);
+        message.channel.send({ embeds: [err_embed.main] });
+        if (config.debug.enable.includes("true")) {
+            message.channel.send({ embeds: [err_embed.debug] });
+            message.channel.send("エラー内容: ");
+            message.channel.send("```\n" + err + "\n```");
+        };
+    };
+};
 
 exports.name = "version";
-
-
