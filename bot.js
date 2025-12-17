@@ -49,7 +49,7 @@ for (const file of events) {
     }
 }
   debug_logger("Loading Event: " + eventName)
-}
+
 logger.info("イベントの読み込みに成功しました")
 
 const commands = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
@@ -68,3 +68,4 @@ client.login( config.bot.token).catch(err => logger.error(err));
 // ログを表示
 
 require("./src/modules/info-logger")
+
