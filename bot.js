@@ -2,7 +2,7 @@ const logger = require('./src/modules/logger')
 logger.info('Botを起動中です...')
 
 // モジュールの読み込み
-const { Client, GatewayIntentBits, Collection, EmbedBuilder, Events} = require('discord.js');
+const { Client, GatewayIntentBits, Collection, EmbedBuilder, Events } = require('discord.js');
 const client = new Client({ 
 	intents: [
 		GatewayIntentBits.Guilds, 
@@ -69,6 +69,7 @@ client.login( config.bot.token).catch(err => logger.error(err));
 // ログを表示
 
 require("./src/modules/info-logger")
+
 
 
 
