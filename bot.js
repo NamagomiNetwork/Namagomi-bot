@@ -43,7 +43,7 @@ for (const file of events) {
     const eventName = file.split(".")[0];
     const event = require(`./src/events/${file}`);
 
-    // イベント名の判定と登録（一回のみ実行）
+    // ファイル名が 'clientReady' または 'ready' の場合、Events.ClientReady 定数を使用
     if (eventName === "clientReady" || eventName === "ready") {
         client.once(Events.ClientReady, (...args) => event(client, ...args));
     } else {
@@ -52,7 +52,6 @@ for (const file of events) {
 
     debug_logger("Loading Event: " + eventName);
 }
-logger.info("イベントの読み込みに成功しました")
 
 const commands = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 for (const file of commands) {
@@ -70,5 +69,6 @@ client.login( config.bot.token).catch(err => logger.error(err));
 // ログを表示
 
 require("./src/modules/info-logger")
+
 
 
