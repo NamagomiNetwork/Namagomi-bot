@@ -41,7 +41,7 @@ module.exports = async (client, oldMessage, newMessage) => {
             {
                 name: "メッセージリンク",
                 value: newMessage.url
-            },
+            }
         ],
         timestamp: new Date()
     });

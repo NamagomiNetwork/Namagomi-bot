@@ -12,12 +12,14 @@ const client = new Client({
         GatewayIntentBits.MessageContent
     ] 
 });
+
 const fs = require("fs");
 client.commands = new Collection();
 logger.info("外部モジュールの読み込みが完了しました");
 
 // configあるときだけ読み込む
 if(!fs.existsSync("./configs/config.json") ){
+
     logger.error("configファイルがありません (config not found) \n ./configs/sample_config.jsonをもとに ./configs/config.json を作成してください");
     logger.error("Error: ENOENT: no such file or directory, open configs/config.json");
     return;
@@ -27,7 +29,7 @@ const config = require('./src/utils/get-config.js');
 logger.info("configの読み込みに成功しました");
 
 // ログをデバッグモード時には細かいものを出力する
-function debug_logger(msg){
+function debug_logger(msg){  
     if(config.debug.enable.includes("true")){
         logger.debug(msg);
     }
@@ -53,6 +55,7 @@ for (const file of events) {
 
     debug_logger("Loading Event: " + eventName);
 }
+logger.info("イベントの読み込みに成功しました")
 
 // コマンドファイルの読み込み
 const commands = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));

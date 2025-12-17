@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
                 message.author.id +
                 "の投稿展開設定プロファイル作成に成功しました"
         );
-    }
+    };
     // URL展開
     url.discord_com(client, message);
     twitter_url.x_twitter_com(client, message);
@@ -59,7 +59,7 @@ module.exports = async (client, message) => {
         prefix = config.bot.prefix;
     } else {
         prefix = profileData.prefix;
-    }
+    };
 
     // ここから先prefixを持ってない人以外無視する
     if (message.content.indexOf(prefix) !== 0) return;
@@ -93,7 +93,7 @@ module.exports = async (client, message) => {
                 message.author.id +
                 "のプロファイル作成に成功しました"
         );
-    }
+    };
 
     // ユーザーブロックprofileを作成
     const BlockData = await BlockUserModel.findOne({ _id: message.author.id });
@@ -219,9 +219,8 @@ module.exports = async (client, message) => {
         for (const [key] of client.commands) {
             if (key.toLowerCase().startsWith(input)) {
                 return key;
-            }
-        }
-
+            };
+        };
         return null;
     };
     const indicateCmdName = indicateDisplay(cmd);
@@ -242,7 +241,7 @@ module.exports = async (client, message) => {
     if (!cmd) {
         message.channel.send({ embeds: [unknown_command] });
         return;
-    }
+    };
 
     // こまんどじっこう
     cmd.run(client, message, args);
