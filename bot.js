@@ -42,14 +42,16 @@ const events = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"
 for (const file of events) {
     const eventName = file.split(".")[0];
     const event = require(`./src/events/${file}`);
-    if (eventName === "clientReady") {
-        client.once(require('discord.js').Events.ClientReady, (...args) => event(client, ...args));
+
+    // イベント名の判定と登録（一回のみ実行）
+    if (eventName === "clientReady" || eventName === "ready") {
+        client.once(Events.ClientReady, (...args) => event(client, ...args));
     } else {
         client.on(eventName, event.bind(null, client));
     }
-}
-  debug_logger("Loading Event: " + eventName)
 
+    debug_logger("Loading Event: " + eventName);
+}
 logger.info("イベントの読み込みに成功しました")
 
 const commands = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
@@ -68,3 +70,4 @@ client.login( config.bot.token).catch(err => logger.error(err));
 // ログを表示
 
 require("./src/modules/info-logger")
+
