@@ -11,20 +11,18 @@ exports.run = (client, message) => {
     try {
         // commit情報を取得
         child.exec("git log -n 1 --pretty=format:%H,%h,%s", (err, res) => {
-            let result;
-            let commit_hash;
-            let commit_short_hash;
-            let commit_message;
+            let result = [];
+            let commit_hash = "取得エラー";
+            let commit_short_hash = "取得エラー";
+            let commit_message = "取得エラーが発生しました...";
 
             if (err) {
-                for (let i = 0; i < 3; i++) {
-                    result[i] = "取得エラーが発生しました...";
-                }
-            } else {
+                logger.error(err);
+            } else if (res) {
                 result = res.toString().split(",");
-                commit_hash = result[0];
-                commit_short_hash = result[1];
-                commit_message = result[2];
+                commit_hash = result[0] || "unknown";
+                commit_short_hash = result[1] || "unknown";
+                commit_message = result[2] || "取得エラーが発生しました...";
             }
 
             const embed = new EmbedBuilder({
@@ -44,7 +42,7 @@ exports.run = (client, message) => {
                     },
                     {
                         name: "bot-version",
-                        value: pkg.version,
+                        value: pkg.version || "unknown",
                         inline: true,
                     },
                     {
@@ -54,7 +52,8 @@ exports.run = (client, message) => {
                     },
                 ],
             });
-            message.channel.send({ embeds: [embed] });
+            
+            message.channel.send({ embeds: [embed] }).catch((e) => logger.error(e));
         });
     } catch (err) {
         logger.error("コマンド実行エラーが発生しました");
