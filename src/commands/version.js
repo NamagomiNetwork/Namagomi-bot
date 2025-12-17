@@ -11,7 +11,7 @@ exports.run = (client, message) => {
     try {
         // commit情報を取得
         child.exec("git log -n 1 --pretty=format:%H,%h,%s", (err, res) => {
-            let result;
+            let result = [];
             let commit_hash;
             let commit_short_hash;
             let commit_message;
@@ -69,3 +69,4 @@ exports.run = (client, message) => {
 };
 
 exports.name = "version";
+
