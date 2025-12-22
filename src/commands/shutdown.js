@@ -2,8 +2,8 @@ const { EmbedBuilder } = require("discord.js");
 const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const check_admin = require("../utils/check-admin");
-const err_embed = require("../utils/error-embed");
 const color = require("../utils/color-code");
+const sendErrorMessage = require("../modules/error-message");
 
 exports.run = (client, message) => {
     async function send_msg(data) {
@@ -29,14 +29,7 @@ exports.run = (client, message) => {
             send_msg(data);
         }
     } catch (err) {
-        logger.error("コマンド実行エラーが発生しました");
-        logger.error(err);
-        message.channel.send({ embeds: [err_embed.main] });
-        if (config.debug.enable.includes("true")) {
-            message.channel.send({ embeds: [err_embed.debug] });
-            message.channel.send("エラー内容: ");
-            message.channel.send("```\n" + err + "\n```");
-        }
+        sendErrorMessage(err, message);
     }
 };
 
