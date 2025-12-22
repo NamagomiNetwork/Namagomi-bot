@@ -11,31 +11,45 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     curl \
     software-properties-common \
     git \
+    python3 \
+    build-essential \
+    libsqlite3-dev \
+    pkg-config \
+    gcc \
+    g++ \
+    libtool \
+    automake \
     && sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list \
     && sed -i.bak -e "s%http://security.ubuntu.com/ubuntu/%http://jp.archive.ubuntu.com/ubuntu/%g" /etc/apt/sources.list \
     && apt update \
-    && apt clean
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Namagomi-botの動作要件を満たすため、Node.js 18.xx系最新のLTSをインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt install -y nodejs \  
+# Namagomi-botの動作要件を満たすため、Node.js 20.xx系LTSをインストール
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh \
+    && bash nodesource_setup.sh \
+    && apt update \
+    && apt install -y nodejs \
     && npm install -g npm@latest \
     && apt clean \
+    && rm -f nodesource_setup.sh \
     && rm -rf /var/lib/apt/lists/*
 
 # Node.jsのバージョン確認
 RUN node -v && npm -v
 
-# Namagomi-botのリポジトリを/app配下に持ってくる
-RUN git clone https://github.com/NamagomiNetwork/Namagomi-bot.git /app
+# アプリケーションファイルをコピー
+RUN mkdir -p /configs
 
-# NOTE:事前にdocker/full-imageディレクトリ配下に`config.json`を配置する必要がある。
-# Namagomi-botの設定ファイルをコンテナ内にコピー
-COPY ./configs/config.json /app/configs/config.json
-
-# 作業ディレクトリを設定し、依存関係のインストール
+# 1. 作業ディレクトリを設定
 WORKDIR /app
+
+# 2. 依存関係ファイルのみをコピーし、npm ciを実行（キャッシュ効率を最大化）
+COPY package.json package-lock.json ./
 RUN npm ci
+
+# 3. 依存関係のインストール後、残りのアプリケーションファイル全体をコピー
+COPY . .
 
 # Namagomi-bot起動コマンドを実行し、プロセス起動
 CMD ["node", "bot.js"]
