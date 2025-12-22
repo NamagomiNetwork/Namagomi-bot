@@ -4,8 +4,8 @@ const check_admin = require("../utils/check-admin");
 const profileModel = require("../utils/Schema/ProfileSchema");
 const { EmbedBuilder } = require("discord.js");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
-const err_embed = require("../utils/error-embed");
 const color = require("../utils/color-code");
+const sendErrorMessage = require("../modules/error-message");
 
 exports.run = async (client, message) => {
     try {
@@ -106,14 +106,7 @@ exports.run = async (client, message) => {
         });
         message.channel.send({ embeds: [data] });
     } catch (err) {
-        logger.error("コマンド実行エラーが発生しました");
-        logger.error(err);
-        message.channel.send({ embeds: [err_embed.main] });
-        if (config.debug.enable.includes("true")) {
-            message.channel.send({ embeds: [err_embed.debug] });
-            message.channel.send("エラー内容: ");
-            message.channel.send("```\n" + err + "\n```");
-        }
+        sendErrorMessage(err, message);
     }
 };
 
