@@ -1,7 +1,5 @@
-const logger = require("../modules/logger");
-const err_embed = require("../utils/error-embed");
-const config = require("../utils/get-config");
 const color = require("../utils/color-code");
+const sendErrorMessage = require("../modules/error-message");
 
 exports.run = (client, message, args) => {
     try {
@@ -58,14 +56,7 @@ exports.run = (client, message, args) => {
             ],
         });
     } catch (err) {
-        logger.error("コマンド実行エラーが発生しました");
-        logger.error(err);
-        message.channel.send({ embeds: [err_embed.main] });
-        if (config.debug.enable.includes("true")) {
-            message.channel.send({ embeds: [err_embed.debug] });
-            message.channel.send("エラー内容: ");
-            message.channel.send("```\n" + err + "\n```");
-        }
+        sendErrorMessage(err, message);
     }
 };
 
