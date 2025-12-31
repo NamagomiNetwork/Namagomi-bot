@@ -7,7 +7,7 @@ const sendErrorMessage = require("../modules/error-message");
 
 exports.run = async (client, message) => {
     try {
-        const args = message.content.split("/[-/\s]/").slice(1).map(Number);
+        const args = message.content.split(" ").slice(1).split("/").map(Number);
 
         // ユーザーIDが指定されていない場合
         const err_argument = new EmbedBuilder({
