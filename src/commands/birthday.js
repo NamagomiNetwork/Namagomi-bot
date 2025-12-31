@@ -25,7 +25,7 @@ exports.run = async (client, message) => {
                 },
                 {
                     name: "めっせーじ: ",
-                    value: "`" + message + "`",
+                    value: "`" + message.content + "`",
                 },
                 {
                     name: "分けた後: ",
