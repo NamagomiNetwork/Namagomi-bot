@@ -87,7 +87,7 @@ exports.run = async (client, message) => {
                 },
                 {
                     name: "誕生日: ",
-                    value: "`" + ProfileData.birthday_month + "/" + ProfileData.birthday_day + "`",
+                    value: "`" + month + "/" + day + "`",
                     inline: true,
                 },
             ],
