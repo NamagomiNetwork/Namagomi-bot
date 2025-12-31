@@ -8,8 +8,6 @@ const sendErrorMessage = require("../modules/error-message");
 exports.run = async (client, message) => {
     try {
         const args = message.content.split("/[-/\s]/").slice(1).map(Number);
-        const month = args[0];
-        const day = args[1];
 
         // ユーザーIDが指定されていない場合
         const err_argument = new EmbedBuilder({
@@ -32,6 +30,9 @@ exports.run = async (client, message) => {
             message.channel.send({ embeds: [err_argument] });
             return;
         }
+
+        const month = args[1];
+        const day = args[2];
 
         // profileの確認
         const ProfileData = await ProfileModel.findOne({ _id: message.author._id });
