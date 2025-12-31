@@ -25,11 +25,11 @@ exports.run = async (client, message) => {
                 },
                 {
                     name: "めっせーじ: ",
-                    value: message,
+                    value: "`" + message + "`",
                 },
                 {
                     name: "分けた後: ",
-                    value: args.join(","),
+                    value: "`" + args.join(",") + "`",
                 },
             ],
         });
@@ -70,7 +70,7 @@ exports.run = async (client, message) => {
             fields: [
                 {
                     name: "ユーザーID: ",
-                    value: "`" + input + "`",
+                    value: "`" + message.author._id + "`",
                     inline: true,
                 },
                 {
