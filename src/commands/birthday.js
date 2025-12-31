@@ -46,8 +46,8 @@ exports.run = async (client, message) => {
             return;
         }
 
-        const month = args[0];
-        const day = args[1];
+        const month = birthday[0];
+        const day = birthday[1];
 
         // profileの確認
         const ProfileData = await ProfileModel.findOne({ _id: message.author.id });
