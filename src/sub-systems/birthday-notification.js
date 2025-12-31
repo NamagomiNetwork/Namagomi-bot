@@ -19,7 +19,7 @@ module.exports = async (client) => {
         const embed = new EmbedBuilder({
             title: "誕生日通知",
             color: color.CMD_RUN,
-            description: ":tada:今日は" + "<@&" + birthdayProfile._id + ">" + "の誕生日です:tada:",
+            description: ":tada:今日は" + "<@" + birthdayProfile._id + ">" + "の誕生日です:tada:",
         });
 
         // const mention = "<@&" + config.birthday_notification.role + ">";
