@@ -50,12 +50,12 @@ exports.run = async (client, message) => {
         const day = args[1];
 
         // profileの確認
-        const ProfileData = await ProfileModel.findOne({ _id: message.author._id });
+        const ProfileData = await ProfileModel.findOne({ _id: message.author.id });
         if (!ProfileData) {
             message.channel.send("エラー: ユーザープロファイルが見つかりませんでした");
             logger.error(
                 "ユーザーID: " +
-                    message.author._id +
+                    message.author.id +
                     " のプロファイルを確認しようとしましたがプロファイルデータがありませんでした..."
             );
             return;
@@ -77,7 +77,7 @@ exports.run = async (client, message) => {
             fields: [
                 {
                     name: "ユーザーID: ",
-                    value: "`" + message.author._id + "`",
+                    value: "`" + message.author.id + "`",
                     inline: true,
                 },
                 {
