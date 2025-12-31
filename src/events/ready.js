@@ -3,6 +3,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const seichi_vote = require("../sub-systems/seichi-vote");
 const seichi_achievement = require("../sub-systems/seichi-achievement");
+const birthday_notification = require("../sub-systems/birthday-notification")
 const set_seichi_achievement = require("../utils/set-achievements");
 const kagawa_notice = require("../sub-systems/kagawa-notification");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
@@ -43,6 +44,11 @@ module.exports = (client) => {
     });
     cron.schedule("0 20 19 * * 0,6", () => {
         kagawa_notice(client);
+    });
+
+    // 誕生日通知
+    cron.schedule("0 0 0 * * *", () => {
+        birthday_notification(client);
     });
 
     async function one_day_tawasi_reset() {
