@@ -7,7 +7,7 @@ const sendErrorMessage = require("../modules/error-message");
 
 exports.run = async (client, message) => {
     try {
-        const args = message.content.split(" ").slice(1).split("/").map(Number);
+        const args = message.content.split(" ").slice(1);
 
         // ユーザーIDが指定されていない場合
         const err_argument = new EmbedBuilder({
@@ -34,7 +34,14 @@ exports.run = async (client, message) => {
             ],
         });
 
-        if (args.length !== 2) {
+        if (args.length !== 1) {
+            message.channel.send({ embeds: [err_argument] });
+            return;
+        }
+
+        const birthday = args[0].split("/").map(Number);
+
+        if (birthday.length !== 2) {
             message.channel.send({ embeds: [err_argument] });
             return;
         }
