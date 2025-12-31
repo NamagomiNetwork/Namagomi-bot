@@ -5,6 +5,7 @@ const ATTENTION_COLOR = 0xfd5267; //明るい赤系の色(16601703)
 const ERROR_COLOR = 0xfd5267; //明るい赤系の色(16601703)
 const DETAIL_COLOR = 0xffff12; //あざやかな黄系の色(16776978)
 const BLOCKED_NOTIFY_COLOR = 0x3acad6; //強い青系の色(3853014)
+const BIRTHDAY_NOTIFY_COLOR = 0xffb6c1; //薄い赤系の色(16758465)
 
 const CMD_RUN_COLOR = 0x50e3c2; //強い青緑系の色(5301186)
 
@@ -16,6 +17,7 @@ module.exports = {
     DETAIL: DETAIL_COLOR,
     CMD_RUN: CMD_RUN_COLOR,
     BLOCKED_NOTIFY: BLOCKED_NOTIFY_COLOR,
+    BIRTHDAY_NOTIFY: BIRTHDAY_NOTIFY_COLOR,
 };
 // endregion
 

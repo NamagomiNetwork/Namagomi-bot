@@ -74,6 +74,8 @@ module.exports = async (client, message) => {
             name: message.author.username,
             avatar: message.author.displayAvatarURL({ format: "png" }),
             prefix: config.bot.prefix,
+            birthday_month: 0,
+            birhtday_day: 0,
         });
         profile.save().catch((error) => {
             logger.error(
