@@ -113,7 +113,7 @@ exports.run = async (client, message) => {
                 ],
             });
             message.channel.send({ embeds: [success] });
-        };
+        //};
         if (OmikujiData.one_day_omikuji_feature.includes("true")) {
             await OmikujiData.updateOne({
                 one_day_omikuji: true,
