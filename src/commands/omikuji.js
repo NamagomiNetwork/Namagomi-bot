@@ -44,6 +44,7 @@ exports.run = async (client, message) => {
 
         //変数宣言
         let result = "";
+        /*
         let unique = false;
         const arrKo = ["や！", "こばわ"];
         const arrButa = ["黙れ豚", "しばくぞ豚"];
@@ -89,7 +90,9 @@ exports.run = async (client, message) => {
             ];
             let randomNum = Math.floor(Math.random() * arr.length);
             result = arr[randomNum];
+            */
 
+            result = "ちょうだいきち";
             let maeno_data = OmikujiData.mae_no_omikuji_kekka;
             let success = new EmbedBuilder({
                 title: "おみくじ",
