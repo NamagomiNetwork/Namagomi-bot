@@ -23,14 +23,6 @@ exports.run = async (client, message) => {
                     name: "実行例: ",
                     value: "`birthday 07/30`",
                 },
-                {
-                    name: "めっせーじ: ",
-                    value: "`" + message.content + "`",
-                },
-                {
-                    name: "分けた後: ",
-                    value: "`" + args.join(",") + "`",
-                },
             ],
         });
 
