@@ -30,7 +30,7 @@ module.exports = async (client) => {
             description: `:tada:今日は <@${birthdayProfile._id}>の誕生日です:tada:`,
         });
 
-        const channel = open_birthday_channel(client, channelName);
+        const channel = await open_birthday_channel(client, channelName);
 
         if(!channel) {
             continue;
@@ -93,7 +93,7 @@ async function archive_birthday_channel(client) {
             });
         }
 
-        birthday_channels.clear();
+        birthday_channels.length = 0;
     } catch (err) {
         logger.error(err)
     }
