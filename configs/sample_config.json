@@ -40,5 +40,10 @@
         "channels": [
             "955408172514942976"
         ]
+    },
+    "birthday": {
+        "channel_category": "1234567890",
+        "archive_category": "1234567890",
+        "role": "1234567890"
     }
 }
