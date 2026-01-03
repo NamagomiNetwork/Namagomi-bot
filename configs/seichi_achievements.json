@@ -1,18 +1,18 @@
 {
   "spring_equinox_day": {
-    "date": "3/21",
+    "date": "3/20",
     "_comment": "9012 春分の日"
   },
   "mothers_day": {
-    "date": "5/12",
+    "date": "5/10",
     "_comment": "9020 母の日"
   },
   "fathers_day": {
-    "date": "6/18",
+    "date": "6/21",
     "_comment": "9023 父の日"
   },
   "harvest_moon": {
-    "date": "9/29",
+    "date": "9/25",
     "_comment": "9037 中秋の名月"
   }
 }
