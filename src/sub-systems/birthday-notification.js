@@ -2,7 +2,7 @@ const { ChannelType, EmbedBuilder } = require("discord.js");
 const ProfileModel = require("../utils/Schema/ProfileSchema");
 const color = require("../utils/color-code");
 const config = require("../utils/get-config");
-const sendErrorMessage = require("../modules/error-message");
+const logger = require("../modules/logger");
 
 const birthday_channels = [];
 
@@ -45,12 +45,6 @@ module.exports = async (client) => {
 
 async function open_birthday_channel(client, channelName) {
     try {
-        const message = new EmbedBuilder({
-            title: "誕生日ルーチン",
-            description: "誕生日チャンネルの作成に失敗しました",
-            color: color.ERROR,
-        });
-
         const categoryId = config.birthday.channel_category;
         if (!categoryId) {
             throw new Error("channel_category not set.");
@@ -71,7 +65,7 @@ async function open_birthday_channel(client, channelName) {
 
         return channel;
     } catch (err) {
-        sendErrorMessage(err, message);
+        logger.error(err);
         return null;
     }
 }
@@ -79,12 +73,6 @@ async function open_birthday_channel(client, channelName) {
 // 既にある誕生日チャンネルをArchive-birthdayに移動し、書き込み権限を削除する。
 async function archive_birthday_channel(client) {
     try {
-        const message = new EmbedBuilder({
-            title: "誕生日ルーチン",
-            description: "誕生日チャンネルのアーカイブに失敗しました",
-            color: color.ERROR,
-        });
-
         const archiveCategoryId = config.birthday.archive_category;
         if (!archiveCategoryId) {
             throw new Error("archive_category not set.");
@@ -110,7 +98,7 @@ async function archive_birthday_channel(client) {
 
         birthday_channels.clear();
     } catch (err) {
-        sendErrorMessage(err, message);
+        logger.error(err)
     }
 }
 
