@@ -42,8 +42,7 @@
         ]
     },
     "birthday": {
-        "channel_category": "1234567890",
-        "archive_category": "1234567890",
-        "role": "1234567890"
+        "channel_category": null,
+        "archive_category": "1066324287486697472"
     }
 }

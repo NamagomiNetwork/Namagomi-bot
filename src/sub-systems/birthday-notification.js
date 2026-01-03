@@ -24,8 +24,6 @@ module.exports = async (client) => {
     for (const birthdayProfile of birthdaysToday) {
         const channelName = birthdayProfile.name + "たん";
 
-        const mention = `<@&${config.birthday.role}>`;
-
         const embed = new EmbedBuilder({
             title: "誕生日通知",
             color: color.CMD_RUN,
@@ -38,7 +36,6 @@ module.exports = async (client) => {
             continue;
         }
 
-        channel.send(mention);
         channel.send({ embeds: [embed] });
     };
 }

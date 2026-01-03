@@ -1,5 +1,3 @@
-const logger = require("../modules/logger");
-const config = require("../utils/get-config");
 const ProfileModel = require("../utils/Schema/ProfileSchema");
 const color = require("../utils/color-code");
 const { EmbedBuilder } = require("discord.js");
