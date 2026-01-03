@@ -98,6 +98,10 @@ const page3 = new EmbedBuilder({
             value: "Twitter投稿展開機能を設定します(設定は設定を行ったユーザーのみに)",
         },
         {
+            name: "`birthday 【誕生日(mm/dd)】`",
+            value: "自分の誕生日を設定します(例: birthday 01/23)",
+        },
+        {
             name: "次のページを表示する",
             value: "`help-4`",
         },
