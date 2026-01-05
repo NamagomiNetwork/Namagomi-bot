@@ -25,7 +25,7 @@ module.exports = async (/** @type {Client} */ client) => {
 
     const guild = client.guilds.cache.get(config.guild);
 
-    await archive_birthday_channel(client);
+    await archive_birthday_channel(client, guild);
 
     for (const birthdayProfile of birthdaysToday) {
         const member = await guild.members.fetch(birthdayProfile._id);
@@ -82,10 +82,13 @@ async function open_birthday_channel(client, guild, channelName) {
 /**
  * 既にある誕生日チャンネルをArchive-birthdayに移動し、書き込み権限を削除する。
  * @param {Client} client
+ * @param {Guild} guild
  */
-async function archive_birthday_channel(client) {
+async function archive_birthday_channel(client, guild) {
     try {
         const archiveCategoryId = config.birthday.archive_category;
+        const roleId = config.birthday.human_role;
+        const role = guild.roles.cache.get(roleId);
 
         const channels = await Promise.all(birthday_channels);
         for (const channel of channels) {
@@ -93,7 +96,7 @@ async function archive_birthday_channel(client) {
                 continue;
             }
             await channel.setParent(archiveCategoryId);
-            await channel.permissionOverwrites.edit(channel.guild.roles.everyone, {
+            await channel.permissionOverwrites.edit(role, {
                 SendMessages: false,
             });
         }
