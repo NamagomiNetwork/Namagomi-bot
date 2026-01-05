@@ -67,7 +67,6 @@ async function open_birthday_channel(client, guild, channelName) {
 
         await channel.permissionOverwrites.edit(role, {
                 ViewChannel: true,
-                SendMessages: true,
             });
 
         birthday_channels.push(channel)
