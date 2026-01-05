@@ -2,6 +2,7 @@ const ProfileModel = require("../utils/Schema/ProfileSchema");
 const color = require("../utils/color-code");
 const { EmbedBuilder } = require("discord.js");
 const sendErrorMessage = require("../modules/error-message");
+const logger = require("../modules/logger");
 
 exports.run = async (client, message) => {
     try {
