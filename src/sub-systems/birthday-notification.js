@@ -1,12 +1,16 @@
-const { ChannelType, EmbedBuilder } = require("discord.js");
+const { ChannelType, EmbedBuilder, Client, Guild, TextChannel } = require("discord.js");
 const ProfileModel = require("../utils/Schema/ProfileSchema");
 const color = require("../utils/color-code");
 const config = require("../utils/get-config");
 const logger = require("../modules/logger");
 
+/** 
+ * 後でアーカイブするためにチャンネルを保存しておく。
+ * @type {TextChannel[]} 
+ * */
 const birthday_channels = [];
 
-module.exports = async (client) => {
+module.exports = async (/** @type {Client} */ client) => {
     const now = new Date(
         new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" })
     );
@@ -19,10 +23,13 @@ module.exports = async (client) => {
         birthday_day: day,
     });
 
+    const guild = client.guilds.cache.get(config.guild);
+
     await archive_birthday_channel(client);
 
     for (const birthdayProfile of birthdaysToday) {
-        const channelName = birthdayProfile.name + "たん";
+        const member = await guild.members.fetch(birthdayProfile._id);
+        const channelName = member.displayName + "たん";
 
         const embed = new EmbedBuilder({
             title: "誕生日通知",
@@ -30,7 +37,7 @@ module.exports = async (client) => {
             description: `:tada:今日は <@${birthdayProfile._id}>の誕生日です:tada:`,
         });
 
-        const channel = await open_birthday_channel(client, channelName);
+        const channel = await open_birthday_channel(client, guild, channelName);
 
         if(!channel) {
             continue;
@@ -40,22 +47,20 @@ module.exports = async (client) => {
     };
 }
 
-async function open_birthday_channel(client, channelName) {
+/**
+ * 誕生日チャンネルを作成する。
+ * @param {Client} client
+ * @param {Guild} guild
+ * @param {string} channelName
+ */
+async function open_birthday_channel(client, guild, channelName) {
     try {
         const categoryId = config.birthday.channel_category;
-        if (!categoryId) {
-            throw new Error("channel_category not set.");
-        }
 
-        const category = await client.channels.fetch(categoryId);
-        if (category.type !== ChannelType.GuildCategory) {
-            throw new Error("channel_category must be GuildCategory. " + category.type + "is set.");
-        }
-
-        const channel = await category.guild.channels.create({
+        const channel = await guild.channels.create({
             name: channelName,
             type: ChannelType.GuildText,
-            parent: category.id,
+            parent: categoryId,
         });
 
         birthday_channels.push(channel)
@@ -67,27 +72,20 @@ async function open_birthday_channel(client, channelName) {
     }
 }
 
-// 既にある誕生日チャンネルをArchive-birthdayに移動し、書き込み権限を削除する。
+/**
+ * 既にある誕生日チャンネルをArchive-birthdayに移動し、書き込み権限を削除する。
+ * @param {Client} client
+ */
 async function archive_birthday_channel(client) {
     try {
         const archiveCategoryId = config.birthday.archive_category;
-        if (!archiveCategoryId) {
-            throw new Error("archive_category not set.");
-        }
-
-        const archiveCategory = await client.channels.fetch(archiveCategoryId);
-        if (archiveCategory.type !== ChannelType.GuildCategory) {
-            throw new Error(
-                "archive_category must be GuildCategory. " + archiveCategory.type + " is set."
-            );
-        }
 
         const channels = await Promise.all(birthday_channels);
         for (const channel of channels) {
             if (!channel) {
                 continue;
             }
-            await channel.setParent(archiveCategory.id);
+            await channel.setParent(archiveCategoryId);
             await channel.permissionOverwrites.edit(channel.guild.roles.everyone, {
                 SendMessages: false,
             });
