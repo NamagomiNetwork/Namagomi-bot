@@ -56,12 +56,19 @@ module.exports = async (/** @type {Client} */ client) => {
 async function open_birthday_channel(client, guild, channelName) {
     try {
         const categoryId = config.birthday.channel_category;
+        const roleId = config.birthday.human_role;
+        const role = guild.roles.cache.get(roleId);
 
         const channel = await guild.channels.create({
             name: channelName,
             type: ChannelType.GuildText,
             parent: categoryId,
         });
+
+        await channel.permissionOverwrites.edit(role, {
+                ViewChannel: true,
+                SendMessages: true,
+            });
 
         birthday_channels.push(channel)
 
