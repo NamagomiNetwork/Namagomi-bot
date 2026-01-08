@@ -1,9 +1,43 @@
 const ProfileModel = require("../utils/Schema/ProfileSchema");
 const color = require("../utils/color-code");
-const { EmbedBuilder } = require("discord.js");
+const { parse, isValid, format } = require("date-fns");
+const { EmbedBuilder, Client, Message, TextChannel } = require("discord.js");
 const sendErrorMessage = require("../modules/error-message");
 const logger = require("../modules/logger");
 
+/**
+ * 
+ * @param {string} input ⭕️ "01/23", ❌️ "99/99"
+ * @returns {{month: number, day: number}} null if not valid
+ */
+const validate_date = (input) => {
+    if (typeof input !== "string") {
+        return null;
+    }
+
+    const match = input.trim().match(/^(\d{1,2})\/(\d{1,2})$/);
+    if (!match) {
+        return null;
+    }
+
+    const month = Number(match[1]);
+    const day = Number(match[2]);
+    const normalized = `${month}/${day}`;
+    const parsed = parse(normalized, "M/d", new Date(2000, 0, 1));
+
+    if (!isValid(parsed) || format(parsed, "M/d") !== normalized) {
+        return null;
+    }
+
+    return { month, day };
+};
+
+/**
+ * 
+ * @param {Client} client 
+ * @param {Message} message 
+ * @returns 
+ */
 exports.run = async (client, message) => {
     try {
         const args = message.content.split(" ").slice(1);
@@ -24,21 +58,28 @@ exports.run = async (client, message) => {
                 },
             ],
         });
+        
+        /** @type {TextChannel} */
+        let channel = null;
+
+        if (message.channel instanceof TextChannel) {
+            channel = message.channel;
+        } else {
+            logger.warn(`This command not available on this channel. type ${message.channel.type} id: ${message.channel.id}`);
+            return;
+        }
 
         if (args.length !== 1) {
-            message.channel.send({ embeds: [err_argument] });
+            channel.send({ embeds: [err_argument] });
             return;
         }
 
-        const birthday = args[0].split("/").map(Number);
-
-        if (birthday.length !== 2) {
-            message.channel.send({ embeds: [err_argument] });
+        const parsedBirthday = validate_date(args[0]);
+        if (!parsedBirthday) {
+            channel.send({ embeds: [err_argument] });
             return;
         }
-
-        const month = birthday[0];
-        const day = birthday[1];
+        const { month, day } = parsedBirthday;
 
         // profileの確認
         const ProfileData = await ProfileModel.findOne({ _id: message.author.id });
