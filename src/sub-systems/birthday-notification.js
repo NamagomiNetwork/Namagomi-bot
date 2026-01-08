@@ -34,7 +34,7 @@ module.exports = async (/** @type {Client} */ client) => {
 
         const channel = await open_birthday_channel(client, guild, channelName);
 
-        if(!channel) {
+        if (!channel) {
             continue;
         }
 
@@ -61,8 +61,8 @@ async function open_birthday_channel(client, guild, channelName) {
         });
 
         await channel.permissionOverwrites.edit(role, {
-                ViewChannel: true,
-            });
+            ViewChannel: true,
+        });
 
         BirthdayChannelModel.create({ channelId: channel.id });
 
@@ -101,8 +101,31 @@ async function archive_birthday_channel(client, guild) {
         }
 
         await BirthdayChannelModel.deleteMany({});
+
+        // アーカイブカテゴリーのチャンネル上限が近づいたら通知
+        const archiveCategory = await guild.channels.fetch(archiveCategoryId);
+
+        if (archiveCategory?.type === ChannelType.GuildCategory) {
+            const childrenCount = archiveCategory.children.cache.size;
+            if (childrenCount >= 45) {
+                const syslogChannel = guild.channels.cache.get(config.syslog.channel);
+                if (syslogChannel?.type === ChannelType.GuildText) {
+                    const /** @type {string[]} */ owners = config.bot.owner;
+                    const mentions = owners
+                        .map((ownerId) => `<@${ownerId}>`)
+                        .join(" ");
+
+                    await syslogChannel.send(
+                        `${mentions} :warning::warning::warning:アーカイブカテゴリ内のチャンネル数が${childrenCount}件あります:warning::warning::warning:`
+                    );
+                }
+            }
+        } else {
+            logger.warn(
+                `Archive category is not a GuildCategory. type: ${archiveCategory?.type}, id: ${archiveCategory?.id}`
+            );
+        }
     } catch (err) {
         logger.error(err)
     }
 }
-
