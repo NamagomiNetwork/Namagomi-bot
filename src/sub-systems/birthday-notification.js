@@ -100,7 +100,7 @@ async function archive_birthday_channel(client, guild) {
             }
         }
 
-        birthday_channels.length = 0;
+        await BirthdayChannelModel.deleteMany({});
     } catch (err) {
         logger.error(err)
     }
