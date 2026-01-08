@@ -96,7 +96,7 @@ async function archive_birthday_channel(client, guild) {
                     SendMessages: false,
                 });
             } else {
-                logger.warn(`Non-GuildText channels are mixed into the BirthdayChannel schema: ${channel?.type} ${channel?.id}`);
+                logger.warn(`Non-GuildText channels are mixed into the BirthdayChannel schema. type: ${channel?.type}, id: ${channel?.id}`);
             }
         }
 
