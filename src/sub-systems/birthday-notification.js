@@ -1,14 +1,9 @@
 const { ChannelType, EmbedBuilder, Client, Guild, TextChannel } = require("discord.js");
 const ProfileModel = require("../utils/Schema/ProfileSchema");
+const BirthdayChannelModel = require("../utils/Schema/BirthdayChannelSchema");
 const color = require("../utils/color-code");
 const config = require("../utils/get-config");
 const logger = require("../modules/logger");
-
-/** 
- * 後でアーカイブするためにチャンネルを保存しておく。
- * @type {TextChannel[]} 
- * */
-const birthday_channels = [];
 
 module.exports = async (/** @type {Client} */ client) => {
     const now = new Date(
@@ -69,7 +64,7 @@ async function open_birthday_channel(client, guild, channelName) {
                 ViewChannel: true,
             });
 
-        birthday_channels.push(channel)
+        BirthdayChannelModel.create({ channelId: channel.id });
 
         return channel;
     } catch (err) {
@@ -88,16 +83,21 @@ async function archive_birthday_channel(client, guild) {
         const archiveCategoryId = config.birthday.archive_category;
         const roleId = config.birthday.human_role;
         const role = guild.roles.cache.get(roleId);
+        const channelIds = await BirthdayChannelModel.distinct("channelId");
 
-        const channels = await Promise.all(birthday_channels);
-        for (const channel of channels) {
+        for (const channelId of channelIds) {
+            const channel = await guild.channels.fetch(channelId);
             if (!channel) {
                 continue;
             }
-            await channel.setParent(archiveCategoryId);
-            await channel.permissionOverwrites.edit(role, {
-                SendMessages: false,
-            });
+            if (channel?.type === ChannelType.GuildText) {
+                await channel.setParent(archiveCategoryId);
+                await channel.permissionOverwrites.edit(role, {
+                    SendMessages: false,
+                });
+            } else {
+                logger.warn(`Non-GuildText channels are mixed into the BirthdayChannel schema: ${channel?.type} ${channel?.id}`);
+            }
         }
 
         birthday_channels.length = 0;
