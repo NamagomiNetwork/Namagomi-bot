@@ -3,7 +3,7 @@ const logger = require("../modules/logger");
 const config = require("../utils/get-config");
 const seichi_vote = require("../sub-systems/seichi-vote");
 const seichi_achievement = require("../sub-systems/seichi-achievement");
-const birthday_notification = require("../sub-systems/birthday-notification")
+const birthday_notification = require("../sub-systems/birthday-notification");
 const set_seichi_achievement = require("../utils/set-achievements");
 const kagawa_notice = require("../sub-systems/kagawa-notification");
 const TawasiModel = require("../utils/Schema/TawasiSchema");
@@ -58,8 +58,8 @@ module.exports = (client) => {
             return;
         } else {
             await TawasiModel.updateMany({ tawasi: true }, { $set: { tawasi: false } });
-        };
-    };
+        }
+    }
     async function one_day_kuji_reset() {
         const OmikujiData = await OmikujiModel.find({ one_day_omikuji: true });
         if (!OmikujiData) {
@@ -67,8 +67,8 @@ module.exports = (client) => {
             return;
         } else {
             await OmikujiModel.updateMany({ one_day_omikuji: true }, { $set: { one_day_omikuji: false } });
-        };
-    };
+        }
+    }
     cron.schedule("0 0 0 * * *", () => {
         one_day_tawasi_reset();
         one_day_kuji_reset();

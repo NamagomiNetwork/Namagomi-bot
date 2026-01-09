@@ -13,18 +13,18 @@ module.exports = async (client, oldMember, newMember) => {
         fields: [
             {
                 name: "対象ユーザー",
-                value: `<@${newMember.id}> (ID: ${newMember.id})`
+                value: `<@${newMember.id}> (ID: ${newMember.id})`,
             },
             {
                 name: "変更前",
-                value: oldMember.displayName
+                value: oldMember.displayName,
             },
             {
                 name: "変更後",
-                value: newMember.displayName
-            }
+                value: newMember.displayName,
+            },
         ],
-        timestamp: new Date()
+        timestamp: new Date(),
     });
     client.channels.cache.get(config.syslog.channel).send({ embeds: [embed] });
 };

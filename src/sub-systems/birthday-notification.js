@@ -6,9 +6,7 @@ const config = require("../utils/get-config");
 const logger = require("../modules/logger");
 
 module.exports = async (/** @type {Client} */ client) => {
-    const now = new Date(
-        new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" })
-    );
+    const now = new Date(new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }));
 
     const month = now.getMonth() + 1;
     const day = now.getDate();
@@ -16,7 +14,7 @@ module.exports = async (/** @type {Client} */ client) => {
     const birthdaysToday = await ProfileModel.find({
         birthday_month: month,
         birthday_day: day,
-        birthday_flag: true
+        birthday_flag: true,
     });
 
     const guild = client.guilds.cache.get(config.guild);
@@ -40,8 +38,8 @@ module.exports = async (/** @type {Client} */ client) => {
         }
 
         channel.send({ embeds: [embed] });
-    };
-}
+    }
+};
 
 /**
  * 誕生日チャンネルを作成する。
@@ -97,7 +95,9 @@ async function archive_birthday_channel(client, guild) {
                     SendMessages: false,
                 });
             } else {
-                logger.warn(`Non-GuildText channels are mixed into the BirthdayChannel schema. type: ${channel?.type}, id: ${channel?.id}`);
+                logger.warn(
+                    `Non-GuildText channels are mixed into the BirthdayChannel schema. type: ${channel?.type}, id: ${channel?.id}`
+                );
             }
         }
 
@@ -112,9 +112,7 @@ async function archive_birthday_channel(client, guild) {
                 const syslogChannel = guild.channels.cache.get(config.syslog.channel);
                 if (syslogChannel?.type === ChannelType.GuildText) {
                     const /** @type {string[]} */ owners = config.bot.owner;
-                    const mentions = owners
-                        .map((ownerId) => `<@${ownerId}>`)
-                        .join(" ");
+                    const mentions = owners.map((ownerId) => `<@${ownerId}>`).join(" ");
 
                     await syslogChannel.send(
                         `${mentions} :warning::warning::warning:アーカイブカテゴリ内のチャンネル数が${childrenCount}件あります:warning::warning::warning:`
@@ -127,6 +125,6 @@ async function archive_birthday_channel(client, guild) {
             );
         }
     } catch (err) {
-        logger.error(err)
+        logger.error(err);
     }
 }
