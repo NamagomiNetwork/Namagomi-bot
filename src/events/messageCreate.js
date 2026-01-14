@@ -76,7 +76,7 @@ module.exports = async (client, message) => {
             prefix: config.bot.prefix,
             birthday_month: 0,
             birhtday_day: 0,
-            birthday_flag: true,
+            birthday_enabled: true,
         });
         profile.save().catch((error) => {
             logger.error(

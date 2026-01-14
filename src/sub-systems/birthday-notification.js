@@ -14,7 +14,7 @@ module.exports = async (/** @type {Client} */ client) => {
     const birthdaysToday = await ProfileModel.find({
         birthday_month: month,
         birthday_day: day,
-        birthday_flag: true,
+        birthday_enabled: true,
     });
 
     const guild = client.guilds.cache.get(config.guild);

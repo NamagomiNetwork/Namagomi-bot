@@ -7,7 +7,7 @@ const profileSchema = new mongoose.Schema({
     prefix: { type: String }, //ユーザーprefix
     birthday_month: { type: Number }, //誕生月
     birthday_day: { type: Number }, //誕生日
-    birthday_flag: { type: Boolean }, //誕生日有効フラグ
+    birthday_enabled: { type: Boolean }, //誕生日有効フラグ
 });
 
 const model = mongoose.model("Profiles", profileSchema);

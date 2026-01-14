@@ -96,7 +96,8 @@ async function birthday_flag_set(userId, message, args, flag) {
 
 /**
  * @param {string} userId
- * @param {boolean} flag
+ * @param {boolean} flag `true`なら有効化する
+ * 
  * 誕生日を有効化/無効化する内部ロジック
  */
 export async function _birthday_flag_set(userId, flag) {
@@ -111,7 +112,7 @@ export async function _birthday_flag_set(userId, flag) {
     }
 
     await ProfileData.updateOne({
-        birthday_flag: flag
+        birthday_enabled: flag
     });
 
     return ProfileData;
