@@ -27,7 +27,7 @@ const err_argument_disable = err_argument_builder("birthday disable");
  * 誕生日を有効化する
  */
 export async function birthday_enable(userId, message, args) {
-    await birthday_flag_set(userId, message, args, true);
+    await birthday_enabled_set(userId, message, args, true);
 }
 
 /**
@@ -37,30 +37,30 @@ export async function birthday_enable(userId, message, args) {
  * 誕生日を無効化する
  */
 export async function birthday_disable(userId, message, args) {
-    await birthday_flag_set(userId, message, args, false);
+    await birthday_enabled_set(userId, message, args, false);
 }
 
 /**
  * @param {string} userId
  * @param {Message} message
  * @param {string[]} args
- * @param {boolean} flag
+ * @param {boolean} enabled
  * 誕生日を有効化/無効化する
  */
-async function birthday_flag_set(userId, message, args, flag) {
+async function birthday_enabled_set(userId, message, args, enabled) {
     if (!(message.channel instanceof TextChannel)) {
         logger.warn(`This command not available on this channel. type ${message.channel.type} id: ${message.channel.id}`);
         return;
     }
 
-    const embed = flag ? err_argument_enable : err_argument_disable;
+    const embed = enabled ? err_argument_enable : err_argument_disable;
 
     if (args.length > 0) {
         message.channel.send({ embeds: [embed] });
         return;
     }
 
-    const ProfileData = await _birthday_flag_set(userId, flag);
+    const ProfileData = await _birthday_enabled_set(userId, enabled);
     if (!ProfileData) {
         return;
     }
@@ -86,7 +86,7 @@ async function birthday_flag_set(userId, message, args, flag) {
             },
             {
                 name: "誕生日が有効か: ",
-                value: `\`${flag}\``,
+                value: `\`${enabled}\``,
                 inline: true,
             },
         ],
@@ -96,11 +96,11 @@ async function birthday_flag_set(userId, message, args, flag) {
 
 /**
  * @param {string} userId
- * @param {boolean} flag `true`なら有効化する
+ * @param {boolean} enabled `true`なら有効化する
  * 
  * 誕生日を有効化/無効化する内部ロジック
  */
-export async function _birthday_flag_set(userId, flag) {
+export async function _birthday_enabled_set(userId, enabled) {
     const ProfileData = await ProfileModel.findOne({ _id: userId });
     if (!ProfileData) {
         logger.error(
@@ -112,7 +112,7 @@ export async function _birthday_flag_set(userId, flag) {
     }
 
     await ProfileData.updateOne({
-        birthday_enabled: flag
+        birthday_enabled: enabled
     });
 
     return ProfileData;

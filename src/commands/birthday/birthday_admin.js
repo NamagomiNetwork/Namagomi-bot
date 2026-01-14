@@ -1,5 +1,5 @@
 import { EmbedBuilder, Message, TextChannel } from "discord.js";
-import { birthday_disable, birthday_enable } from "./birthday_flag";
+import { birthday_disable, birthday_enable } from "./birthday_enabled";
 import { birthday_set } from "./birthday_set";
 import logger from "../../modules/logger";
 const color = require("../../utils/color-code");
