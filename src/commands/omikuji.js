@@ -39,9 +39,9 @@ exports.run = async (client, message) => {
                 });
                 message.channel.send({ embeds: [sudeni_1day_true] });
                 return;
-            }
-        }
-
+            };
+        };
+        
         //変数宣言
         let result = "";
         let unique = false;
