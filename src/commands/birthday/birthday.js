@@ -1,4 +1,3 @@
-const ProfileModel = require("../../utils/Schema/ProfileSchema");
 const color = require("../../utils/color-code");
 const { parse, isValid, format } = require("date-fns");
 import { EmbedBuilder, Client, Message, TextChannel } from "discord.js";
