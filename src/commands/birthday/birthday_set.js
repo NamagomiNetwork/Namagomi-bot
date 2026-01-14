@@ -37,7 +37,7 @@ export async function birthday_set(userId, message, args) {
         return;
     }
 
-    const parsedBirthday = validate_date(args[0]);
+    const parsedBirthday = parse_date_to_month_day(args[0]);
     if (!parsedBirthday) {
         message.channel.send({ embeds: [err_argument] });
         return;
@@ -108,7 +108,7 @@ export async function _birthday_set(userId, month, day) {
  * @param {string} input ⭕️ "01/23", ❌️ "99/99"
  * @returns {{month: number, day: number}} null if not valid
  */
-function validate_date(input) {
+function parse_date_to_month_day(input) {
     if (typeof input !== "string") {
         return null;
     }
