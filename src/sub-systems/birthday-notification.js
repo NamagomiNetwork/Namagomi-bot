@@ -31,7 +31,7 @@ module.exports = async (/** @type {Client} */ client) => {
             description: `:tada:今日は <@${birthdayProfile._id}>の誕生日です:tada:`,
         });
 
-        const channel = await open_birthday_channel(client, guild, channelName);
+        const channel = await create_birthday_channel(client, guild, channelName);
 
         if (!channel) {
             continue;
@@ -47,7 +47,7 @@ module.exports = async (/** @type {Client} */ client) => {
  * @param {Guild} guild
  * @param {string} channelName
  */
-async function open_birthday_channel(client, guild, channelName) {
+async function create_birthday_channel(client, guild, channelName) {
     try {
         const categoryId = config.birthday.channel_category;
         const roleId = config.birthday.human_role;
