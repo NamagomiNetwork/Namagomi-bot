@@ -62,7 +62,7 @@ async function create_birthday_channel(guild, channelName) {
             ViewChannel: true,
         });
 
-        BirthdayChannelModel.create({ channelId: channel.id });
+        await BirthdayChannelModel.create({ channelId: channel.id });
 
         return channel;
     } catch (err) {
