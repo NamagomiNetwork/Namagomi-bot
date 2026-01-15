@@ -19,7 +19,7 @@ module.exports = async (/** @type {Client} */ client) => {
 
     const guild = client.guilds.cache.get(config.guild);
 
-    await archive_birthday_channel(client, guild);
+    await archive_birthday_channel(guild);
 
     for (const birthdayProfile of birthdaysToday) {
         const member = await guild.members.fetch(birthdayProfile._id);
@@ -31,7 +31,7 @@ module.exports = async (/** @type {Client} */ client) => {
             description: `:tada:今日は <@${birthdayProfile._id}>の誕生日です:tada:`,
         });
 
-        const channel = await create_birthday_channel(client, guild, channelName);
+        const channel = await create_birthday_channel(guild, channelName);
 
         if (!channel) {
             continue;
@@ -43,11 +43,10 @@ module.exports = async (/** @type {Client} */ client) => {
 
 /**
  * 誕生日チャンネルを作成する。
- * @param {Client} client
  * @param {Guild} guild
  * @param {string} channelName
  */
-async function create_birthday_channel(client, guild, channelName) {
+async function create_birthday_channel(guild, channelName) {
     try {
         const categoryId = config.birthday.channel_category;
         const roleId = config.birthday.human_role;
@@ -74,10 +73,9 @@ async function create_birthday_channel(client, guild, channelName) {
 
 /**
  * 既にある誕生日チャンネルをArchive-birthdayに移動し、書き込み権限を削除する。
- * @param {Client} client
  * @param {Guild} guild
  */
-async function archive_birthday_channel(client, guild) {
+async function archive_birthday_channel(guild) {
     try {
         const archiveCategoryId = config.birthday.archive_category;
         const roleId = config.birthday.human_role;
