@@ -1,5 +1,5 @@
-import { Client, Message, EmbedBuilder, TextChannel } from "discord.js";
-import logger from "../../modules/logger";
+const { Message, EmbedBuilder, TextChannel } = require("discord.js");
+const logger = require("../../modules/logger");
 const color = require("../../utils/color-code");
 const ProfileModel = require("../../utils/Schema/ProfileSchema");
 
@@ -26,9 +26,9 @@ const err_argument_disable = err_argument_builder("birthday disable");
  * @param {string[]} args
  * 誕生日を有効化する
  */
-export async function birthday_enable(userId, message, args) {
+const birthday_enable = async (userId, message, args) => {
     await birthday_enabled_set(userId, message, args, true);
-}
+};
 
 /**
  * @param {string} userId
@@ -36,9 +36,9 @@ export async function birthday_enable(userId, message, args) {
  * @param {string[]} args
  * 誕生日を無効化する
  */
-export async function birthday_disable(userId, message, args) {
+const birthday_disable = async (userId, message, args) => {
     await birthday_enabled_set(userId, message, args, false);
-}
+};
 
 /**
  * @param {string} userId
@@ -100,7 +100,7 @@ async function birthday_enabled_set(userId, message, args, enabled) {
  * 
  * 誕生日を有効化/無効化する内部ロジック
  */
-export async function _birthday_enabled_set(userId, enabled) {
+const _birthday_enabled_set = async (userId, enabled) => {
     const ProfileData = await ProfileModel.findOne({ _id: userId });
     if (!ProfileData) {
         logger.error(
@@ -116,4 +116,6 @@ export async function _birthday_enabled_set(userId, enabled) {
     });
 
     return ProfileData;
-}
+};
+
+module.exports = { birthday_enable, birthday_disable, _birthday_enabled_set };

@@ -1,6 +1,6 @@
-import { Client, EmbedBuilder, Message, TextChannel } from "discord.js";
-import logger from "../../modules/logger";
-import { isValid, parse, format } from "date-fns";
+const { Client, EmbedBuilder, Message, TextChannel } = require("discord.js");
+const logger = require("../../modules/logger");
+const { isValid, parse, format } = require("date-fns");
 const color = require("../../utils/color-code");
 const ProfileModel = require("../../utils/Schema/ProfileSchema");
 
@@ -26,7 +26,7 @@ const err_argument = new EmbedBuilder({
  * @param {string[]} args
  * 誕生日を設定する
  */
-export async function birthday_set(userId, message, args) {
+const birthday_set = async (userId, message, args) => {
     if (!(message.channel instanceof TextChannel)) {
         logger.warn(`This command not available on this channel. type ${message.channel.type} id: ${message.channel.id}`);
         return;
@@ -76,7 +76,7 @@ export async function birthday_set(userId, message, args) {
         ],
     });
     message.channel.send({ embeds: [data] });
-}
+};
 
 /**
  * @param {string} userId
@@ -84,7 +84,7 @@ export async function birthday_set(userId, message, args) {
  * @param {number} day
  * 誕生日を設定する内部ロジック
  */
-export async function _birthday_set(userId, month, day) {
+const _birthday_set = async (userId, month, day) => {
     const ProfileData = await ProfileModel.findOne({ _id: userId });
     if (!ProfileData) {
         logger.error(
@@ -101,7 +101,7 @@ export async function _birthday_set(userId, month, day) {
     });
 
     return ProfileData;
-}
+};
 
 /**
  * 
@@ -129,3 +129,5 @@ function parse_date_to_month_day(input) {
 
     return { month, day };
 }
+
+module.exports = { birthday_set, _birthday_set };

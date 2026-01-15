@@ -1,7 +1,7 @@
-import { EmbedBuilder, Message, TextChannel } from "discord.js";
-import { birthday_disable, birthday_enable } from "./birthday_enabled";
-import { birthday_set } from "./birthday_set";
-import logger from "../../modules/logger";
+const { EmbedBuilder, Message, TextChannel } = require("discord.js");
+const { birthday_disable, birthday_enable } = require("./birthday_enabled");
+const { birthday_set } = require("./birthday_set");
+const logger = require("../../modules/logger");
 const color = require("../../utils/color-code");
 
 const err_argument = new EmbedBuilder({
@@ -26,7 +26,7 @@ const err_argument = new EmbedBuilder({
  * @param {string[]} args
  * 他人の誕生日関連のコマンドを実行する。管理者権限のチェックは呼び出し元が行う。
  */
-export async function birthday_admin(message, args) {
+const birthday_admin = async (message, args) => {
     if (!(message.channel instanceof TextChannel)) {
         logger.warn(`This command not available on this channel. type ${message.channel.type} id: ${message.channel.id}`);
         return;
@@ -54,4 +54,6 @@ export async function birthday_admin(message, args) {
             message.channel.send({ embeds: [err_argument] });
             return;
     }
-}
+};
+
+module.exports = { birthday_admin };

@@ -1,6 +1,6 @@
 const color = require("../utils/color-code");
-import { EmbedBuilder, Client, Message, TextChannel } from "discord.js";
-import { birthday_admin } from "./birthday/birthday_admin";
+const { EmbedBuilder, Client, Message, TextChannel } = require("discord.js");
+const { birthday_admin } = require("./birthday/birthday_admin");
 const sendErrorMessage = require("../modules/error-message");
 const logger = require("../modules/logger");
 const { birthday_set } = require("./birthday/birthday_set");
