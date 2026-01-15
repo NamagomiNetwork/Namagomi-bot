@@ -27,7 +27,7 @@ module.exports = async (/** @type {Client} */ client) => {
 
         const embed = new EmbedBuilder({
             title: "誕生日通知",
-            color: color.CMD_RUN,
+            color: color.BIRTHDAY_NOTIFY,
             description: `:tada:今日は <@${birthdayProfile._id}>の誕生日です:tada:`,
         });
 
