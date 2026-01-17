@@ -4,6 +4,7 @@ const logger = require("../modules/logger");
 const msg_reply = require("../sub-systems/message-reply");
 const url = require("../sub-systems/url-show");
 const twitter_url = require("../sub-systems/twitter-url-show");
+const init_profile = require("../utils/init-profile");
 //#region  DBSchema
 const profileModel = require("../utils/Schema/ProfileSchema");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
@@ -68,35 +69,7 @@ module.exports = async (client, message) => {
     const command = args.shift().toLowerCase();
 
     // ユーザーprofileがない場合作成
-    if (!profileData) {
-        const profile = await profileModel.create({
-            _id: message.author.id,
-            name: message.author.username,
-            avatar: message.author.displayAvatarURL({ format: "png" }),
-            prefix: config.bot.prefix,
-            birthday_month: 0,
-            birhtday_day: 0,
-            birthday_enabled: true,
-        });
-        profile.save().catch((error) => {
-            logger.error(
-                "ユーザー名: " +
-                    message.author.username +
-                    " ユーザーID: " +
-                    message.author.id +
-                    "のプロファイル作成中にエラーが発生しました..."
-            );
-            logger.error(error);
-            return;
-        });
-        logger.info(
-            "ユーザー名: " +
-                message.author.username +
-                " ユーザーID: " +
-                message.author.id +
-                "のプロファイル作成に成功しました"
-        );
-    }
+    await init_profile(client, message.author.id);
 
     // ユーザーブロックprofileを作成
     const BlockData = await BlockUserModel.findOne({ _id: message.author.id });

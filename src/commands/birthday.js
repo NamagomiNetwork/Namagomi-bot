@@ -60,7 +60,7 @@ exports.run = async (client, message) => {
                 if (permission_check == "owner: no") {
                     return;
                 }
-                await birthday_admin(message, args.slice(1));
+                await birthday_admin(client, message, args.slice(1));
                 return;
             default:
                 message.channel.send({ embeds: [err_argument] });
