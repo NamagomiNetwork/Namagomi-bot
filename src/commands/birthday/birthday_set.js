@@ -1,4 +1,4 @@
-const { Client, EmbedBuilder, Message, TextChannel } = require("discord.js");
+const { EmbedBuilder, Message, TextChannel } = require("discord.js");
 const logger = require("../../modules/logger");
 const { isValid, parse, format } = require("date-fns");
 const color = require("../../utils/color-code");
