@@ -107,7 +107,7 @@ async function archive_birthday_channel(guild) {
         if (archiveCategory?.type === ChannelType.GuildCategory) {
             const childrenCount = archiveCategory.children.cache.size;
             if (childrenCount >= 45) {
-                const syslogChannel = guild.channels.cache.get(config.syslog.channel);
+                const syslogChannel = guild.channels.cache.get(config.syslog);
                 if (syslogChannel?.type === ChannelType.GuildText) {
                     const /** @type {string[]} */ owners = config.bot.owner;
                     const mentions = owners.map((ownerId) => `<@${ownerId}>`).join(" ");
