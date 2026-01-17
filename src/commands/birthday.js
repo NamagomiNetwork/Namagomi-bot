@@ -44,7 +44,6 @@ exports.run = async (client, message) => {
         }
 
         const userId = message.author.id;
-        const permission_check = check_admin(message, client);
 
         switch (subcommand) {
             case "set":
@@ -57,6 +56,7 @@ exports.run = async (client, message) => {
                 await birthday_disable(userId, message, args.slice(1));
                 return;
             case "admin":
+                const permission_check = check_admin(message, client);
                 if (permission_check == "owner: no") {
                     return;
                 }
