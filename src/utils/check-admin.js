@@ -28,7 +28,7 @@ module.exports = (message, client) => {
     if (!config.bot.owner.includes(message.author.id)) {
         message.channel.send({ embeds: [user_notification] });
         // ログとして送信
-        client.channels.cache.get(config.syslog).send({ embeds: [syslog] });
+        client.channels.cache.get(config.syslog.channel).send({ embeds: [syslog] });
         logger.warn("権限のない人が管理コマンドを実行しました");
         return "owner: no";
     } else {
@@ -37,3 +37,4 @@ module.exports = (message, client) => {
         }
     }
 };
+
