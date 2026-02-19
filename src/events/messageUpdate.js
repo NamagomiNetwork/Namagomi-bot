@@ -10,8 +10,8 @@ module.exports = async (client, oldMessage, newMessage) => {
 
     // 内容に変更がない場合は無視する
     if (oldMessage.content === newMessage.content) return;
-    const oldContent = oldMessage.content || '（変更集前の内容なし）';
-    const newContent = newMessage.content || '（変更後の内容なし）';
+    const oldContent = oldMessage.content || "（変更集前の内容なし）";
+    const newContent = newMessage.content || "（変更後の内容なし）";
 
     const embed = new EmbedBuilder({
         title: "メッセージが更新されました",
@@ -20,30 +20,30 @@ module.exports = async (client, oldMessage, newMessage) => {
         fields: [
             {
                 name: "送信時間",
-                value: oldMessage.createdAt.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
+                value: oldMessage.createdAt.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }),
             },
             {
                 name: "チャンネル",
-                value: `<#${oldMessage.channelId}>`
+                value: `<#${oldMessage.channelId}>`,
             },
             {
                 name: "送信者",
-                value: `<@${oldMessage.author.id}> (ID: ${oldMessage.author.id})`
+                value: `<@${oldMessage.author.id}> (ID: ${oldMessage.author.id})`,
             },
             {
                 name: "変更前の内容",
-                value: oldContent
+                value: oldContent,
             },
             {
                 name: "変更後の内容",
-                value: newContent
+                value: newContent,
             },
             {
                 name: "メッセージリンク",
-                value: newMessage.url
-            }
+                value: newMessage.url,
+            },
         ],
-        timestamp: new Date()
+        timestamp: new Date(),
     });
     client.channels.cache.get(config.syslog.channel).send({ embeds: [embed] });
 };

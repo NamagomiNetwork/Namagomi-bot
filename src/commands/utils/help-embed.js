@@ -98,6 +98,18 @@ const page3 = new EmbedBuilder({
             value: "Twitter投稿展開機能を設定します(設定は設定を行ったユーザーのみに)",
         },
         {
+            name: "`birthday set 【誕生日(mm/dd)】`",
+            value: "自分の誕生日を設定します(例: birthday 01/23)",
+        },
+        {
+            name: "`birthday enable`",
+            value: "自分の誕生日を有効化します(誕生日になったら誕生日チャンネルが作成される)",
+        },
+        {
+            name: "`birthday disable`",
+            value: "自分の誕生日を有効化します(誕生日になったら誕生日チャンネルが作成されない)",
+        },
+        {
             name: "次のページを表示する",
             value: "`help-4`",
         },
@@ -158,6 +170,10 @@ const page4 = new EmbedBuilder({
             name: "`deploy`",
             value: "`git pull origin main`を実行します",
         },
+        {
+            name: "`birthday admin 【ユーザーのID】 【サブコマンド...】`",
+            value: "`他人の誕生日コマンドを実行します`"
+        }
     ],
 });
 exports.top = top;

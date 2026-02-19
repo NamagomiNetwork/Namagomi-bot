@@ -7,6 +7,7 @@
             "538308521985572867"
         ]
     },
+    "guild": "954683140553715752",
     "mongodb": {
         "url": "mongodb://127.0.0.1:8080/namagomi-bot"
     },
@@ -40,5 +41,10 @@
         "channels": [
             "955408172514942976"
         ]
+    },
+    "birthday": {
+        "channel_category": null,
+        "archive_category": "1066324287486697472",
+        "human_role": "954710495179464714"
     }
 }
