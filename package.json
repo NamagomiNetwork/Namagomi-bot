@@ -32,6 +32,7 @@
     "@eslint/migrate-config": "^2.0.0",
     "axios": "^1.0.0",
     "child_process": "^1.0.2",
+    "date-fns": "^4.1.0",
     "discord-job-panel": "^1.0.8",
     "discord.js": "^14.15.3",
     "dotenv": "^17.0.0",

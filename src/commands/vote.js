@@ -2,28 +2,7 @@ const sendErrorMessage = require("../modules/error-message");
 
 exports.run = (client, message, args) => {
     const [title, ...choices] = args;
-    const emojis = [
-        "🇦",
-        "🇧",
-        "🇨",
-        "🇩",
-        "🇪",
-        "🇫",
-        "🇬",
-        "🇭",
-        "🇮",
-        "🇯",
-        "🇰",
-        "🇱",
-        "🇲",
-        "🇳",
-        "🇴",
-        "🇵",
-        "🇶",
-        "🇷",
-        "🇸",
-        "🇹",
-    ];
+    const emojis = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹"];
     async function sent() {
         const poll = await message.channel.send({
             embeds: [

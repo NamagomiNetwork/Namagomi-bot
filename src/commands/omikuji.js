@@ -41,7 +41,7 @@ exports.run = async (client, message) => {
                 return;
             };
         };
-
+        
         //変数宣言
         let result = "";
         let unique = false;
@@ -49,15 +49,15 @@ exports.run = async (client, message) => {
         const arrButa = ["黙れ豚", "しばくぞ豚"];
         const arrNamagomi = ["生ゴミ", "黙れゴミ"];
 
-        //個人用おみくじ        
-        const uniqueOmikuji = arr => {
-            if (Math.random() < 0.5){
+        //個人用おみくじ
+        const uniqueOmikuji = (arr) => {
+            if (Math.random() < 0.5) {
                 const randomNum = Math.floor(Math.random() * arr.length);
                 result = arr[randomNum];
                 message.channel.send({ content: result });
                 unique = true;
                 return;
-            };
+            }
         };
         if (message.author.id.includes("538308521985572867")) {
             //namagomi
@@ -68,7 +68,7 @@ exports.run = async (client, message) => {
         } else if (message.author.id.includes("281902125909409792")) {
             //ぶた
             uniqueOmikuji(arrButa);
-        };
+        }
 
         //通常おみくじ
         if (!unique) {
@@ -110,18 +110,18 @@ exports.run = async (client, message) => {
                 ],
             });
             message.channel.send({ embeds: [success] });
-        };
+        }
         if (OmikujiData.one_day_omikuji_feature.includes("true")) {
             await OmikujiData.updateOne({
                 one_day_omikuji: true,
             });
-        };
+        }
         await OmikujiData.updateOne({
             mae_no_omikuji_kekka: result,
         });
     } catch (err) {
         sendErrorMessage(err, message);
-    };
+    }
 };
 
 exports.name = "omikuji";

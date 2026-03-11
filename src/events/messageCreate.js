@@ -4,6 +4,7 @@ const logger = require("../modules/logger");
 const msg_reply = require("../sub-systems/message-reply");
 const url = require("../sub-systems/url-show");
 const twitter_url = require("../sub-systems/twitter-url-show");
+const init_profile = require("../utils/init-profile");
 //#region  DBSchema
 const profileModel = require("../utils/Schema/ProfileSchema");
 const BlockUserModel = require("../utils/Schema/BlockUserSchema");
@@ -44,7 +45,7 @@ module.exports = async (client, message) => {
                 message.author.id +
                 "の投稿展開設定プロファイル作成に成功しました"
         );
-    };
+    }
     // URL展開
     url.discord_com(client, message);
     twitter_url.x_twitter_com(client, message);
@@ -59,7 +60,7 @@ module.exports = async (client, message) => {
         prefix = config.bot.prefix;
     } else {
         prefix = profileData.prefix;
-    };
+    }
 
     // ここから先prefixを持ってない人以外無視する
     if (message.content.indexOf(prefix) !== 0) return;
@@ -68,32 +69,7 @@ module.exports = async (client, message) => {
     const command = args.shift().toLowerCase();
 
     // ユーザーprofileがない場合作成
-    if (!profileData) {
-        const profile = await profileModel.create({
-            _id: message.author.id,
-            name: message.author.username,
-            avatar: message.author.displayAvatarURL({ format: "png" }),
-            prefix: config.bot.prefix,
-        });
-        profile.save().catch((error) => {
-            logger.error(
-                "ユーザー名: " +
-                    message.author.username +
-                    " ユーザーID: " +
-                    message.author.id +
-                    "のプロファイル作成中にエラーが発生しました..."
-            );
-            logger.error(error);
-            return;
-        });
-        logger.info(
-            "ユーザー名: " +
-                message.author.username +
-                " ユーザーID: " +
-                message.author.id +
-                "のプロファイル作成に成功しました"
-        );
-    };
+    await init_profile(client, message.author.id);
 
     // ユーザーブロックprofileを作成
     const BlockData = await BlockUserModel.findOne({ _id: message.author.id });
@@ -219,8 +195,8 @@ module.exports = async (client, message) => {
         for (const [key] of client.commands) {
             if (key.toLowerCase().startsWith(input)) {
                 return key;
-            };
-        };
+            }
+        }
         return null;
     };
     const indicateCmdName = indicateDisplay(cmd);
@@ -241,7 +217,7 @@ module.exports = async (client, message) => {
     if (!cmd) {
         message.channel.send({ embeds: [unknown_command] });
         return;
-    };
+    }
 
     // こまんどじっこう
     cmd.run(client, message, args);

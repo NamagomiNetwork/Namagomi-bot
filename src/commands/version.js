@@ -51,7 +51,7 @@ exports.run = (client, message) => {
                     },
                 ],
             });
-            
+
             message.channel.send({ embeds: [embed] }).catch((e) => logger.error(e));
         });
     } catch (err) {

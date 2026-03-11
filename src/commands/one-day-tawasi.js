@@ -18,7 +18,7 @@ exports.run = async (client, message) => {
             );
             message.channel.send({ embeds: [err_embed.main] });
             return;
-        };
+        }
 
         if (tawasiData.one_day_tawasi_feature.includes("true")) {
             const disenable = new EmbedBuilder({
@@ -59,10 +59,10 @@ exports.run = async (client, message) => {
             await tawasiData.updateOne({
                 one_day_tawasi_feature: true,
             });
-        };
+        }
     } catch (err) {
         sendErrorMessage(err, message);
-    };
+    }
 };
 
 exports.name = "one_day_tawasi";
