@@ -46,7 +46,7 @@ WORKDIR /app
 
 # 2. 依存関係ファイルのみをコピーし、npm ciを実行（キャッシュ効率を最大化）
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm update prebuild-install --package-lock-only && npm ci
 
 # 3. 依存関係のインストール後、残りのアプリケーションファイル全体をコピー
 COPY . .
