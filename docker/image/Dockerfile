@@ -3,6 +3,7 @@ FROM ubuntu:24.04
 
 # ロケールとタイムゾーンの設定
 ENV TZ=Asia/Tokyo
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
     && apt update \
@@ -25,12 +26,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Namagomi-botの動作要件を満たすため、Node.js 20.xx系LTSをインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh \
+# Namagomi-botの動作要件を満たすため、Node.js 24 LTSをインストール
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt update \
     && apt install -y nodejs \
-    && npm install -g npm@latest \
     && apt clean \
     && rm -f nodesource_setup.sh \
     && rm -rf /var/lib/apt/lists/*
