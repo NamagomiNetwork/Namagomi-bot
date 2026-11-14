@@ -28,7 +28,7 @@
   "homepage": "https://github.com/NamagomiNetwork/Namagomi-bot",
   "dependencies": {
     "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.7.0",
+    "@eslint/js": "^10.0.0",
     "@eslint/migrate-config": "^2.0.0",
     "axios": "^1.0.0",
     "child_process": "^1.0.2",
@@ -48,7 +48,7 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "eslint": "^9.0.0",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.0.0",
     "lint-staged": "^16.0.0",
     "prettier": "^3.0.0",
